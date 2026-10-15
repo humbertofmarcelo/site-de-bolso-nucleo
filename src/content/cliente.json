@@ -1,44 +1,40 @@
 {
-  "nome": "Maria Cileide Ferreira",
+  "nome": "Marcelle Gonçalves",
   "profissao": "Psicóloga",
-  "crp": "06/185854",
-  "cidade": "São Paulo",
+  "crp": "06/210464",
+  "cidade": "Santo André",
   "uf": "SP",
   "bairro": "",
   "endereco": "",
-  "email": "psicologa.mariacileide@outlook.com",
-  "abordagem": "Fenomenologia",
-  "modalidade": ["presencial", "online"],
-  "titulo_hero": "Psicóloga Existencial em São Paulo",
-  "subtitulo_hero": "Nunca é alto o preço a se pagar pelo privilégio de pertencer a si mesmo",
-  "bio": "Sou filha de agricultores nordestinos e tenho orgulho das minhas origens. Concluí o ensino médio pelo programa EJA, em escola pública, e enfrentei os desafios até conquistar minha vaga na faculdade por meio do Enem. Me formei como Bacharel em Psicologia em 2022.",
-  "bio_complementar": "Minha abordagem é a Fenomenologia, a partir da qual busco compreender a singularidade de cada existência, acolhendo as experiências e os sentidos que cada pessoa atribui à própria vida.",
-  "descricao_seo": "Cileide Ferreira - Psicóloga Clínica (CRP 06/185854). Terapia Individual e Social em São Paulo e Online. Agende um atendimento.",
+  "email": "",
+  "abordagem": "Psicanálise",
+  "modalidade": ["online"],
+  "titulo_hero": "Psicóloga Psicanalista em São Paulo",
+  "subtitulo_hero": "Todos nós precisamos de um espaço onde possamos ser ouvidos de verdade.",
+  "bio": "Se quiser, me chamar de Mah. Sou psicóloga formada pela Universidade Presbiteriana Mackenzie e atuo na clínica com abordagem psicanalítica, em atendimentos online.",
+  "bio_complementar": "Minha trajetória começou com a educação: já fui auxiliar bilíngue e dou aulas de inglês há alguns anos. Sempre fui curiosa, observadora e apaixonada por ouvir histórias — e foi essa escuta atenta, junto do desejo de acolher e compreender o outro, que me levou à psicologia.",
+  "descricao_seo": "Marcelle Gonçalves - Psicóloga Clínica (CRP 06/210464). Terapia Online em Santo André. Agende um atendimento.",
   "demandas_titulo": "Existem muitos motivos para começar a terapia",
   "demandas_subtitulo": "Se você já se viu pensando sobre...",
   "demandas": [
-    "Autossabotagem",
+    "Conflitos Familiares",
     "Relacionamentos",
-    "Questões de gênero",
+    "Vida no Exterior",
     "Ansiedade",
     "Vícios"
   ],
-  "demandas_reflexao": "A terapia é um ambiente seguro de acolhimento e escuta qualificada, que te oferece a possibilidade de se ouvir, se perceber, se conhecer e a possibilidade de olhar o mundo através da lente que fizer sentido para você.",
+  "demandas_reflexao": "A terapia, ao contrário do que muitos pensam, não fornece respostas prontas mas cria um caminho de autoconhecimento. É como se fosse um gps: te ajuda a se localizar, entender onde está e escolher para onde deseja ir!",
   "servicos": [
     {
-      "titulo": "Terapia Individual",
-      "descricao": "A partir da Fenomenologia, buscamos compreender como você vivencia e atribui significado às suas experiências, acolhendo sua forma singular de perceber e estar no mundo. Essa abordagem valoriza a escuta, a compreensão da sua experiência subjetiva e a construção de sentidos a partir daquilo que emerge na relação terapêutica."
+      "titulo": "Terapia Online para todos",
+      "descricao": "A partir da Psicanálise, buscamos compreender os conflitos inconscientes, os desejos e as experiências que influenciam sua forma de sentir, pensar e se relacionar. Essa abordagem valoriza a escuta, a livre associação e a investigação dos sentidos que emergem ao longo da história de cada pessoa, favorecendo a compreensão de si e de seus modos de estar no mundo."
     },
     {
-      "titulo": "Terapia Social",
-      "descricao": "Feita por e para mulheres, a Terapia Social oferece atendimento psicológico online, ético e acolhedor, considerando as diferentes realidades, histórias e condições de vida de cada mulher. A proposta é tornar o cuidado com a saúde mental mais acessível, proporcionando um espaço seguro de escuta, acolhimento e reflexão."
+      "titulo": "Terapia em inglês/português",
+      "descricao": "Ideal para brasileiros que vivem no exterior e desejam se sentir acolhidos em sua língua materna, encontrando um espaço de escuta e compreensão, e para estrangeiros que falam inglês e se conectam com a cultura brasileira por suas raízes, família, parceiros ou experiências que despertam o desejo de manter esse vínculo cultural e afetivo, mesmo à distância."
     }
   ],
   "modalidades_info": [
-    {
-      "titulo": "Atendimento Presencial",
-      "descricao": "Meus serviços presenciais são realizados em São Paulo/SP. A clínica situa-se em área residencial e comercial. Conta com a discrição necessária para que os pacientes se sintam confortáveis e acolhidos durante o processo terapêutico."
-    },
     {
       "titulo": "Atendimento Online",
       "descricao": "Os atendimentos realizados de maneira online proporcionam a mesma eficácia e qualidade das sessões presenciais, realizados por videoconferência. Conduzidas em ambientes escolhidos por você, a distância física entre paciente e psicólogo não interfere."
@@ -51,7 +47,7 @@
     },
     {
       "pergunta": "Quais são as formas de pagamento disponíveis?",
-      "resposta": "Ofereço as seguintes opções: PIX, boleto, cartão de crédito, transferência bancária e pagamento em espécie."
+      "resposta": "Ofereço as seguintes opções: PIX, boleto, cartão de crédito, Paypall e transferência bancária."
     },
     {
       "pergunta": "Como agendar consulta online?",
@@ -61,19 +57,19 @@
   "contato_texto": "Agende uma consulta e se permita dar o primeiro passo para uma vida mais leve.",
   "whatsapp": "5511991291010",
   "whatsapp_mensagem": "Olá, Cileide! Vim pelo site e gostaria de agendar um atendimento.",
-  "instagram": "cileidef.psi",
+  "instagram": "mahgon.psi",
   "og_image": "/og.jpg",
   "imagens": {
     "hero": {
       "desktop": "/images/hero-cileide-desktop.webp",
       "mobile": "/images/hero.webp",
       "arquivo": "/images/hero.webp",
-      "alt": "Retrato de Cileide Ferreira, Psicóloga Clínica",
+      "alt": "Retrato de Marcelle Gonçalves, Psicóloga Clínica",
       "obrigatoria": false
     },
     "sobre": {
       "arquivo": "/images/sobre.webp",
-      "alt": "Cileide Ferreira em seu consultório",
+      "alt": "Marcelle Gonçalves em seu consultório",
       "obrigatoria": false
     }
   }
