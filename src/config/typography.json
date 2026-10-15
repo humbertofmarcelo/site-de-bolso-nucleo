@@ -19,12 +19,12 @@
         },
         {
           "peso": 500,
-          "estilo": "italic",
+          "estilo": "normal",
           "caminho": "/fonts/lora-500-italic.woff2"
         },
         {
           "peso": 600,
-          "estilo": "italic",
+          "estilo": "normal",
           "caminho": "/fonts/lora-500-italic.woff2"
         }
       ]

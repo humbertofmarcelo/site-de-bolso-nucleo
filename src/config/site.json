@@ -1,6 +1,6 @@
 {
   "colecao": "editorial",
-  "paleta": "mare-serena",
+  "paleta": "purpura",
   "tipografia": "editorial",
   "secoes": [
     { "id": "inicio", "tipo": "hero", "variante": "overlay" },

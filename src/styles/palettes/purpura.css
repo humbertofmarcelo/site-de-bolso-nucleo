@@ -1,0 +1,33 @@
+@theme {
+    --color-*: initial;
+
+    /* Identidade: malva suave, derivado do lilás da marca */
+    --color-primary: #865F94;
+    --color-primary-dark: #6D4A7A;
+
+    /* Seções base: ameixa profunda e acolhedora */
+    --color-surface: #43324A;
+
+    /* Seções alternativas: névoa lilás */
+    --color-surface-alt: #FAF6FB;
+    --color-surface-card: #E6D7EA;
+
+    /* Textos sobre fundos claros */
+    --color-ink: #2E2230;
+    --color-ink-soft: #6B5A6C;
+
+    /* Textos sobre fundos escuros */
+    --color-ink-light: #FFFFFF;
+    --color-ink-light-soft: #E6D7EA;
+
+    /* Divisórias e bordas */
+    --color-line: #D3C3D8;
+    --color-line-dark: #5E4A66;
+
+    /* Detalhe da marca: o tom do monograma e do "Psicóloga" */
+    --color-accent: #B09D96;
+    --color-accent-dark: #8A776F;
+
+    /* Branco de apoio */
+    --color-white: #ffffff;
+}
