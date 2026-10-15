@@ -1,0 +1,46 @@
+---
+// Tokens: text-ink-light, text-ink-light-soft, text-sm, text-lg, text-3xl, text-balance, rounded-card, border, border-line-dark, mt-4, mt-6, mt-8, pb-6, gap-8, flex, justify-between, items-center, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+import Section from "../../ui/Section.astro";
+import BotaoWhatsapp from "../../common/BotaoWhatsapp.astro";
+import cliente from "../../../content/cliente.json";
+
+const heroImg = cliente.imagens?.hero;
+const temImagem = Boolean(heroImg?.arquivo);
+const titulo = cliente.titulo_hero || `${cliente.profissao} em ${cliente.cidade}`;
+const descricao = cliente.subtitulo_hero || cliente.bio;
+---
+<Section id="inicio" tom="base" largura="ampla">
+  <!-- Barra de identificação profissional no topo -->
+  <div class="flex justify-between items-center text-sm text-ink-light-soft pb-6 border-b border-line-dark">
+    <span class="font-medium">{cliente.nome}</span>
+    <span>CRP {cliente.crp}</span>
+  </div>
+
+  <div class={temImagem ? "mt-8 md:grid md:grid-cols-2 md:gap-12 md:items-center" : "mt-8"}>
+    {temImagem && (
+      <div class="mb-8 md:mb-0 flex justify-center order-first md:order-last">
+        <img
+          src={heroImg.arquivo}
+          alt={heroImg.alt || `Retrato de ${cliente.nome}`}
+          class="rounded-card border border-line-dark object-cover w-full max-w-sm shadow-sm"
+          loading="eager"
+        />
+      </div>
+    )}
+
+    <div>
+      <h1 class="texto-titulo text-ink-light text-balance">
+        {titulo}
+      </h1>
+
+      <p class="text-base text-ink-light-soft mt-6">
+        {descricao}
+      </p>
+
+      <div class="mt-8">
+        <BotaoWhatsapp rotulo="AGENDE UM ATENDIMENTO" />
+      </div>
+    </div>
+  </div>
+</Section>

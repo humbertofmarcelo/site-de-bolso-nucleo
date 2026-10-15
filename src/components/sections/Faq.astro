@@ -1,0 +1,28 @@
+---
+// Tokens: text-ink, text-ink-soft, text-lg, text-2xl, border-line, rounded-card, space/padding/margin em múltiplos de 4px (p-4, py-4, etc.)
+// cliente.json: faq (pergunta, resposta)
+import Section from "../ui/Section.astro";
+import cliente from "../../content/cliente.json";
+---
+
+<Section id="faq" tom="alt">
+  <h2 class="text-2xl text-ink text-balance mb-8">
+    Perguntas frequentes
+  </h2>
+  
+  <div class="border-t border-line">
+    {cliente.faq.map((item) => (
+      <details class="border-b border-line group py-4">
+        <summary class="text-lg text-ink font-medium cursor-pointer list-none flex gap-4 justify-between items-center">
+          {item.pergunta}
+          <span aria-hidden="true" class="shrink-0 text-ink-soft transition-transform group-open:rotate-180">
+            ↓
+          </span>
+        </summary>
+        <p class="text-ink-soft mt-4">
+          {item.resposta}
+        </p>
+      </details>
+    ))}
+  </div>
+</Section>

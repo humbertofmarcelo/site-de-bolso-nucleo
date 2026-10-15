@@ -1,0 +1,72 @@
+{
+  "colecao": "editorial",
+  "familias": {
+    "inter": {
+      "nome": "Inter Variable",
+      "tipo": "sans",
+      "origem": "npm",
+      "pesos": [400, 500, 600, 700]
+    },
+    "lora": {
+      "nome": "Lora",
+      "tipo": "serif",
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 600,
+          "estilo": "normal",
+          "caminho": "/fonts/lora-600.woff2"
+        },
+        {
+          "peso": 500,
+          "estilo": "italic",
+          "caminho": "/fonts/lora-500-italic.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "italic",
+          "caminho": "/fonts/lora-500-italic.woff2"
+        }
+      ]
+    },
+    "lato": {
+      "nome": "Lato",
+      "tipo": "sans",
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 400,
+          "estilo": "normal",
+          "caminho": "/fonts/lato-400.woff2"
+        },
+        {
+          "peso": 700,
+          "estilo": "normal",
+          "caminho": "/fonts/lato-700.woff2"
+        }
+      ]
+    }
+  },
+  "papeis": {
+    "titulo": {
+      "familia": "lora",
+      "peso": 600,
+      "tamanho": "text-3xl"
+    },
+    "subtitulo": {
+      "familia": "lora",
+      "peso": 600,
+      "tamanho": "text-2xl"
+    },
+    "corpo": {
+      "familia": "lato",
+      "peso": 400,
+      "tamanho": "text-base"
+    },
+    "legenda": {
+      "familia": "lato",
+      "peso": 400,
+      "tamanho": "text-sm"
+    }
+  }
+}

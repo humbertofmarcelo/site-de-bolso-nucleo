@@ -1,0 +1,28 @@
+---
+// Tokens: border, border-line-dark, rounded-card, p-6, p-8, text-ink-light, text-ink-light-soft, text-xl, text-base, text-balance, mt-4, mt-8, grid, grid-cols-1, gap-6, md:grid-cols-2
+// cliente.json: servicos (titulo, descricao)
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+---
+<Section id="servicos" tom="base" largura="ampla">
+  <div class="text-center md:text-left">
+    <h2 class="texto-subtitulo text-ink-light text-balance">
+      Como posso te ajudar?
+    </h2>
+  </div>
+
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+    {cliente.servicos.map((servico) => (
+      <div class="border border-line-dark rounded-card p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl text-ink-light font-medium text-balance">
+            {servico.titulo}
+          </h3>
+          <p class="text-base text-ink-light-soft mt-4 leading-relaxed">
+            {servico.descricao}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

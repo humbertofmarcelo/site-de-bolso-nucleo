@@ -1,0 +1,60 @@
+---
+// Tokens: relative, w-full, h-full, object-contain, object-top, pointer-events-none, z-10, mx-auto, max-w-4xl, max-w-lg, px-6, py-8, md:py-16, flex, flex-col, justify-between, items-center, text-sm, text-ink-soft, font-medium, mt-48, md:mt-16, mt-4, mt-8, texto-titulo, text-ink, text-balance, texto-corpo, leading-relaxed
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+import Section from "../../ui/Section.astro";
+import BotaoWhatsapp from "../../common/BotaoWhatsapp.astro";
+import cliente from "../../../content/cliente.json";
+
+const { id = "inicio" } = Astro.props;
+
+const heroImg = cliente.imagens?.hero;
+const temImagem = Boolean(heroImg?.arquivo || heroImg?.desktop || heroImg?.mobile);
+const imgDesktop = heroImg?.desktop || heroImg?.arquivo;
+const imgMobile = heroImg?.mobile || heroImg?.arquivo;
+const altTexto = heroImg?.alt || `Retrato de ${cliente.nome}`;
+
+const titulo = cliente.titulo_hero || `${cliente.profissao} em ${cliente.cidade}`;
+const descricao = cliente.subtitulo_hero || cliente.bio;
+---
+<Section id={id} tom="alt" largura="total" semPadding={true}>
+  <div class="relative w-full overflow-hidden bg-surface-alt">
+    {temImagem && (
+      <picture class="absolute inset-0 w-full h-full pointer-events-none flex justify-center items-start">
+        {imgDesktop && (
+          <source media="(min-width: 768px)" srcset={imgDesktop} />
+        )}
+        <img
+          src={imgMobile || imgDesktop}
+          alt={altTexto}
+          class="w-full h-full object-contain object-top"
+          loading="eager"
+        />
+      </picture>
+    )}
+
+    <div class="absolute inset-0 hero-overlay-mask pointer-events-none" />
+
+    <div class="relative z-10 mx-auto max-w-4xl px-6 py-8 md:py-16 flex flex-col justify-between">
+      <!-- Identificação profissional sem linha divisória -->
+      <div class="flex justify-between items-center text-sm text-ink-soft">
+        <span class="font-medium">{cliente.nome}</span>
+        <span>CRP {cliente.crp}</span>
+      </div>
+
+      <!-- Conteúdo sobreposto na área de leitura sem cobrir o topo da foto -->
+      <div class="mt-48 md:mt-16 max-w-lg">
+        <h1 class="texto-titulo text-ink text-balance">
+          {titulo}
+        </h1>
+
+        <p class="texto-corpo text-ink-soft mt-4 leading-relaxed">
+          {descricao}
+        </p>
+
+        <div class="mt-8">
+          <BotaoWhatsapp rotulo="AGENDE UM ATENDIMENTO" />
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,13 @@
+---
+// Tokens: bg-surface, bg-surface-alt, px-6, py-16, md:py-24, max-w-xl, max-w-4xl, w-full, relative
+// Props: id (âncora), tom ("base", "alt" ou "transparente"), largura ("padrao", "ampla" ou "total"), semPadding (boolean)
+const { id, tom = "base", largura = "padrao", semPadding = false } = Astro.props;
+const fundo = tom === "alt" ? "bg-surface-alt" : tom === "transparente" ? "" : "bg-surface";
+const container = largura === "ampla" ? "max-w-4xl" : largura === "total" ? "w-full" : "max-w-xl";
+const espacamento = semPadding ? "" : "px-6 py-16 md:py-24";
+---
+<section id={id} class={`relative ${fundo} ${espacamento}`.trim()}>
+  <div class={`mx-auto ${container}`}>
+    <slot />
+  </div>
+</section>

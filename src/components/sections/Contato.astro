@@ -1,0 +1,33 @@
+---
+// Tokens: text-2xl, text-base, text-sm, text-ink, text-ink-soft, bg-surface, px-6, py-16, md:py-24, max-w-xl, mt-4, mt-8, mt-12
+// cliente.json: nome, profissao, crp, bairro, cidade, uf, instagram
+import Section from "../ui/Section.astro";
+import BotaoWhatsapp from "../common/BotaoWhatsapp.astro";
+import cliente from "../../content/cliente.json";
+---
+
+<Section id="contato">
+  <h2 class="text-2xl text-ink text-balance">Vamos conversar?</h2>
+  <p class="text-base text-ink-soft mt-4">
+    {cliente.contato_texto}
+  </p>
+
+  <div class="mt-8">
+    <BotaoWhatsapp />
+  </div>
+
+  <p class="text-base mt-8">
+    <a
+      href={`https://www.instagram.com/${cliente.instagram}`}
+      class="text-primary-dark  underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      @{cliente.instagram}
+    </a>
+  </p>
+
+  <p class="text-sm text-ink-soft mt-12">
+    {cliente.nome} · CRP {cliente.crp} · {cliente.bairro}, {cliente.cidade} - {cliente.uf}
+  </p>
+</Section>

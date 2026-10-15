@@ -1,0 +1,27 @@
+
+---
+/*
+Tokens: bg-white, border, border-line, rounded-card, p-6, text-ink,
+text-ink-soft, text-2xl, text-balance, espaçamentos da grade de 4px.
+cliente.json: servicos (titulo, descricao).
+*/
+import Section from "../ui/Section.astro";
+import cliente from "../../content/cliente.json";
+---
+
+<Section id="servicos">
+  <h2 class="text-2xl text-ink text-balance">Serviços</h2>
+
+  <div class="mt-8 space-y-4">
+    {cliente.servicos.map((servico) => (
+      <div class="bg-white border border-line rounded-card p-6">
+        <h3 class="text-lg text-ink text-balance">
+          {servico.titulo}
+        </h3>
+        <p class="text-base text-ink-soft mt-2">
+          {servico.descricao}
+        </p>
+      </div>
+    ))}
+  </div>
+</Section>

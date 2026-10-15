@@ -1,0 +1,21 @@
+
+---
+ // Tokens: text-2xl, text-ink, text-base, text-ink-soft, espaçamentos da grade de 4px
+ // cliente.json: bio, abordagem, modalidade
+import Section from "../ui/Section.astro";
+import cliente from "../../content/cliente.json";
+
+const modalidade = cliente.modalidade.join(" e ");
+---
+
+<Section id="sobre" tom="alt">
+  <h2 class="text-2xl text-ink text-balance">Sobre</h2>
+
+  <p class="text-base text-ink-soft mt-6">
+    {cliente.bio}
+  </p>
+
+  <p class="text-base text-ink-soft mt-4">
+    {cliente.abordagem} · Atendimento {modalidade}.
+  </p>
+</Section>

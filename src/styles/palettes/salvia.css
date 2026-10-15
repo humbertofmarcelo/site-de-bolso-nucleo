@@ -1,0 +1,16 @@
+@theme {
+  --color-*: initial;
+
+  --color-primary: #5b7c6f;
+  --color-primary-dark: #435d52;
+  --color-surface: #1e2e26;
+  --color-surface-alt: #f7f9f6;
+  --color-surface-card: #e5ece7;
+  --color-ink: #182620;
+  --color-ink-soft: #4a5c53;
+  --color-ink-light: #ffffff;
+  --color-ink-light-soft: #d3dfd8;
+  --color-line: #d6e0d9;
+  --color-line-dark: #32473c;
+  --color-white: #ffffff;
+}

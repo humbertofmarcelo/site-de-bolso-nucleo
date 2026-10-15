@@ -1,0 +1,80 @@
+{
+  "nome": "Maria Cileide Ferreira",
+  "profissao": "Psicóloga",
+  "crp": "06/185854",
+  "cidade": "São Paulo",
+  "uf": "SP",
+  "bairro": "",
+  "endereco": "",
+  "email": "psicologa.mariacileide@outlook.com",
+  "abordagem": "Fenomenologia",
+  "modalidade": ["presencial", "online"],
+  "titulo_hero": "Psicóloga Existencial em São Paulo",
+  "subtitulo_hero": "Nunca é alto o preço a se pagar pelo privilégio de pertencer a si mesmo",
+  "bio": "Sou filha de agricultores nordestinos e tenho orgulho das minhas origens. Concluí o ensino médio pelo programa EJA, em escola pública, e enfrentei os desafios até conquistar minha vaga na faculdade por meio do Enem. Me formei como Bacharel em Psicologia em 2022.",
+  "bio_complementar": "Minha abordagem é a Fenomenologia, a partir da qual busco compreender a singularidade de cada existência, acolhendo as experiências e os sentidos que cada pessoa atribui à própria vida.",
+  "descricao_seo": "Cileide Ferreira - Psicóloga Clínica (CRP 06/185854). Terapia Individual e Social em São Paulo e Online. Agende um atendimento.",
+  "demandas_titulo": "Existem muitos motivos para começar a terapia",
+  "demandas_subtitulo": "Se você já se viu pensando sobre...",
+  "demandas": [
+    "Autossabotagem",
+    "Relacionamentos",
+    "Questões de gênero",
+    "Ansiedade",
+    "Vícios"
+  ],
+  "demandas_reflexao": "A terapia é um ambiente seguro de acolhimento e escuta qualificada, que te oferece a possibilidade de se ouvir, se perceber, se conhecer e a possibilidade de olhar o mundo através da lente que fizer sentido para você.",
+  "servicos": [
+    {
+      "titulo": "Terapia Individual",
+      "descricao": "A partir da Fenomenologia, buscamos compreender como você vivencia e atribui significado às suas experiências, acolhendo sua forma singular de perceber e estar no mundo. Essa abordagem valoriza a escuta, a compreensão da sua experiência subjetiva e a construção de sentidos a partir daquilo que emerge na relação terapêutica."
+    },
+    {
+      "titulo": "Terapia Social",
+      "descricao": "Feita por e para mulheres, a Terapia Social oferece atendimento psicológico online, ético e acolhedor, considerando as diferentes realidades, histórias e condições de vida de cada mulher. A proposta é tornar o cuidado com a saúde mental mais acessível, proporcionando um espaço seguro de escuta, acolhimento e reflexão."
+    }
+  ],
+  "modalidades_info": [
+    {
+      "titulo": "Atendimento Presencial",
+      "descricao": "Meus serviços presenciais são realizados em São Paulo/SP. A clínica situa-se em área residencial e comercial. Conta com a discrição necessária para que os pacientes se sintam confortáveis e acolhidos durante o processo terapêutico."
+    },
+    {
+      "titulo": "Atendimento Online",
+      "descricao": "Os atendimentos realizados de maneira online proporcionam a mesma eficácia e qualidade das sessões presenciais, realizados por videoconferência. Conduzidas em ambientes escolhidos por você, a distância física entre paciente e psicólogo não interfere."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Qual é a duração do tratamento?",
+      "resposta": "A duração da terapia não é fixa, pois varia de acordo com o perfil de cada pessoa, seu envolvimento com o processo terapêutico e as demandas que surgem ao longo do percurso."
+    },
+    {
+      "pergunta": "Quais são as formas de pagamento disponíveis?",
+      "resposta": "Ofereço as seguintes opções: PIX, boleto, cartão de crédito, transferência bancária e pagamento em espécie."
+    },
+    {
+      "pergunta": "Como agendar consulta online?",
+      "resposta": "Para consulta online, é necessário que semanalmente você esteja em um ambiente privado, silencioso e com bom acesso à internet. Entre em contato pelo WhatsApp e fale diretamente comigo para combinarmos horários e condições."
+    }
+  ],
+  "contato_texto": "Agende uma consulta e se permita dar o primeiro passo para uma vida mais leve.",
+  "whatsapp": "5511991291010",
+  "whatsapp_mensagem": "Olá, Cileide! Vim pelo site e gostaria de agendar um atendimento.",
+  "instagram": "cileidef.psi",
+  "og_image": "/og.jpg",
+  "imagens": {
+    "hero": {
+      "desktop": "/images/hero-cileide-desktop.webp",
+      "mobile": "/images/hero.webp",
+      "arquivo": "/images/hero.webp",
+      "alt": "Retrato de Cileide Ferreira, Psicóloga Clínica",
+      "obrigatoria": false
+    },
+    "sobre": {
+      "arquivo": "/images/sobre.webp",
+      "alt": "Cileide Ferreira em seu consultório",
+      "obrigatoria": false
+    }
+  }
+}

@@ -1,0 +1,58 @@
+---
+// Tokens: text-ink-light, text-ink-light-soft, text-xl, text-sm, text-base, border-t, border-line-dark, pt-6, mt-1, mt-2, mt-6, space-y-6, text-center, md:text-left
+// cliente.json: nome, crp, email, endereco, instagram
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+---
+<Section id="contato" tom="base" largura="padrao">
+  <div class="space-y-6 text-center md:text-left">
+    <div>
+      <h2 class="text-xl text-ink-light font-medium">
+        {cliente.nome}
+      </h2>
+      <p class="text-sm text-ink-light-soft mt-1">
+        CRP {cliente.crp}
+      </p>
+      {cliente.email && (
+        <p class="text-sm text-ink-light-soft mt-2">
+          <a href={`mailto:${cliente.email}`} class="hover:underline">
+            {cliente.email}
+          </a>
+        </p>
+      )}
+    </div>
+
+    {cliente.endereco && (
+      <div class="pt-6 border-t border-line-dark">
+        <h3 class="text-base text-ink-light font-medium">
+          Atendimento Presencial
+        </h3>
+        <p class="text-sm text-ink-light-soft mt-1">
+          {cliente.endereco}
+        </p>
+      </div>
+    )}
+
+    <div class="pt-6 border-t border-line-dark">
+      <h3 class="text-base text-ink-light font-medium">
+        Redes Sociais
+      </h3>
+      <p class="text-sm text-ink-light-soft mt-1">
+        <a
+          href={`https://www.instagram.com/${cliente.instagram}`}
+          class="hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram: @{cliente.instagram}
+        </a>
+      </p>
+    </div>
+
+    <div class="pt-6 border-t border-line-dark text-center">
+      <p class="text-sm text-ink-light-soft">
+        Copyright © 2026 · {cliente.nome}. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</Section>

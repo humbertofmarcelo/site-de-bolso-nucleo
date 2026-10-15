@@ -1,0 +1,15 @@
+---
+// Tokens: bg-primary, bg-primary-dark, text-white, rounded-button, px-6, py-4, font-medium
+// cliente.json: whatsapp, whatsapp_mensagem
+// Props: rotulo (texto do botão, padrão "Agendar pelo WhatsApp")
+import cliente from "../../content/cliente.json";
+
+const { rotulo = "Agendar pelo WhatsApp" } = Astro.props;
+const link = `https://wa.me/${cliente.whatsapp}?text=${encodeURIComponent(cliente.whatsapp_mensagem)}`;
+---
+<a
+  href={link}
+  class="inline-block bg-primary text-white rounded-button px-6 py-4 font-medium hover:bg-primary-dark"
+>
+  {rotulo}
+</a>

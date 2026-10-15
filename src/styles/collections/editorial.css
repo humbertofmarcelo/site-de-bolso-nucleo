@@ -1,0 +1,53 @@
+@theme {
+  --radius-card-lg: 24px;
+}
+
+/* Classes tipográficas semânticas da coleção editorial */
+.texto-titulo {
+  font-family: var(--font-titulos, Georgia, serif);
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.texto-subtitulo {
+  font-family: var(--font-titulos, Georgia, serif);
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.texto-corpo {
+  font-family: var(--font-corpo, var(--font-sans));
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+}
+
+.texto-legenda {
+  font-family: var(--font-corpo, var(--font-sans));
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+/* Máscara de legibilidade suave para Hero com imagem: preserva o rosto nítido no topo */
+.hero-overlay-mask {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface-alt) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-surface-alt) 50%, transparent) 35%,
+    transparent 65%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-overlay-mask {
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-surface-alt) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface-alt) 40%, transparent) 35%,
+      transparent 55%
+    );
+  }
+}

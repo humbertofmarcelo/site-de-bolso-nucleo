@@ -1,0 +1,14 @@
+{
+  "colecao": "editorial",
+  "paleta": "mare-serena",
+  "tipografia": "editorial",
+  "secoes": [
+    { "id": "inicio", "tipo": "hero", "variante": "overlay" },
+    { "id": "demandas", "tipo": "demandas" },
+    { "id": "servicos", "tipo": "servicos" },
+    { "id": "sobre", "tipo": "sobre" },
+    { "id": "modalidades", "tipo": "modalidades" },
+    { "id": "faq", "tipo": "faq" },
+    { "id": "contato", "tipo": "contato" }
+  ]
+}

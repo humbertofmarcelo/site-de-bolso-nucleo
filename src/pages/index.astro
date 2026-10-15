@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import site from "../config/site.json";
+import { obterComponenteSecao } from "../components/registry";
+
+interface SecaoConfig {
+  id: string;
+  tipo: string;
+  variante?: string;
+}
+
+const secoes = (site.secoes as SecaoConfig[])
+  .map((item) => ({
+    id: item.id,
+    tipo: item.tipo,
+    Componente: obterComponenteSecao(site.colecao, item.tipo, item.variante),
+  }))
+  .filter((item) => item.Componente !== null);
+---
+
+<Base>
+  <main>
+    {secoes.map(({ id, Componente }) => (
+      <Componente id={id} />
+    ))}
+  </main>
+</Base>

@@ -1,0 +1,23 @@
+---
+// Tokens: text-ink, text-ink-soft, text-sm/lg/3xl, espaçamentos da grade de 4px
+// cliente.json: nome, profissao, crp, bairro, cidade, abordagem, modalidade
+import Section from "../ui/Section.astro";
+import BotaoWhatsapp from "../common/BotaoWhatsapp.astro";
+import cliente from "../../content/cliente.json";
+
+const modalidade = cliente.modalidade.join(" e ");
+---
+<Section id="inicio">
+  <p class="text-sm text-ink-soft">
+    {cliente.nome} · {cliente.profissao} · CRP {cliente.crp}
+  </p>
+  <h1 class="text-3xl text-ink text-balance mt-4">
+    {cliente.profissao} em {cliente.bairro}, {cliente.cidade}
+  </h1>
+  <p class="text-lg text-ink-soft mt-4">
+    {cliente.abordagem}, atendimento {modalidade}.
+  </p>
+  <div class="mt-8">
+    <BotaoWhatsapp />
+  </div>
+</Section>

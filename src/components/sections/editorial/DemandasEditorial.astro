@@ -1,0 +1,39 @@
+---
+// Tokens: text-ink, text-ink-soft, bg-surface-card, rounded-card, border, border-line, p-4, p-6, mt-4, mt-8, space-y-4, text-balance, text-base, text-sm, font-medium
+// cliente.json: demandas_titulo, demandas_subtitulo, demandas, demandas_reflexao
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const titulo = cliente.demandas_titulo || "Viver bem é possível!";
+const subtitulo = cliente.demandas_subtitulo || "Se você convive com...";
+const demandas = cliente.demandas || [];
+const reflexao = cliente.demandas_reflexao || "";
+---
+<Section id="demandas" tom="alt" largura="padrao">
+  <div class="text-center">
+    <h2 class="texto-subtitulo text-ink text-balance">
+      {titulo}
+    </h2>
+    <p class="text-base text-ink-soft mt-4">
+      {subtitulo}
+    </p>
+  </div>
+
+  <div class="mt-8 space-y-4">
+    {demandas.map((item) => (
+      <div class="bg-surface-card border border-line rounded-card p-4 text-center">
+        <p class="text-base text-ink font-medium">
+          {item}
+        </p>
+      </div>
+    ))}
+  </div>
+
+  {reflexao && (
+    <div class="mt-8 pt-8 border-t border-line text-center">
+      <p class="text-base text-ink-soft leading-relaxed">
+        {reflexao}
+      </p>
+    </div>
+  )}
+</Section>

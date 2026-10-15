@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import "@fontsource-variable/inter";
+import cliente from "../content/cliente.json";
+import { gerarCssTipografia, obterPreloadsFontes } from "../config/typography";
+
+const { title, description } = Astro.props;
+const pageTitle =
+  title ?? `${cliente.nome} | ${cliente.profissao} em ${cliente.cidade} · CRP ${cliente.crp}`;
+const pageDescription = description ?? cliente.descricao_seo;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = cliente.og_image ? new URL(cliente.og_image, Astro.site).href : null;
+
+const cssTipografia = gerarCssTipografia();
+const preloads = obterPreloadsFontes();
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `${cliente.nome} - ${cliente.profissao}`,
+    description: pageDescription,
+    url: canonical,
+    areaServed: cliente.cidade,
+    sameAs: [`https://www.instagram.com/${cliente.instagram}`],
+    ...(ogImage && { image: ogImage }),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: cliente.nome,
+    jobTitle: cliente.profissao,
+    url: canonical,
+    ...(ogImage && { image: ogImage }),
+  },
+];
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" />
+
+    {preloads.map((href) => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+    ))}
+    <style is:inline set:html={cssTipografia} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-surface font-sans text-ink">
+    <slot />
+  </body>
+</html>

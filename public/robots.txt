@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cileide-ferreira.amostra-site.workers.dev/sitemap-index.xml

@@ -1,0 +1,30 @@
+
+@theme {
+  --color-*: initial;
+
+  /* Identidade: azul mineral sereno */
+  --color-primary: #287F91;
+  --color-primary-dark: #206675;
+
+  /* Seções base: azul profundo e acolhedor */
+  --color-surface: #16434F;
+
+  /* Seções alternativas: névoa azulada */
+  --color-surface-alt: #F5F8FA;
+  --color-surface-card: #E4ECF2;
+
+  /* Textos sobre fundos claros */
+  --color-ink: #18313A;
+  --color-ink-soft: #49616A;
+
+  /* Textos sobre fundos escuros */
+  --color-ink-light: #FFFFFF;
+  --color-ink-light-soft: #D8E8ED;
+
+  /* Divisórias e bordas */
+  --color-line: #C5D5DC;
+  --color-line-dark: #315B67;
+
+  /* Branco de apoio */
+  --color-white: #ffffff;
+}
