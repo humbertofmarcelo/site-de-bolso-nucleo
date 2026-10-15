@@ -1,11 +1,40 @@
 ---
-// Tokens: relative, w-full, h-full, object-contain, object-top, pointer-events-none, z-10, mx-auto, max-w-4xl, max-w-lg, px-6, py-8, md:py-16, flex, flex-col, justify-between, items-center, text-sm, text-ink-soft, font-medium, mt-48, md:mt-16, mt-4, mt-8, texto-titulo, text-ink, text-balance, texto-corpo, leading-relaxed
-// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+// Tokens: relative, w-full, h-full, object-cover, object-top, pointer-events-none, z-10, mx-auto, max-w-4xl, max-w-lg, px-6, py-8, md:py-16, flex, flex-col, justify-between, items-center, text-sm, font-medium, mt-48, md:mt-16, mt-4, mt-8, texto-titulo, text-balance, texto-corpo, leading-relaxed, bg-surface, bg-surface-alt, absolute, inset-0, overflow-hidden, text-ink-soft, text-ink-light-soft, text-ink, text-ink-light, md:text-ink-soft, md:text-ink-light-soft, md:text-ink, md:text-ink-light, md:bg-surface, md:bg-surface-alt
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero, hero
+// site.json: hero, secoes
+// Props: id, mobile (objeto com estilos para mobile), desktop (objeto com estilos para desktop), e props diretas
 import Section from "../../ui/Section.astro";
 import BotaoWhatsapp from "../../common/BotaoWhatsapp.astro";
 import cliente from "../../../content/cliente.json";
+import site from "../../../config/site.json";
 
-const { id = "inicio" } = Astro.props;
+interface Props {
+  id?: string;
+  mobile?: {
+    fundo?: "solido" | "dark" | "light";
+    gradiente?: "light" | "dark" | "nenhum" | boolean;
+    tema_texto?: "light" | "dark";
+    tema_texto_topo?: "light" | "dark";
+    tema_texto_titulo?: "light" | "dark";
+    tema_texto_subtitulo?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "solido" | "gradiente";
+    direcao_gradiente?: "light-para-dark" | "dark-para-light";
+    extensao_gradiente?: number | string;
+    gradiente?: "light" | "dark" | "nenhum" | boolean;
+    tema_texto?: "light" | "dark";
+    tema_texto_topo?: "light" | "dark";
+    tema_texto_titulo?: "light" | "dark";
+    tema_texto_subtitulo?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const { id = "inicio" } = props;
 
 const heroImg = cliente.imagens?.hero;
 const temImagem = Boolean(heroImg?.arquivo || heroImg?.desktop || heroImg?.mobile);
@@ -15,44 +44,239 @@ const altTexto = heroImg?.alt || `Retrato de ${cliente.nome}`;
 
 const titulo = cliente.titulo_hero || `${cliente.profissao} em ${cliente.cidade}`;
 const descricao = cliente.subtitulo_hero || cliente.bio;
+
+const siteHero = (site as any).hero || {};
+const clienteHero = (cliente as any).hero || (cliente as any).hero_config || {};
+
+// ==========================================
+// 1. RESOLUÇÃO DE CONFIGURAÇÕES PARA MOBILE
+// ==========================================
+const confMobile = props.mobile ?? siteHero.mobile ?? clienteHero.mobile ?? {};
+
+const gradienteMobileRaw =
+  confMobile.gradiente ??
+  props.gradiente_mobile ??
+  (props.mobile ? undefined : props.gradiente) ??
+  siteHero.gradiente_mobile ??
+  siteHero.gradiente ??
+  "dark";
+
+const temGradienteMobile =
+  gradienteMobileRaw !== "nenhum" && gradienteMobileRaw !== false && gradienteMobileRaw !== "desativado";
+const temaGradienteMobile: "light" | "dark" | null = temGradienteMobile
+  ? gradienteMobileRaw === "light"
+    ? "light"
+    : "dark"
+  : null;
+
+const fundoMobileTipo =
+  confMobile.fundo ??
+  props.fundo_mobile ??
+  (temaGradienteMobile === "light" ? "light" : "dark");
+const classeFundoMobile = fundoMobileTipo === "light" ? "bg-surface-alt" : "bg-surface";
+
+const temaTextoMobileGeral =
+  confMobile.tema_texto ??
+  props.tema_texto_mobile ??
+  (props.mobile ? undefined : props.tema_texto) ??
+  siteHero.tema_texto_mobile ??
+  siteHero.tema_texto ??
+  (temaGradienteMobile === "dark" ? "light" : "dark");
+
+const temaTopoMobile =
+  confMobile.tema_texto_topo ??
+  props.tema_texto_topo_mobile ??
+  props.tema_texto_topo ??
+  temaTextoMobileGeral;
+const temaTituloMobile =
+  confMobile.tema_texto_titulo ??
+  props.tema_texto_titulo_mobile ??
+  props.tema_texto_titulo ??
+  temaTextoMobileGeral;
+const temaSubtituloMobile =
+  confMobile.tema_texto_subtitulo ??
+  props.tema_texto_subtitulo_mobile ??
+  props.tema_texto_subtitulo ??
+  temaTextoMobileGeral;
+
+// ==========================================
+// 2. RESOLUÇÃO DE CONFIGURAÇÕES PARA DESKTOP
+// ==========================================
+const confDesktop = props.desktop ?? siteHero.desktop ?? clienteHero.desktop ?? {};
+
+const fundoTipoDesktop =
+  confDesktop.fundo ??
+  props.fundo_desktop ??
+  (props.desktop ? undefined : props.fundo) ??
+  siteHero.fundo_desktop ??
+  siteHero.fundo ??
+  "gradiente";
+
+const ehFundoGradienteDesktop = fundoTipoDesktop === "gradiente";
+const direcaoGradienteDesktop =
+  confDesktop.direcao_gradiente ??
+  props.direcao_gradiente_desktop ??
+  props.direcao_gradiente ??
+  siteHero.direcao_gradiente ??
+  "light-para-dark";
+
+const extensaoRaw =
+  confDesktop.extensao_gradiente ??
+  props.extensao_gradiente_desktop ??
+  props.extensao_gradiente ??
+  siteHero.extensao_gradiente ??
+  45;
+const extensaoNum = typeof extensaoRaw === "string" ? parseInt(extensaoRaw, 10) : extensaoRaw;
+const extensaoFinal = isNaN(extensaoNum) ? 45 : Math.max(5, Math.min(95, extensaoNum));
+
+const gradienteDesktopRaw =
+  confDesktop.gradiente ??
+  props.gradiente_desktop ??
+  (ehFundoGradienteDesktop ? "nenhum" : (props.desktop ? undefined : props.gradiente) ?? "nenhum");
+
+const temGradienteDesktop =
+  gradienteDesktopRaw !== "nenhum" && gradienteDesktopRaw !== false && gradienteDesktopRaw !== "desativado";
+const temaGradienteDesktop: "light" | "dark" | null = temGradienteDesktop
+  ? gradienteDesktopRaw === "dark"
+    ? "dark"
+    : "light"
+  : null;
+
+const ladoEsquerdoDesktopEhClaro = ehFundoGradienteDesktop
+  ? direcaoGradienteDesktop === "light-para-dark"
+  : temaGradienteDesktop !== "dark";
+
+const temaTextoDesktopPadrao = ladoEsquerdoDesktopEhClaro ? "dark" : "light";
+
+const temaTextoDesktopGeral =
+  confDesktop.tema_texto ??
+  props.tema_texto_desktop ??
+  (props.desktop ? undefined : props.tema_texto) ??
+  siteHero.tema_texto_desktop ??
+  siteHero.tema_texto ??
+  temaTextoDesktopPadrao;
+
+const temaTopoDesktop =
+  confDesktop.tema_texto_topo ??
+  props.tema_texto_topo_desktop ??
+  props.tema_texto_topo ??
+  temaTextoDesktopGeral;
+const temaTituloDesktop =
+  confDesktop.tema_texto_titulo ??
+  props.tema_texto_titulo_desktop ??
+  props.tema_texto_titulo ??
+  temaTextoDesktopGeral;
+const temaSubtituloDesktop =
+  confDesktop.tema_texto_subtitulo ??
+  props.tema_texto_subtitulo_desktop ??
+  props.tema_texto_subtitulo ??
+  temaTextoDesktopGeral;
+
+// Classes de fundo do Desktop
+let classeFundoDesktop = "";
+if (ehFundoGradienteDesktop) {
+  classeFundoDesktop =
+    direcaoGradienteDesktop === "dark-para-light"
+      ? "hero-fundo-desktop-dark-light"
+      : "hero-fundo-desktop-light-dark";
+} else {
+  classeFundoDesktop =
+    (confDesktop.fundo === "dark" || temaGradienteDesktop === "dark")
+      ? "md:bg-surface"
+      : "md:bg-surface-alt";
+}
+
+// ==========================================
+// 3. COMBINAÇÃO DE CLASSES RESPONSIVAS
+// ==========================================
+
+const tomSection: "base" | "alt" | "transparente" = ehFundoGradienteDesktop
+  ? "transparente"
+  : fundoMobileTipo === "light"
+    ? "alt"
+    : "base";
+
+const classeFundoContainer = `${classeFundoMobile} ${classeFundoDesktop}`.trim();
+const estiloVariavel = ehFundoGradienteDesktop ? `--hero-gradient-ext: ${extensaoFinal}%;` : undefined;
+
+// Máscaras sobre a foto
+const temAlgumaMascara = temGradienteMobile || temGradienteDesktop;
+const classesMascara = [
+  "absolute inset-0 pointer-events-none",
+  temGradienteMobile ? (temaGradienteMobile === "dark" ? "hero-mask-mobile-dark" : "hero-mask-mobile-light") : "",
+  temGradienteDesktop ? (temaGradienteDesktop === "dark" ? "hero-mask-desktop-dark" : "hero-mask-desktop-light") : "",
+]
+  .filter(Boolean)
+  .join(" ");
+
+// Textos (mobile base + md: desktop)
+const classeCorTopo = `${temaTopoMobile === "light" ? "text-ink-light-soft" : "text-ink-soft"} ${temaTopoDesktop === "light" ? "md:text-ink-light-soft" : "md:text-ink-soft"}`;
+const classeCorTitulo = `${temaTituloMobile === "light" ? "text-ink-light" : "text-ink"} ${temaTituloDesktop === "light" ? "md:text-ink-light" : "md:text-ink"}`;
+const classeCorSubtitulo = `${temaSubtituloMobile === "light" ? "text-ink-light-soft" : "text-ink-soft"} ${temaSubtituloDesktop === "light" ? "md:text-ink-light-soft" : "md:text-ink-soft"}`;
+
+// Botão de Agendamento (oposto da área de leitura em cada tela)
+let varBotaoMobile: "normal" | "light" | "dark" = "normal";
+if (temGradienteMobile) {
+  varBotaoMobile = temaGradienteMobile === "dark" ? "light" : "dark";
+} else {
+  varBotaoMobile = fundoMobileTipo === "dark" ? "light" : "normal";
+}
+if (confMobile.variante_botao) varBotaoMobile = confMobile.variante_botao;
+
+let varBotaoDesktop: "normal" | "light" | "dark" = "normal";
+if (ehFundoGradienteDesktop) {
+  varBotaoDesktop = ladoEsquerdoDesktopEhClaro ? "dark" : "light";
+} else if (temGradienteDesktop) {
+  varBotaoDesktop = temaGradienteDesktop === "dark" ? "light" : "dark";
+} else {
+  varBotaoDesktop = "normal";
+}
+if (confDesktop.variante_botao) varBotaoDesktop = confDesktop.variante_botao;
 ---
-<Section id={id} tom="alt" largura="total" semPadding={true}>
-  <div class="relative w-full overflow-hidden bg-surface-alt">
+<Section id={id} tom={tomSection} largura="total" semPadding={true}>
+  <div class={`relative w-full overflow-hidden ${classeFundoContainer}`} style={estiloVariavel}>
     {temImagem && (
-      <picture class="absolute inset-0 w-full h-full pointer-events-none flex justify-center items-start">
+      <picture class="absolute inset-0 w-full h-full pointer-events-none">
         {imgDesktop && (
           <source media="(min-width: 768px)" srcset={imgDesktop} />
         )}
         <img
           src={imgMobile || imgDesktop}
           alt={altTexto}
-          class="w-full h-full object-contain object-top"
+          class="w-full h-full object-cover object-top"
+          style="object-position: center top;"
           loading="eager"
         />
       </picture>
     )}
 
-    <div class="absolute inset-0 hero-overlay-mask pointer-events-none" />
+    {temAlgumaMascara && (
+      <div class={classesMascara} />
+    )}
 
     <div class="relative z-10 mx-auto max-w-4xl px-6 py-8 md:py-16 flex flex-col justify-between">
       <!-- Identificação profissional sem linha divisória -->
-      <div class="flex justify-between items-center text-sm text-ink-soft">
+      <div class={`flex justify-between items-center text-sm ${classeCorTopo}`}>
         <span class="font-medium">{cliente.nome}</span>
         <span>CRP {cliente.crp}</span>
       </div>
 
       <!-- Conteúdo sobreposto na área de leitura sem cobrir o topo da foto -->
       <div class="mt-48 md:mt-16 max-w-lg">
-        <h1 class="texto-titulo text-ink text-balance">
+        <h1 class={`texto-titulo ${classeCorTitulo} text-balance`}>
           {titulo}
         </h1>
 
-        <p class="texto-corpo text-ink-soft mt-4 leading-relaxed">
+        <p class={`texto-corpo ${classeCorSubtitulo} mt-4 leading-relaxed`}>
           {descricao}
         </p>
 
         <div class="mt-8">
-          <BotaoWhatsapp rotulo="AGENDE UM ATENDIMENTO" />
+          <BotaoWhatsapp
+            rotulo="AGENDE UM ATENDIMENTO"
+            varianteMobile={varBotaoMobile}
+            varianteDesktop={varBotaoDesktop}
+          />
         </div>
       </div>
     </div>

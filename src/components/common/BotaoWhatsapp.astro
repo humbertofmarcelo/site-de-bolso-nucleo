@@ -1,16 +1,26 @@
 ---
-// Tokens: inline-block, bg-primary, bg-primary-dark, text-white, rounded-button, px-6, py-4, font-medium, hover:bg-primary-dark
+// Tokens: inline-block, bg-primary, bg-primary-dark, bg-surface, bg-surface-alt, text-white, text-ink, text-ink-light, rounded-button, px-6, py-4, font-medium, hover:bg-primary-dark, hover:bg-surface-card, md:bg-surface-alt, md:text-ink, md:hover:bg-surface-card, md:bg-surface, md:text-ink-light, md:bg-primary, md:text-white
 // cliente.json: tipo_agendamento, link_agendamento, whatsapp, whatsapp_mensagem
-// Props: rotulo (texto do botão), href (sobrescrever URL opcional), tipo (tipo opcional: "whatsapp" | "link")
+// Props: rotulo (texto do botão), href (sobrescrever URL), tipo ("whatsapp" | "link"), variante, varianteMobile, varianteDesktop
 import cliente from "../../content/cliente.json";
 
 interface Props {
   rotulo?: string;
   href?: string;
   tipo?: "whatsapp" | "link";
+  variante?: "normal" | "light" | "dark";
+  varianteMobile?: "normal" | "light" | "dark";
+  varianteDesktop?: "normal" | "light" | "dark";
 }
 
-const { rotulo, href, tipo } = Astro.props;
+const {
+  rotulo,
+  href,
+  tipo,
+  variante = "normal",
+  varianteMobile = variante,
+  varianteDesktop = variante,
+} = Astro.props;
 
 const tipoAtivo = tipo || (cliente as any).tipo_agendamento || "whatsapp";
 const ehLink = tipoAtivo === "link";
@@ -23,10 +33,24 @@ const rotuloPadrao = ehLink ? "Agendar Atendimento" : "Agendar pelo WhatsApp";
 const textoFinal = rotulo || rotuloPadrao;
 
 const isExterno = linkFinal.startsWith("http://") || linkFinal.startsWith("https://");
+
+const estiloMobile =
+  varianteMobile === "light"
+    ? "bg-surface-alt text-ink hover:bg-surface-card"
+    : varianteMobile === "dark"
+      ? "bg-surface text-ink-light hover:bg-primary-dark"
+      : "bg-primary text-white hover:bg-primary-dark";
+
+const estiloDesktop =
+  varianteDesktop === "light"
+    ? "md:bg-surface-alt md:text-ink md:hover:bg-surface-card"
+    : varianteDesktop === "dark"
+      ? "md:bg-surface md:text-ink-light md:hover:bg-primary-dark"
+      : "md:bg-primary md:text-white md:hover:bg-primary-dark";
 ---
 <a
   href={linkFinal}
-  class="inline-block bg-primary text-white rounded-button px-6 py-4 font-medium hover:bg-primary-dark"
+  class={`inline-block ${estiloMobile} ${estiloDesktop} rounded-button px-6 py-4 font-medium`}
   target={isExterno ? "_blank" : undefined}
   rel={isExterno ? "noopener noreferrer" : undefined}
 >

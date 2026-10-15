@@ -2,7 +2,7 @@
   "nome": "Marcelle Gonçalves",
   "profissao": "Psicóloga",
   "crp": "06/210464",
-  "cidade": "Santo André",
+  "cidade": "São Paulo",
   "uf": "SP",
   "bairro": "",
   "endereco": "",
@@ -64,8 +64,8 @@
   "imagens": {
     "hero": {
       "desktop": "/images/hero-marcelle-desktop.webp",
-      "mobile": "/images/hero.webp",
-      "arquivo": "/images/hero.webp",
+      "mobile": "/images/hero-marcelle-mobile.webp",
+      "arquivo": "/images/hero-marcelle-mobile.webp",
       "alt": "Retrato de Marcelle Gonçalves, Psicóloga Clínica",
       "obrigatoria": false
     },

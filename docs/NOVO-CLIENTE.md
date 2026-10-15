@@ -5,9 +5,9 @@ Template de origem: template-v1.1.1
 ## Fases
 - [x] Roteiro e textos
 - [x] Identidade visual (tokens)
-- [ ] Imagens (favicon e og.jpg)
-- [ ] Links e botões
-- [ ] SEO
+- [x] Imagens (favicon e og.jpg)
+- [x] Links e botões
+- [x] SEO
 - [ ] Verificações gerais
 - [ ] Deploy
 
@@ -30,10 +30,10 @@ Template de origem: template-v1.1.1
 
 
 ## Fase atual
-tag fase-3-imagens
+tag fase-4-verificacoes
 
 ## Última coisa que funcionou
-(citar uma tag)
+tag fase-3-imagens
 
 ## Problema aberto
 (nenhum)

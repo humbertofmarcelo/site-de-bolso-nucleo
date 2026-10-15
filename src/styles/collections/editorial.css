@@ -31,8 +31,9 @@
   line-height: var(--text-sm--line-height);
 }
 
-/* Máscara de legibilidade suave para Hero com imagem: preserva o rosto nítido no topo */
-.hero-overlay-mask {
+/* Máscaras de legibilidade para Hero com imagem (baseadas nas superfícies da paleta) */
+.hero-overlay-mask,
+.hero-overlay-mask-light {
   background: linear-gradient(
     to top,
     color-mix(in srgb, var(--color-surface-alt) 92%, transparent) 0%,
@@ -42,12 +43,132 @@
 }
 
 @media (min-width: 768px) {
-  .hero-overlay-mask {
+  .hero-overlay-mask,
+  .hero-overlay-mask-light {
     background: linear-gradient(
       to right,
       color-mix(in srgb, var(--color-surface-alt) 88%, transparent) 0%,
       color-mix(in srgb, var(--color-surface-alt) 40%, transparent) 35%,
       transparent 55%
+    );
+  }
+}
+
+.hero-overlay-mask-dark {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-surface) 50%, transparent) 35%,
+    transparent 65%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-overlay-mask-dark {
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-surface) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 40%, transparent) 35%,
+      transparent 55%
+    );
+  }
+}
+
+/* 1. Máscaras exclusivas para Mobile (< 768px): degradê vertical que desativa em telas maiores */
+.hero-mask-mobile-dark {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-surface) 50%, transparent) 40%,
+    transparent 70%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-mask-mobile-dark {
+    background: none;
+  }
+}
+
+.hero-mask-mobile-light {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-surface-alt) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-surface-alt) 50%, transparent) 40%,
+    transparent 70%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-mask-mobile-light {
+    background: none;
+  }
+}
+
+/* 2. Máscaras exclusivas para Desktop (>= 768px): degradê horizontal que desativa no mobile */
+.hero-mask-desktop-dark {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .hero-mask-desktop-dark {
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-surface) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface) 40%, transparent) 35%,
+      transparent 55%
+    );
+  }
+}
+
+.hero-mask-desktop-light {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .hero-mask-desktop-light {
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-surface-alt) 88%, transparent) 0%,
+      color-mix(in srgb, var(--color-surface-alt) 40%, transparent) 35%,
+      transparent 55%
+    );
+  }
+}
+
+/* 3. Fundo do Container da Hero: gradiente linear configurável no desktop */
+.hero-fundo-gradiente-light-dark,
+.hero-fundo-desktop-light-dark {
+  background: var(--color-surface-alt);
+}
+
+@media (min-width: 768px) {
+  .hero-fundo-gradiente-light-dark,
+  .hero-fundo-desktop-light-dark {
+    background: linear-gradient(
+      to right,
+      var(--color-surface-alt) 0%,
+      var(--color-surface-alt) max(0%, calc(var(--hero-gradient-ext, 45%) - 12%)),
+      var(--color-surface) min(100%, calc(var(--hero-gradient-ext, 45%) + 12%)),
+      var(--color-surface) 100%
+    );
+  }
+}
+
+.hero-fundo-gradiente-dark-light,
+.hero-fundo-desktop-dark-light {
+  background: var(--color-surface);
+}
+
+@media (min-width: 768px) {
+  .hero-fundo-gradiente-dark-light,
+  .hero-fundo-desktop-dark-light {
+    background: linear-gradient(
+      to right,
+      var(--color-surface) 0%,
+      var(--color-surface) max(0%, calc(var(--hero-gradient-ext, 45%) - 12%)),
+      var(--color-surface-alt) min(100%, calc(var(--hero-gradient-ext, 45%) + 12%)),
+      var(--color-surface-alt) 100%
     );
   }
 }

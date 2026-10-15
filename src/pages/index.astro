@@ -7,6 +7,7 @@ interface SecaoConfig {
   id: string;
   tipo: string;
   variante?: string;
+  [key: string]: any;
 }
 
 const secoes = (site.secoes as SecaoConfig[])
@@ -14,14 +15,15 @@ const secoes = (site.secoes as SecaoConfig[])
     id: item.id,
     tipo: item.tipo,
     Componente: obterComponenteSecao(site.colecao, item.tipo, item.variante),
+    config: item,
   }))
   .filter((item) => item.Componente !== null);
 ---
 
 <Base>
   <main>
-    {secoes.map(({ id, Componente }) => (
-      <Componente id={id} />
+    {secoes.map(({ id, Componente, config }) => (
+      <Componente id={id} {...config} />
     ))}
   </main>
 </Base>

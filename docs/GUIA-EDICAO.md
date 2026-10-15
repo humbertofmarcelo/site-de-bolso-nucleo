@@ -8,6 +8,7 @@ Este guia ensina como você pode alterar **textos**, **cores**, **fontes**, **im
 1. [Textos e Conteúdo do Cliente](#1-textos-e-conteúdo-do-cliente)
    - [Configurar Botão de Agendamento: WhatsApp ou Link/Formulário](#11-configurar-botão-de-agendamento-whatsapp-ou-linkformulário)
 2. [Identidade Visual e Cores (Paletas)](#2-identidade-visual-e-cores-paletas)
+   - [Personalização da Seção Hero (Gradiente, Textos Light/Dark e Botão Dinâmico)](#21-personalização-da-seção-hero-gradiente-textos-lightdark-e-botão-dinâmico)
 3. [Tipografia e Fontes Locais](#3-tipografia-e-fontes-locais)
 4. [Imagens e Dimensões Recomendadas](#4-imagens-e-dimensões-recomendadas)
 5. [Ordem e Seleção de Seções](#5-ordem-e-seleção-de-seções)
@@ -72,8 +73,10 @@ As cores do site são 100% desacopladas dos componentes. Elas ficam em:
 📁 **`src/styles/palettes/<nome-da-paleta>.css`**
 
 ### Paletas já prontas no projeto:
-* `volpatto.css`: Terroso escuro café + creme linho + botão caramelo quente.
+* `purpura.css`: Malva suave + ameixa profunda e acolhedora + detalhe em tom rosé da marca.
 * `salvia.css`: Verde-sálvia elegante + creme suave + fundo escuro verde floresta.
+* `mare-serena.css`: Azul mineral sereno + névoa azulada + azul profundo e acolhedor.
+* `volpatto.css`: Terroso escuro café + creme linho + botão caramelo quente.
 * `terracota.css`: Terracota aconchegante + areia quente + fundo marrom profundo.
 
 ### O que cada token de cor controla:
@@ -81,24 +84,144 @@ As cores do site são 100% desacopladas dos componentes. Elas ficam em:
 @theme {
   --color-*: initial;
 
-  --color-primary: #945339;          /* Cor dos botões principais de CTA */
-  --color-primary-dark: #7b422a;     /* Cor de hover do botão */
-  --color-surface: #422417;          /* Fundo das seções escuras */
-  --color-surface-alt: #f7f1eb;      /* Fundo das seções claras */
-  --color-surface-card: #ebd9cb;     /* Fundo de cartões em seções claras */
-  --color-ink: #2b170e;              /* Texto principal em seções claras */
-  --color-ink-soft: #634336;         /* Texto secundário em seções claras */
-  --color-ink-light: #ffffff;        /* Texto em seções escuras */
-  --color-ink-light-soft: #ebdcd2;   /* Texto secundário em seções escuras */
-  --color-line: #dfc8b7;             /* Linhas e bordas em seções claras */
-  --color-line-dark: #6e4635;        /* Linhas e bordas em seções escuras */
+  --color-primary: #865F94;          /* Cor dos botões principais de CTA */
+  --color-primary-dark: #6D4A7A;     /* Cor de hover do botão */
+  --color-surface: #43324A;          /* Fundo das seções escuras */
+  --color-surface-alt: #FAF6FB;      /* Fundo das seções claras */
+  --color-surface-card: #E6D7EA;     /* Fundo de cartões em seções claras */
+  --color-ink: #2E2230;              /* Texto principal em seções claras (tema dark de texto) */
+  --color-ink-soft: #6B5A6C;         /* Texto secundário em seções claras */
+  --color-ink-light: #ffffff;        /* Texto principal em seções escuras (tema light de texto) */
+  --color-ink-light-soft: #E6D7EA;   /* Texto secundário em seções escuras */
+  --color-line: #D3C3D8;             /* Linhas e bordas em seções claras */
+  --color-line-dark: #5E4A66;        /* Linhas e bordas em seções escuras */
   --color-white: #ffffff;
 }
 ```
 
 ### Como trocar a cor do site inteiro:
-1. Abra [`src/config/site.json`](file:///C:/Users/user/Documents/git-documents/sites/cileideferreira/src/config/site.json) e mude `"paleta": "salvia"` para `"volpatto"` ou `"terracota"`.
+1. Abra [`src/config/site.json`](file:///c:/Users/user/Documents/git-documents/sites/marcellegoncalves/src/config/site.json) e mude `"paleta": "purpura"` para `"salvia"`, `"mare-serena"`, `"volpatto"` ou `"terracota"`.
 2. **Pronto!** O sistema sincroniza automaticamente o `src/styles/global.css` em tempo de desenvolvimento (com Hot Reload) e no build de produção. Não é mais necessário editar o CSS manualmente.
+
+### 2.1. Personalização da Seção Hero (Estilos Independentes para Mobile e Desktop)
+
+A seção Hero (na variante `overlay`) permite definir **de forma completamente independente** os estilos para celulares (**Mobile**) e computadores (**Desktop**).
+
+Isso é fundamental porque, no celular, a imagem é vertical e o texto precisa de um gradiente escuro de leitura na base com texto claro (`light`); enquanto no computador (desktop), a tela é panorâmica e o texto pode ficar sobre uma área clara da foto com texto escuro (`dark`) e o fundo do container estendendo o degradê até as laterais da tela.
+
+Toda personalização é feita diretamente no arquivo 📁 **[`src/config/site.json`](file:///c:/Users/user/Documents/git-documents/sites/marcellegoncalves/src/config/site.json)** dentro do objeto da seção `hero`, separando as opções nos blocos `"mobile"` e `"desktop"`:
+
+```json
+{
+  "id": "inicio",
+  "tipo": "hero",
+  "variante": "overlay",
+  "mobile": {
+    "fundo": "dark",
+    "gradiente": "dark",
+    "tema_texto": "light"
+  },
+  "desktop": {
+    "fundo": "gradiente",
+    "direcao_gradiente": "light-para-dark",
+    "extensao_gradiente": 45,
+    "gradiente": "nenhum",
+    "tema_texto": "dark"
+  }
+}
+```
+
+---
+
+#### 1. Opções para Celulares (`mobile`)
+* **`fundo`:** `"dark"` (fundo escuro `bg-surface`) ou `"light"` (fundo claro `bg-surface-alt`).
+* **`gradiente` (máscara vertical na base da foto):**
+  * `"dark"`: Aplica uma suave máscara gradiente escura de baixo para cima para dar contraste ao texto.
+  * `"light"`: Aplica máscara clara de baixo para cima.
+  * `"nenhum"`: Desativa a máscara no celular.
+* **`tema_texto`:** `"light"` (textos brancos/claros da paleta: `text-ink-light` e `text-ink-light-soft`) ou `"dark"` (textos escuros da paleta: `text-ink` e `text-ink-soft`).
+  * *Ajuste fino individual (opcional):* `"tema_texto_topo"`, `"tema_texto_titulo"`, `"tema_texto_subtitulo"`.
+* **`variante_botao`:** Opcional (`"light"`, `"dark"` ou `"normal"`). Por padrão, assume o oposto do gradiente mobile (ex.: botão claro sobre a base escura).
+
+---
+
+#### 2. Opções para Computadores (`desktop`)
+* **`fundo`:**
+  * `"gradiente"`: Ativa o gradiente linear contínuo no desktop, preenchendo as laterais da tela com as cores da paleta de forma contínua com a imagem.
+  * `"solido"`: Fundo com cor sólida (`bg-surface` ou `bg-surface-alt`).
+* **`direcao_gradiente`:**
+  * `"light-para-dark"`: Inicia claro na esquerda (`--color-surface-alt`) e transiciona para escuro (`--color-surface`) na direita.
+  * `"dark-para-light"`: Inicia escuro na esquerda (`--color-surface`) e transiciona para claro (`--color-surface-alt`) na direita.
+* **`extensao_gradiente`:** Percentual onde ocorre a transição horizontal na tela (ex.: `45`, `50`, `60`).
+* **`gradiente` (máscara horizontal na foto):**
+  * `"nenhum"`: **Recomendado quando a foto do desktop já possui gradiente.** Não adiciona nenhuma máscara sobre a foto.
+  * `"dark"` ou `"light"`: Aplica uma máscara horizontal caso queira reforçar o contraste.
+* **`tema_texto`:** `"dark"` (textos escuros: `text-ink`) ou `"light"` (textos claros: `text-ink-light`).
+  * *Ajuste fino individual (opcional):* `"tema_texto_topo"`, `"tema_texto_titulo"`, `"tema_texto_subtitulo"`.
+* **`variante_botao`:** Opcional (`"dark"`, `"light"` ou `"normal"`). Por padrão, assume o oposto da área de leitura do desktop (ex.: botão escuro sobre o lado claro).
+
+---
+
+#### Exemplos Práticos:
+
+* **Configuração Ideal para Fotos com Degradê no Desktop e Fundo Escuro no Mobile:**
+  ```json
+  {
+    "id": "inicio",
+    "tipo": "hero",
+    "variante": "overlay",
+    "mobile": {
+      "fundo": "dark",
+      "gradiente": "dark",
+      "tema_texto": "light"
+    },
+    "desktop": {
+      "fundo": "gradiente",
+      "direcao_gradiente": "light-para-dark",
+      "extensao_gradiente": 45,
+      "gradiente": "nenhum",
+      "tema_texto": "dark"
+    }
+  }
+  ```
+
+* **Configuração 100% Noturna (Escuro tanto no Mobile quanto no Desktop):**
+  ```json
+  {
+    "id": "inicio",
+    "tipo": "hero",
+    "variante": "overlay",
+    "mobile": {
+      "fundo": "dark",
+      "gradiente": "dark",
+      "tema_texto": "light"
+    },
+    "desktop": {
+      "fundo": "solido",
+      "gradiente": "dark",
+      "tema_texto": "light"
+    }
+  }
+  ```
+
+* **Configuração 100% Diurna (Claro tanto no Mobile quanto no Desktop):**
+  ```json
+  {
+    "id": "inicio",
+    "tipo": "hero",
+    "variante": "overlay",
+    "mobile": {
+      "fundo": "light",
+      "gradiente": "light",
+      "tema_texto": "dark"
+    },
+    "desktop": {
+      "fundo": "solido",
+      "gradiente": "light",
+      "tema_texto": "dark"
+    }
+  }
+  ```
 
 ---
 
