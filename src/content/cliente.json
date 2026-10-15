@@ -55,13 +55,15 @@
     }
   ],
   "contato_texto": "Agende uma consulta e se permita dar o primeiro passo para uma vida mais leve.",
+  "tipo_agendamento": "link",
+  "link_agendamento": "https://www.instagram.com/mahgon.psi/",
   "whatsapp": "551199999999",
   "whatsapp_mensagem": "Olá, Marcelle! Vim pelo site e gostaria de agendar um atendimento.",
   "instagram": "mahgon.psi",
   "og_image": "/og.jpg",
   "imagens": {
     "hero": {
-      "desktop": "/images/hero-cileide-desktop.webp",
+      "desktop": "/images/hero-marcelle-desktop.webp",
       "mobile": "/images/hero.webp",
       "arquivo": "/images/hero.webp",
       "alt": "Retrato de Marcelle Gonçalves, Psicóloga Clínica",

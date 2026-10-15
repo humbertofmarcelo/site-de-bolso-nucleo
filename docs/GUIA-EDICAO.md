@@ -6,6 +6,7 @@ Este guia ensina como você pode alterar **textos**, **cores**, **fontes**, **im
 
 ## Índice
 1. [Textos e Conteúdo do Cliente](#1-textos-e-conteúdo-do-cliente)
+   - [Configurar Botão de Agendamento: WhatsApp ou Link/Formulário](#11-configurar-botão-de-agendamento-whatsapp-ou-linkformulário)
 2. [Identidade Visual e Cores (Paletas)](#2-identidade-visual-e-cores-paletas)
 3. [Tipografia e Fontes Locais](#3-tipografia-e-fontes-locais)
 4. [Imagens e Dimensões Recomendadas](#4-imagens-e-dimensões-recomendadas)
@@ -19,7 +20,7 @@ Este guia ensina como você pode alterar **textos**, **cores**, **fontes**, **im
 ## 1. Textos e Conteúdo do Cliente
 
 Tudo o que é texto está em um único arquivo:  
-📁 **[`src/content/cliente.json`](file:///C:/Users/user/Documents/git-documents/sites/cileideferreira/src/content/cliente.json)**
+📁 **[`src/content/cliente.json`](file:///c:/Users/user/Documents/git-documents/sites/marcellegoncalves/src/content/cliente.json)**
 
 * **Dados cadastrais:** `"nome"`, `"profissao"`, `"crp"`, `"cidade"`, `"uf"`, `"bairro"`, `"endereco"`, `"email"`.
 * **Hero (Topo):** `"titulo_hero"` (título de impacto) e `"subtitulo_hero"` (frase de apoio).
@@ -29,6 +30,39 @@ Tudo o que é texto está em um único arquivo:
 * **Modalidades:** Informações de atendimento presencial e online em `"modalidades_info"`.
 * **FAQ:** Lista com `"pergunta"` e `"resposta"`.
 * **WhatsApp e Redes:** `"whatsapp"` (apenas números: `55 + DDD + número`), `"whatsapp_mensagem"` e `"instagram"`.
+
+### 1.1. Configurar Botão de Agendamento: WhatsApp ou Link/Formulário
+
+Você pode escolher com uma única linha se o botão de **"Agendar um atendimento"** levará o paciente diretamente para o WhatsApp ou para um link avulso (como formulário do Google Forms, Typeform, Calendly, Doctoralia, etc.).
+
+Essa configuração fica dentro de 📁 **[`src/content/cliente.json`](file:///c:/Users/user/Documents/git-documents/sites/marcellegoncalves/src/content/cliente.json)** e reflete **instantaneamente em todos os botões do site**:
+
+#### Cenário 1: Botão direcionando para o WhatsApp (Padrão)
+Selecione `"tipo_agendamento": "whatsapp"`:
+```json
+{
+  "tipo_agendamento": "whatsapp",
+  "whatsapp": "551199999999",
+  "whatsapp_mensagem": "Olá! Vim pelo site e gostaria de agendar um atendimento."
+}
+```
+* **Comportamento:** Ao clicar no botão, o paciente é direcionado ao WhatsApp com a mensagem personalizada pronta para envio.
+
+#### Cenário 2: Botão direcionando para um Link Avulso / Formulário
+Selecione `"tipo_agendamento": "link"` e informe a URL no `"link_agendamento"`:
+```json
+{
+  "tipo_agendamento": "link",
+  "link_agendamento": "https://forms.gle/SEU_FORMULARIO_AQUI",
+  "whatsapp": "551199999999",
+  "whatsapp_mensagem": "Olá! Vim pelo site e gostaria de agendar um atendimento."
+}
+```
+* **Comportamento:** Ao clicar no botão, o link abre o formulário ou página de agendamento em uma nova aba com total segurança (`target="_blank"` e `rel="noopener noreferrer"`).
+* **Segurança:** O script de checagem do projeto (`npm run check`) avisará caso você defina `"link"` mas esqueça de preencher o `"link_agendamento"`.
+
+> [!TIP]  
+> Você não precisa alterar nenhum arquivo de layout ou componente `.astro`. Toda a estrutura de botões do site (`<BotaoWhatsapp />` ou `<BotaoAgendamento />`) se adapta automaticamente à opção definida no `cliente.json`.
 
 ---
 

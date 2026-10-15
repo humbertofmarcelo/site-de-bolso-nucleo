@@ -4,7 +4,7 @@ Template de origem: template-v1.1.1
 
 ## Fases
 - [x] Roteiro e textos
-- [ ] Identidade visual (tokens)
+- [x] Identidade visual (tokens)
 - [ ] Imagens (favicon e og.jpg)
 - [ ] Links e botões
 - [ ] SEO
@@ -30,7 +30,7 @@ Template de origem: template-v1.1.1
 
 
 ## Fase atual
-tag fase-1-roteiro
+tag fase-3-imagens
 
 ## Última coisa que funcionou
 (citar uma tag)

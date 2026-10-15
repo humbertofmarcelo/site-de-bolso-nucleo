@@ -1,15 +1,34 @@
 ---
-// Tokens: bg-primary, bg-primary-dark, text-white, rounded-button, px-6, py-4, font-medium
-// cliente.json: whatsapp, whatsapp_mensagem
-// Props: rotulo (texto do botão, padrão "Agendar pelo WhatsApp")
+// Tokens: inline-block, bg-primary, bg-primary-dark, text-white, rounded-button, px-6, py-4, font-medium, hover:bg-primary-dark
+// cliente.json: tipo_agendamento, link_agendamento, whatsapp, whatsapp_mensagem
+// Props: rotulo (texto do botão), href (sobrescrever URL opcional), tipo (tipo opcional: "whatsapp" | "link")
 import cliente from "../../content/cliente.json";
 
-const { rotulo = "Agendar pelo WhatsApp" } = Astro.props;
-const link = `https://wa.me/${cliente.whatsapp}?text=${encodeURIComponent(cliente.whatsapp_mensagem)}`;
+interface Props {
+  rotulo?: string;
+  href?: string;
+  tipo?: "whatsapp" | "link";
+}
+
+const { rotulo, href, tipo } = Astro.props;
+
+const tipoAtivo = tipo || (cliente as any).tipo_agendamento || "whatsapp";
+const ehLink = tipoAtivo === "link";
+
+const urlWhatsapp = `https://wa.me/${cliente.whatsapp}?text=${encodeURIComponent(cliente.whatsapp_mensagem)}`;
+const urlLink = (cliente as any).link_agendamento || urlWhatsapp;
+const linkFinal = href || (ehLink ? urlLink : urlWhatsapp);
+
+const rotuloPadrao = ehLink ? "Agendar Atendimento" : "Agendar pelo WhatsApp";
+const textoFinal = rotulo || rotuloPadrao;
+
+const isExterno = linkFinal.startsWith("http://") || linkFinal.startsWith("https://");
 ---
 <a
-  href={link}
+  href={linkFinal}
   class="inline-block bg-primary text-white rounded-button px-6 py-4 font-medium hover:bg-primary-dark"
+  target={isExterno ? "_blank" : undefined}
+  rel={isExterno ? "noopener noreferrer" : undefined}
 >
-  {rotulo}
+  {textoFinal}
 </a>

@@ -1,0 +1,15 @@
+---
+// Tokens: inline-block, bg-primary, bg-primary-dark, text-white, rounded-button, px-6, py-4, font-medium, hover:bg-primary-dark
+// cliente.json: tipo_agendamento, link_agendamento, whatsapp, whatsapp_mensagem
+// Props: rotulo (texto do botão), href (sobrescrever URL opcional), tipo (tipo opcional: "whatsapp" | "link")
+import BotaoWhatsapp from "./BotaoWhatsapp.astro";
+
+interface Props {
+  rotulo?: string;
+  href?: string;
+  tipo?: "whatsapp" | "link";
+}
+
+const props = Astro.props;
+---
+<BotaoWhatsapp {...props} />

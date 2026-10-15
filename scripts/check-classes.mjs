@@ -49,6 +49,11 @@ try {
   // Imagens do cliente
   const clienteRaw = readFileSync("src/content/cliente.json", "utf8");
   const cliente = JSON.parse(clienteRaw);
+  // Agendamento do cliente
+  if (cliente.tipo_agendamento === "link" && !cliente.link_agendamento) {
+    bad.push("cliente.json: tipo_agendamento está definido como 'link', mas link_agendamento está vazio.");
+  }
+
   if (cliente.imagens) {
     for (const [chave, img] of Object.entries(cliente.imagens)) {
       if (img.obrigatoria && !img.arquivo && !img.desktop && !img.mobile) {
@@ -91,7 +96,7 @@ function walk(dir) {
       });
 
       // Seções precisam usar o wrapper <Section>
-      const isento = ["Section.astro", "BotaoWhatsapp.astro"];
+      const isento = ["Section.astro", "BotaoWhatsapp.astro", "BotaoAgendamento.astro"];
       if (p.includes("components") && !isento.includes(name) && !text.includes("<Section"))
         bad.push(`${p}: seção sem <Section> (corpo ausente?)`);
     }

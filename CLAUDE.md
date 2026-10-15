@@ -40,7 +40,7 @@ Template de site de uma página para psicólogos (Site de Bolso). Estático, mob
 - Título de seção: `<h2 class="text-2xl text-ink">`. Nunca `<h1>` fora do Hero.
 - Textos do cliente vêm do `cliente.json`, nunca escritos no componente. Rótulos fixos de interface (ex.: "Sobre") podem ficar no componente.
 - Use `text-balance` em títulos.
-
+- Botão de Agendamento: use sempre `<BotaoWhatsapp />` ou `<BotaoAgendamento />` (aceita a prop `rotulo`). Ele resolve dinamicamente entre WhatsApp e link avulso via `cliente.json` (`tipo_agendamento`). Nunca recrie o link `wa.me` solto nos componentes.
 
 ## Development
 
