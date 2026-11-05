@@ -34,13 +34,21 @@ Template de site de uma página para psicólogos (Site de Bolso). Estático, mob
 - O trabalho só termina quando `npm run build` e `npm run check` passam.
 
 
-## Padrão de seções
-- Referência: `Hero.astro` e `Section.astro`. Imite o padrão deles.
+## Padrão de seções e Modelos de Layout
+- O projeto suporta 6 modelos selecionáveis via campo `"modelo"` em `src/content/cliente.json`:
+  1. `silvia-volpatto` (ou `modelo-1`): Editorial Terroso / Atual
+  2. `gabriela-alcantara` (ou `modelo-2`): Editorial P&B / Clássico
+  3. `amanda-botelho` (ou `modelo-3`): Lúdico Lilás / Gen-Z
+  4. `leticia-malta` (ou `modelo-4`): Orgânico Sálvia / Minimalista
+  5. `ricardo-costa` (ou `modelo-5`): Estruturado Azul / TCC
+  6. `bruno-freitas` (ou `modelo-6`): Vibrante Roxo & Laranja
+- Componentes específicos de cada modelo ficam em `src/components/modelos/<nome-do-modelo>/`.
 - Toda seção usa `<Section id="...">` como wrapper. Não repita padding nem largura máxima.
 - Título de seção: `<h2 class="text-2xl text-ink">`. Nunca `<h1>` fora do Hero.
 - Textos do cliente vêm do `cliente.json`, nunca escritos no componente. Rótulos fixos de interface (ex.: "Sobre") podem ficar no componente.
 - Use `text-balance` em títulos.
 - Botão de Agendamento: use sempre `<BotaoWhatsapp />` ou `<BotaoAgendamento />` (aceita a prop `rotulo`). Ele resolve dinamicamente entre WhatsApp e link avulso via `cliente.json` (`tipo_agendamento`). Nunca recrie o link `wa.me` solto nos componentes.
+- Ícones: use `<Icone nome="..." tamanho="..." />` de `src/components/common/Icone.astro`. Proibido pacotes externos pesados de ícones.
 
 ## Development
 

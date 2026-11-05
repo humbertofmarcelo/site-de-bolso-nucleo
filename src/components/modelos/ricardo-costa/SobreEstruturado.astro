@@ -1,0 +1,63 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-6, md:p-8, mt-4, mt-6, mt-8, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, profissao, crp, bio, bio_complementar, formacao_itens, imagens.sobre
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const foto = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
+const formacoes = (cliente as any).formacao_itens || [
+  "Graduação em Psicologia",
+  "Especialização em Terapia Cognitivo-Comportamental",
+  "Experiência com ansiedade e relacionamentos",
+  "Membro ativo do Conselho Regional de Psicologia",
+];
+---
+
+<Section id="sobre" tom="alt" largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna Retrato Profissional -->
+    <div class="flex justify-center mb-8 md:mb-0">
+      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-sm">
+        <img
+          src={foto}
+          alt={`Sobre ${cliente.nome}`}
+          class="w-full h-80 md:h-96 object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Coluna de Biografia e Formação -->
+    <div class="text-center md:text-left">
+      <span class="text-sm text-ink-soft uppercase tracking-wider font-semibold">
+        {cliente.profissao}
+      </span>
+      <h2 class="text-2xl md:text-3xl text-ink font-bold mt-1">
+        {cliente.nome}
+      </h2>
+      <p class="text-sm text-ink-soft mt-1">
+        CRP {cliente.crp}
+      </p>
+
+      <div class="mt-6 text-base text-ink-soft leading-relaxed space-y-3">
+        <p>{cliente.bio}</p>
+        {cliente.bio_complementar && <p>{cliente.bio_complementar}</p>}
+      </div>
+
+      <!-- Card de Formação e Qualificações -->
+      <div class="mt-8 bg-surface-card border border-line rounded-card p-6 md:p-8 text-left shadow-sm">
+        <h3 class="text-lg text-ink font-bold">
+          Formação e Experiência
+        </h3>
+        <ul class="mt-4 space-y-2 text-sm text-ink">
+          {formacoes.map((item: string) => (
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold" aria-hidden="true">•</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Section>

@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "node scripts/check-classes.mjs"
+    "check": "node scripts/check-classes.mjs",
+    "test:modelos": "node scripts/test-modelos.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

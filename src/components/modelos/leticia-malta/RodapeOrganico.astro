@@ -1,0 +1,40 @@
+---
+// Tokens: text-sm, text-xs, text-ink-light, text-ink-light-soft, rounded-card, border-t, border-line-dark, pt-8, mt-4, mt-8, text-center, space-y-4
+// cliente.json: nome, crp, instagram, whatsapp, imagens.paisagem_rodape
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const fotoBosque = (cliente.imagens as any)?.paisagem_rodape?.arquivo || (cliente.imagens as any)?.paisagem?.arquivo || "/images/hero.webp";
+---
+
+<Section id="contato" tom="base" largura="padrao">
+  <div class="text-center space-y-6">
+    <div class="overflow-hidden rounded-card shadow-sm border border-line-dark">
+      <img
+        src={fotoBosque}
+        alt={`Ambiente terapêutico sereno`}
+        class="w-full h-40 object-cover opacity-80"
+        loading="lazy"
+      />
+    </div>
+
+    <div>
+      <h2 class="text-lg text-ink-light font-serif font-medium">
+        {cliente.nome}
+      </h2>
+      <p class="text-sm text-ink-light-soft mt-1">
+        {cliente.profissao} · CRP {cliente.crp}
+      </p>
+    </div>
+
+    <div class="pt-6 border-t border-line-dark text-xs text-ink-light-soft">
+      <p>
+        Atendimento psicológico estritamente confidencial em conformidade com o Código de Ética Profissional do Psicólogo (CFP).
+      </p>
+      <p class="mt-2 opacity-75">
+        Copyright © 2026 · {cliente.nome}. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</Section>
+

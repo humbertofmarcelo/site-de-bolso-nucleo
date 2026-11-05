@@ -1,0 +1,41 @@
+---
+// Tokens: text-2xl, text-xl, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-6, md:p-8, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-6, flex, justify-between, items-start
+// cliente.json: servicos (titulo, descricao)
+import Section from "../../ui/Section.astro";
+import Icone from "../../common/Icone.astro";
+import cliente from "../../../content/cliente.json";
+
+const servicos = cliente.servicos || [];
+const iconesPadrao = ["planta", "coracao", "ansiedade", "estrela"];
+---
+
+<Section id="servicos" tom="alt" largura="ampla">
+  <div class="text-center md:text-left">
+    <h2 class="text-2xl text-ink font-serif font-medium text-balance">
+      Conheça as áreas em que posso te acompanhar
+    </h2>
+  </div>
+
+  <div class="mt-8 md:grid md:grid-cols-2 md:gap-6 space-y-4 md:space-y-0">
+    {servicos.map((servico: any, idx: number) => {
+      const nomeIcone = servico.icone || iconesPadrao[idx % iconesPadrao.length];
+      return (
+        <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start gap-4">
+              <h3 class="text-xl text-ink font-medium text-balance">
+                {servico.titulo}
+              </h3>
+              <span class="text-ink-soft" aria-hidden="true">
+                <Icone nome={nomeIcone} tamanho="lg" />
+              </span>
+            </div>
+            <p class="text-base text-ink-soft mt-3 leading-relaxed">
+              {servico.descricao}
+            </p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</Section>

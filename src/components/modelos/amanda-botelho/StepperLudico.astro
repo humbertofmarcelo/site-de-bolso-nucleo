@@ -1,0 +1,47 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-4, p-6, md:p-8, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-3, md:gap-6
+// cliente.json: passos_timeline
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const passos = (cliente as any).passos_timeline || [
+  {
+    titulo: "1. Agendamento",
+    descricao: "Você me envia uma mensagem no WhatsApp e escolhemos o melhor dia e horário para a sua rotina.",
+  },
+  {
+    titulo: "2. Primeira Sessão",
+    descricao: "Nosso primeiro encontro para nos conhecermos, entender o que te traz à terapia e alinhar expectativas.",
+  },
+  {
+    titulo: "3. A Sessão Contínua",
+    descricao: "Encontros semanais online com duração de 50 minutos onde trabalhamos juntos no seu processo.",
+  },
+];
+---
+
+<Section id="como-funciona" tom="alt" largura="ampla">
+  <div class="text-center">
+    <h2 class="text-2xl text-ink font-bold text-balance">
+      Como funciona?
+    </h2>
+    <p class="text-base text-ink-soft mt-2">
+      Passo a passo simples para iniciar sua jornada
+    </p>
+  </div>
+
+  <div class="mt-8 md:grid md:grid-cols-3 md:gap-6 space-y-4 md:space-y-0">
+    {passos.map((item: any) => (
+      <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg text-ink font-bold text-balance">
+            {item.titulo}
+          </h3>
+          <p class="text-base text-ink-soft mt-3 leading-relaxed">
+            {item.descricao}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

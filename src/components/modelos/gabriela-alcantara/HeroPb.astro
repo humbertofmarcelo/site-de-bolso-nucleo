@@ -1,0 +1,78 @@
+---
+// Tokens: border-b, border-line, border-line-dark, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, text-sm, text-3xl, text-balance, rounded-card, w-full, max-w-sm, mx-auto, mt-4, mt-6, mt-8, mt-12, pb-6, flex, justify-between, items-center, text-center, md:text-left, md:grid, md:grid-cols-2, md:gap-12, md:items-center, bg-surface, bg-surface-alt
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+// Props: mobile, desktop (liberdade Item 6)
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+interface Props {
+  mobile?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const confMobile = props.mobile ?? {};
+const confDesktop = props.desktop ?? {};
+
+const heroImg = cliente.imagens?.hero;
+const foto = heroImg?.arquivo || heroImg?.desktop || heroImg?.mobile || "/images/sobre.webp";
+const titulo = cliente.titulo_hero || "Encontre um caminho para lidar com suas angústias e construir relações mais saudáveis";
+const subtitulo = cliente.subtitulo_hero || cliente.bio;
+
+const fundoTom = confMobile.fundo === "dark" ? "base" : "alt";
+const corTextoTitulo = confMobile.tema_texto === "light" ? "text-ink-light" : "text-ink";
+const corTextoSub = confMobile.tema_texto === "light" ? "text-ink-light-soft" : "text-ink-soft";
+const varBotaoMob = confMobile.variante_botao ?? (confMobile.fundo === "dark" ? "light" : "normal");
+const varBotaoDesk = confDesktop.variante_botao ?? (confDesktop.fundo === "dark" ? "light" : "normal");
+---
+
+<Section id="inicio" tom={fundoTom} largura="ampla">
+  <!-- Barra superior profissional -->
+  <div class="flex justify-between items-center text-sm text-ink-soft pb-6 border-b border-line">
+    <span class="font-medium tracking-wide uppercase">{cliente.nome}</span>
+    <span>CRP {cliente.crp}</span>
+  </div>
+
+  <div class="mt-8 md:mt-12 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Foto (no mobile fica acima, no desktop fica à direita ou à esquerda conforme preferência) -->
+    <div class="order-first md:order-last flex justify-center mb-8 md:mb-0">
+      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-sm">
+        <img
+          src={foto}
+          alt={heroImg?.alt || `Retrato de ${cliente.nome}`}
+          class="w-full object-cover aspect-4/5 grayscale contrast-125"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Coluna de Conteúdo Editorial -->
+    <div class="text-center md:text-left">
+      <h1 class={`texto-titulo ${corTextoTitulo} text-balance`}>
+        {titulo}
+      </h1>
+
+      <p class={`text-base ${corTextoSub} mt-6 leading-relaxed`}>
+        {subtitulo}
+      </p>
+
+      <div class="mt-8">
+        <BotaoAgendamento
+          rotulo="Agendar consulta"
+          varianteMobile={varBotaoMob}
+          varianteDesktop={varBotaoDesk}
+        />
+      </div>
+    </div>
+  </div>
+</Section>

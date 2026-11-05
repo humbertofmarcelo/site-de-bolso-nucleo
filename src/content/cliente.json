@@ -1,4 +1,6 @@
 {
+  "modelo": "gabriela-alcantara",
+  "paleta": "classico-pb",
   "nome": "Marcelle Gonçalves",
   "profissao": "Psicóloga",
   "crp": "06/210464",
@@ -40,6 +42,18 @@
       "descricao": "Os atendimentos realizados de maneira online proporcionam a mesma eficácia e qualidade das sessões presenciais, realizados por videoconferência. Conduzidas em ambientes escolhidos por você, a distância física entre paciente e psicólogo não interfere."
     }
   ],
+  "passos_processo": [
+  {
+      "numero": "01",
+      "titulo": "Como funciona o negócio?",
+      "descricao": "Cara, funciona assim..."
+  },
+  {
+      "numero": "02",
+      "titulo": "Mas funciona mesmo?",
+      "descricao": "Pitango o nargas pa..."
+  }  
+  ],
   "faq": [
     {
       "pergunta": "Qual é a duração do tratamento?",
@@ -60,7 +74,7 @@
   "whatsapp": "551199999999",
   "whatsapp_mensagem": "Olá, Marcelle! Vim pelo site e gostaria de agendar um atendimento.",
   "instagram": "mahgon.psi",
-  "og_image": "/og.jpg",
+  "og_image": "/og2.jpg",
   "imagens": {
     "hero": {
       "desktop": "/images/hero-marcelle-desktop.webp",

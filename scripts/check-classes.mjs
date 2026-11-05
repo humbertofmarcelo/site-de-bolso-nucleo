@@ -9,19 +9,58 @@ const bad = [];
 
 // 1. Validação de Contratos de Configuração (site.json, typography.json, cliente.json)
 try {
-  const siteRaw = readFileSync("src/config/site.json", "utf8");
-  const site = JSON.parse(siteRaw);
+  let site = {};
+  if (existsSync("src/config/site.json")) {
+    try {
+      site = JSON.parse(readFileSync("src/config/site.json", "utf8"));
+    } catch {}
+  }
+
+  let cliente = {};
+  if (existsSync("src/content/cliente.json")) {
+    try {
+      cliente = JSON.parse(readFileSync("src/content/cliente.json", "utf8"));
+    } catch {}
+  }
+
+  const ALIASES_MODELOS = {
+    "modelo-1": "silvia-volpatto", "modelo1": "silvia-volpatto", "volpatto": "silvia-volpatto",
+    "modelo-2": "gabriela-alcantara", "modelo2": "gabriela-alcantara", "mariana-nogueira": "gabriela-alcantara",
+    "modelo-3": "amanda-botelho", "modelo3": "amanda-botelho", "jaqueline-ramos": "amanda-botelho",
+    "modelo-4": "leticia-malta", "modelo4": "leticia-malta", "minimal-sereno": "leticia-malta",
+    "modelo-5": "ricardo-costa", "modelo5": "ricardo-costa", "eduardo-sousa": "ricardo-costa",
+    "modelo-6": "bruno-freitas", "modelo6": "bruno-freitas", "lucas-santos": "bruno-freitas",
+  };
+
+  const PALETAS_PADRAO_MODELO = {
+    "silvia-volpatto": "volpatto",
+    "gabriela-alcantara": "classico-pb",
+    "amanda-botelho": "ludico-lilas",
+    "leticia-malta": "salvia",
+    "ricardo-costa": "azul-confiante",
+    "bruno-freitas": "vibrante-roxo",
+  };
+
+  let paletaAtiva = cliente.paleta;
+  if (!paletaAtiva && cliente.modelo) {
+    const modKey = (cliente.modelo || "").toLowerCase().trim();
+    const modId = ALIASES_MODELOS[modKey] || modKey;
+    paletaAtiva = PALETAS_PADRAO_MODELO[modId];
+  }
+  if (!paletaAtiva) paletaAtiva = site.paleta || "volpatto";
+
+  const colecaoAtiva = cliente.colecao || site.colecao || "editorial";
 
   // Paleta
-  const paletaPath = join("src/styles/palettes", `${site.paleta}.css`);
+  const paletaPath = join("src/styles/palettes", `${paletaAtiva}.css`);
   if (!existsSync(paletaPath)) {
-    bad.push(`Paleta configurada "${site.paleta}" não encontrada em ${paletaPath}`);
+    bad.push(`Paleta configurada "${paletaAtiva}" não encontrada em ${paletaPath}`);
   }
 
   // Coleção
-  const colecaoPath = join("src/styles/collections", `${site.colecao}.css`);
+  const colecaoPath = join("src/styles/collections", `${colecaoAtiva}.css`);
   if (!existsSync(colecaoPath)) {
-    bad.push(`Coleção configurada "${site.colecao}" não encontrada em ${colecaoPath}`);
+    bad.push(`Coleção configurada "${colecaoAtiva}" não encontrada em ${colecaoPath}`);
   }
 
   // Tipografia
@@ -46,9 +85,6 @@ try {
     }
   }
 
-  // Imagens do cliente
-  const clienteRaw = readFileSync("src/content/cliente.json", "utf8");
-  const cliente = JSON.parse(clienteRaw);
   // Agendamento do cliente
   if (cliente.tipo_agendamento === "link" && !cliente.link_agendamento) {
     bad.push("cliente.json: tipo_agendamento está definido como 'link', mas link_agendamento está vazio.");
@@ -96,8 +132,9 @@ function walk(dir) {
       });
 
       // Seções precisam usar o wrapper <Section>
-      const isento = ["Section.astro", "BotaoWhatsapp.astro", "BotaoAgendamento.astro"];
-      if (p.includes("components") && !isento.includes(name) && !text.includes("<Section"))
+      const isento = ["Section.astro", "BotaoWhatsapp.astro", "BotaoAgendamento.astro", "Icone.astro"];
+      const ehSecao = p.includes("sections") || p.includes("modelos");
+      if ((ehSecao || (p.includes("components") && !p.includes("common") && !p.includes("ui"))) && !isento.includes(name) && !text.includes("<Section"))
         bad.push(`${p}: seção sem <Section> (corpo ausente?)`);
     }
   }

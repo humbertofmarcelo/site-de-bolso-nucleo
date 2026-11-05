@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cileide-ferreira.amostra-site.workers.dev/sitemap-index.xml
+Sitemap: https://marcelle-goncalves.amostra-site.workers.dev/sitemap-index.xml

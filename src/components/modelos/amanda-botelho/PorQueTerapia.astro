@@ -1,0 +1,54 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-light, text-ink-light-soft, bg-surface-card, border, border-line, border-line-dark, rounded-card, p-6, md:p-8, mt-4, mt-6, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-8, md:items-stretch
+// cliente.json: motivos_checklist, demandas
+import Section from "../../ui/Section.astro";
+import Icone from "../../common/Icone.astro";
+import cliente from "../../../content/cliente.json";
+
+const checklist = (cliente as any).motivos_checklist || (cliente as any).demandas || [
+  "Ansiedade e pensamentos acelerados",
+  "Sentimento de sobrecarga constante",
+  "Dificuldade de impor limites saudáveis",
+  "Insegurança e autocrítica severa",
+  "Relacionamentos que causam sofrimento",
+];
+---
+
+<Section id="por-que-terapia" tom="base" largura="ampla">
+  <div class="text-center">
+    <h2 class="text-2xl text-ink-light font-bold text-balance">
+      Por que fazer terapia? 🤔
+    </h2>
+  </div>
+
+  <div class="mt-8 md:grid md:grid-cols-2 md:gap-8 md:items-stretch space-y-6 md:space-y-0">
+    <!-- Card 1: Checklist Branco -->
+    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg text-ink font-bold text-balance">
+          A psicoterapia pode te ajudar com:
+        </h3>
+        <ul class="mt-4 space-y-3 text-base text-ink">
+          {checklist.map((item: string) => (
+            <li class="flex items-center gap-3">
+              <span class="text-primary" aria-hidden="true">
+                <Icone nome="check" tamanho="base" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 2: Reflexão Lilás Suave -->
+    <div class="border border-line-dark rounded-card p-6 md:p-8 bg-surface opacity-95 flex flex-col justify-center">
+      <p class="text-lg text-ink-light-soft leading-relaxed">
+        Sabia que terapia não é só para quando você está no fundo do poço?
+      </p>
+      <p class="text-base text-ink-light-soft leading-relaxed mt-4">
+        Cuidar da mente é um ato contínuo de autocompaixão e autoconhecimento. Criar esse espaço semanal para você é o melhor investimento na sua paz interior e nas suas relações.
+      </p>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,39 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-6, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-6, md:items-start, flex, justify-between, items-center
+// cliente.json: faq (pergunta, resposta)
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const faq = cliente.faq || [];
+---
+
+<Section id="faq" tom="alt" largura="ampla">
+  <div class="text-center">
+    <h2 class="text-2xl text-ink font-serif font-medium text-balance">
+      Dúvidas Comuns
+    </h2>
+  </div>
+
+  <div
+    class="mt-8 md:grid md:grid-cols-2 md:gap-6 md:items-start space-y-4 md:space-y-0"
+  >
+    {
+      faq.map((item: any) => (
+        <details class="bg-surface-card border border-line rounded-card p-6 group shadow-sm">
+          <summary class="text-lg text-ink font-medium cursor-pointer list-none flex gap-4 justify-between items-center">
+            <span>{item.pergunta}</span>
+            <span
+              aria-hidden="true"
+              class="shrink-0 text-ink-soft transition-transform group-open:rotate-180"
+            >
+              ↓
+            </span>
+          </summary>
+          <p class="text-base text-ink-soft mt-4 leading-relaxed pt-4 border-t border-line">
+            {item.resposta}
+          </p>
+        </details>
+      ))
+    }
+  </div>
+</Section>

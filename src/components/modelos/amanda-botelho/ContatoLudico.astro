@@ -1,0 +1,53 @@
+---
+// Tokens: text-xl, text-sm, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-6, mt-4, mt-6, text-center, flex, justify-center, gap-4
+// cliente.json: nome, crp, instagram, whatsapp
+import Section from "../../ui/Section.astro";
+import Icone from "../../common/Icone.astro";
+import cliente from "../../../content/cliente.json";
+---
+
+<Section id="contato" tom="alt" largura="padrao">
+  <div class="bg-surface-card border-2 border-line rounded-card p-6 md:p-8 text-center shadow-sm">
+    <h2 class="text-xl text-ink font-bold">
+      {cliente.nome}
+    </h2>
+    <p class="text-sm text-ink-soft mt-1">
+      {cliente.profissao} · CRP {cliente.crp}
+    </p>
+
+    <div class="flex justify-center gap-4 mt-6">
+      {cliente.whatsapp && (
+        <a
+          href={`https://wa.me/${cliente.whatsapp}`}
+          class="border border-line rounded-button p-3 text-ink hover:bg-surface-alt transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <Icone nome="whatsapp" tamanho="base" />
+        </a>
+      )}
+      {cliente.instagram && (
+        <a
+          href={`https://www.instagram.com/${cliente.instagram}`}
+          class="border border-line rounded-button p-3 text-ink hover:bg-surface-alt transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <Icone nome="instagram" tamanho="base" />
+        </a>
+      )}
+    </div>
+
+    <div class="pt-6 border-t border-line text-xs text-ink-soft mt-6">
+      <p>
+        Atendimento psicológico estritamente confidencial em conformidade com o Código de Ética Profissional do Psicólogo (CFP).
+      </p>
+      <p class="mt-2 opacity-75">
+        Copyright © 2026 · {cliente.nome}. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</Section>
+

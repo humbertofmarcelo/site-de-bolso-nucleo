@@ -1,0 +1,49 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-ink-light, text-ink-light-soft, bg-surface-card, border, border-line-dark, rounded-card, p-6, md:p-8, mt-4, mt-8, space-y-3, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: quando_buscar, demandas
+import Section from "../../ui/Section.astro";
+import Icone from "../../common/Icone.astro";
+import cliente from "../../../content/cliente.json";
+
+const sinais = (cliente as any).quando_buscar || [
+  "Sentimento constante de tristeza, vazio ou angústia",
+  "Medo ou preocupação excessiva com o futuro",
+  "Dificuldade persistente para dormir ou relaxar",
+  "Sensação de sobrecarga e esgotamento emocional",
+  "Isolamento social e perda de interesse nas atividades",
+  "Dúvidas sobre si mesmo, carreira ou decisões difíceis",
+];
+---
+
+<Section id="quando-buscar" tom="base" largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Reflexão e Chamada -->
+    <div class="text-center md:text-left mb-8 md:mb-0">
+      <h2 class="text-2xl md:text-3xl text-ink-light font-bold text-balance">
+        Quando buscar um psicólogo?
+      </h2>
+      <p class="text-base text-ink-light-soft mt-4 leading-relaxed">
+        Se você se identifica com um ou mais dos pontos ao lado, a psicoterapia pode ser um caminho transformador para a sua vida.
+      </p>
+      <p class="text-base text-ink-light-soft mt-4 leading-relaxed">
+        Você não precisa esperar uma crise insustentável para buscar apoio. Quanto antes você começar, mais cedo encontrará ferramentas para viver com autonomia e leveza.
+      </p>
+    </div>
+
+    <!-- Coluna do Checklist em Card Roxo -->
+    <div>
+      <div class="bg-surface-card border border-line-dark rounded-card p-6 md:p-8 shadow-sm">
+        <ul class="space-y-4 text-base text-ink-light">
+          {sinais.map((sinal: string) => (
+            <li class="flex items-center gap-3">
+              <span class="text-primary shrink-0" aria-hidden="true">
+                <Icone nome="check" tamanho="base" />
+              </span>
+              <span>{sinal}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Section>

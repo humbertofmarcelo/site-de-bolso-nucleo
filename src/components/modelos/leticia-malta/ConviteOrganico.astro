@@ -1,0 +1,26 @@
+---
+// Tokens: text-2xl, text-base, text-ink-light, text-ink-light-soft, mt-4, mt-8, text-center, flex, flex-col, sm:flex-row, justify-center, gap-4, md:gap-6
+// cliente.json: contato_texto
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+const texto = cliente.contato_texto || "O primeiro passo em direção ao cuidado emocional pode parecer desafiador, mas você não precisa percorrê-lo sozinho.";
+---
+
+<Section id="convite" tom="base" largura="ampla">
+  <div class="text-center space-y-4 max-w-2xl mx-auto">
+    <h2 class="text-2xl md:text-3xl text-ink-light font-serif font-medium text-balance">
+      Agende sua sessão
+    </h2>
+
+    <p class="text-base text-ink-light-soft leading-relaxed">
+      {texto}
+    </p>
+
+    <div class="mt-8 pt-4 flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
+      <BotaoAgendamento rotulo="Agendar primeira sessão" variante="light" />
+      <BotaoAgendamento rotulo="Tirar dúvidas pelo WhatsApp" tipo="whatsapp" variante="light" />
+    </div>
+  </div>
+</Section>

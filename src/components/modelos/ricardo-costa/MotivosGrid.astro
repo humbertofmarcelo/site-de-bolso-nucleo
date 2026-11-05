@@ -1,0 +1,45 @@
+---
+// Tokens: text-2xl, text-base, text-sm, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-4, md:p-6, mt-4, mt-8, grid, grid-cols-2, gap-3, md:grid-cols-4, md:gap-6, flex, flex-col, items-center, text-center
+// cliente.json: grid_motivos, demandas
+import Section from "../../ui/Section.astro";
+import Icone from "../../common/Icone.astro";
+import cliente from "../../../content/cliente.json";
+
+const motivosPadrao = [
+  { rotulo: "Ansiedade", icone: "ansiedade" },
+  { rotulo: "Depressão", icone: "depressao" },
+  { rotulo: "Estresse", icone: "estresse" },
+  { rotulo: "Relacionamentos", icone: "relacionamentos" },
+  { rotulo: "Luto", icone: "luto" },
+  { rotulo: "Fobia Social", icone: "fobia-social" },
+  { rotulo: "Pânico", icone: "panico" },
+  { rotulo: "Autoestima", icone: "autoestima" },
+];
+
+const motivos = (cliente as any).grid_motivos || motivosPadrao;
+---
+
+<Section id="motivos" tom="alt" largura="ampla">
+  <div class="text-center">
+    <h2 class="text-2xl md:text-3xl text-ink font-bold text-balance">
+      Existem muitos motivos para começar a terapia
+    </h2>
+  </div>
+
+  <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    {motivos.map((item: any) => (
+      <div class="bg-surface-card border border-line rounded-card p-5 md:p-6 flex flex-col items-center justify-center text-center shadow-sm hover:border-primary transition-colors">
+        <span class="text-primary mb-3" aria-hidden="true">
+          <Icone nome={item.icone || "ansiedade"} tamanho="xl" />
+        </span>
+        <span class="text-sm md:text-base font-semibold text-ink">
+          {item.rotulo}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <p class="text-base text-ink-soft mt-10 leading-relaxed text-center max-w-2xl mx-auto">
+    O acompanhamento psicológico oferece ferramentas práticas e validadas cientificamente para que você supere momentos difíceis e viva com autonomia.
+  </p>
+</Section>

@@ -11,7 +11,7 @@ function pluginSincronizarTema() {
       sincronizarTema();
     },
     handleHotUpdate({ file }) {
-      if (file.endsWith('site.json')) {
+      if (file.endsWith('site.json') || file.endsWith('cliente.json')) {
         sincronizarTema();
       }
     }
@@ -20,7 +20,7 @@ function pluginSincronizarTema() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cileide-ferreira.amostra-site.workers.dev/',
+  site: 'https://marcelle-goncalves.amostra-site.workers.dev/',
 
   vite: {
     plugins: [

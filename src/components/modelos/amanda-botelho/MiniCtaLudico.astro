@@ -1,0 +1,35 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-6, md:p-8, mt-4, mt-6, text-center, md:text-left, flex, flex-col, md:flex-row, items-center, md:justify-between, md:gap-8
+// cliente.json: imagens.sobre, nome
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+const foto = cliente.imagens?.sobre?.arquivo || cliente.imagens?.hero?.arquivo || "/images/sobre.webp";
+---
+
+<Section id="mini-cta" tom="alt" largura="ampla">
+  <div class="bg-surface-card border-2 border-line rounded-card p-6 md:p-10 text-center md:text-left flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-8 shadow-sm">
+    <div class="flex flex-col md:flex-row items-center gap-6">
+      <div class="w-20 h-20 shrink-0 overflow-hidden rounded-button border-2 border-line shadow-sm">
+        <img
+          src={foto}
+          alt={`Fale com ${cliente.nome}`}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Balão de conversa -->
+      <div class="p-4 rounded-card border border-line bg-surface-alt max-w-md">
+        <p class="text-base text-ink font-medium leading-relaxed">
+          "Quer dar esse passo? Vamos conversar e encontrar o melhor caminho para você!"
+        </p>
+      </div>
+    </div>
+
+    <div class="shrink-0">
+      <BotaoAgendamento rotulo="AGENDAR CONSULTA" />
+    </div>
+  </div>
+</Section>

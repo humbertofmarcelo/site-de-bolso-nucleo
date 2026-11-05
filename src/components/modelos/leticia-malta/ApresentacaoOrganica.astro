@@ -1,0 +1,40 @@
+---
+// Tokens: text-xl, text-2xl, text-base, text-ink, text-ink-soft, rounded-card, border, border-line, mt-6, mt-8, text-center, md:text-left, max-w-md, md:max-w-none, mx-auto, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: bio, bio_complementar, frase_acolhimento, imagens.sobre
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const frase = (cliente as any).frase_acolhimento || "Se você sente que precisa de um espaço seguro para cuidar de si, desacelerar e acolher sua história com mais gentileza...";
+const foto = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
+---
+
+<Section id="sobre" tom="alt" largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna Retrato Vertical -->
+    <div class="flex justify-center mb-8 md:mb-0">
+      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-xs md:max-w-sm">
+        <img
+          src={foto}
+          alt={`Retrato de ${cliente.nome}`}
+          class="w-full h-80 md:h-96 object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Coluna Apresentação Pessoal -->
+    <div class="text-center md:text-left">
+      <p class="text-xl md:text-2xl text-ink font-serif italic text-balance leading-relaxed">
+        "{frase}"
+      </p>
+
+      <div class="mt-6 border-t border-line pt-6 text-base text-ink-soft leading-relaxed space-y-4">
+        <h2 class="text-2xl text-ink font-serif font-medium">
+          Olá, sou {cliente.nome}
+        </h2>
+        <p>{cliente.bio}</p>
+        {cliente.bio_complementar && <p>{cliente.bio_complementar}</p>}
+      </div>
+    </div>
+  </div>
+</Section>

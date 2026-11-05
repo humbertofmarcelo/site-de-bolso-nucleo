@@ -1,0 +1,83 @@
+---
+// Tokens: text-2xl, text-3xl, text-sm, text-base, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, rounded-card, rounded-button, border, border-line, p-4, mt-4, mt-6, mt-8, text-center, md:text-left, mx-auto, max-w-sm, md:max-w-none, md:grid, md:grid-cols-2, md:gap-12, md:items-center, bg-surface-card, shadow-sm
+// cliente.json: nome, crp, bio, bio_complementar, imagens.hero
+// Props: mobile, desktop (liberdade Item 6)
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+interface Props {
+  mobile?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const confMobile = props.mobile ?? {};
+const confDesktop = props.desktop ?? {};
+
+const heroImg = cliente.imagens?.hero;
+const foto = heroImg?.arquivo || heroImg?.desktop || heroImg?.mobile || "/images/sobre.webp";
+const fundoTom = confMobile.fundo === "dark" ? "base" : "alt";
+const varBotaoMob = confMobile.variante_botao ?? "normal";
+const varBotaoDesk = confDesktop.variante_botao ?? "normal";
+---
+
+<Section id="inicio" tom={fundoTom} largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Foto (Mobile primeiro, Desktop à direita) -->
+    <div class="order-first md:order-last flex justify-center mb-8 md:mb-0">
+      <div class="w-full max-w-xs p-2 rounded-card border-2 border-line bg-surface-card shadow-sm">
+        <div class="overflow-hidden rounded-card">
+          <img
+            src={foto}
+            alt={heroImg?.alt || `Retrato de ${cliente.nome}`}
+            class="w-full h-80 object-cover"
+            loading="eager"
+          />
+        </div>
+
+        <div class="pt-3 pb-1 text-center">
+          <h2 class="text-lg text-ink font-bold">
+            {cliente.nome}
+          </h2>
+          <p class="text-xs text-ink-soft">
+            {cliente.profissao} · CRP {cliente.crp}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna de Apresentação Acolhedora -->
+    <div class="text-center md:text-left">
+      <span class="text-2xl text-ink font-serif italic block">
+        Olá, sou a
+      </span>
+
+      <h1 class="text-3xl text-ink font-bold mt-2 text-balance leading-tight">
+        {cliente.nome}
+      </h1>
+
+      <div class="mt-6 text-base text-ink-soft leading-relaxed space-y-3 max-w-lg">
+        <p>{cliente.bio}</p>
+        {cliente.bio_complementar && <p>{cliente.bio_complementar}</p>}
+      </div>
+
+      <div class="mt-8">
+        <BotaoAgendamento
+          rotulo="Agende sua sessão"
+          varianteMobile={varBotaoMob}
+          varianteDesktop={varBotaoDesk}
+        />
+      </div>
+    </div>
+  </div>
+</Section>

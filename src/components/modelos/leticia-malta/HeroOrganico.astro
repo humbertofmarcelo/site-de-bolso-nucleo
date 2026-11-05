@@ -1,0 +1,75 @@
+---
+// Tokens: text-sm, text-3xl, text-base, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, rounded-card, rounded-button, mt-4, mt-6, mt-8, text-center, md:text-left, flex, justify-between, items-center, border-b, border-line, pb-6, md:grid, md:grid-cols-2, md:gap-12, md:items-center, shadow-sm
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero, imagens.paisagem
+// Props: mobile, desktop (liberdade Item 6)
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+interface Props {
+  mobile?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const confMobile = props.mobile ?? {};
+const confDesktop = props.desktop ?? {};
+
+const titulo = cliente.titulo_hero || "Terapia online para uma vida com mais leveza, sentido e presença.";
+const subtitulo = cliente.subtitulo_hero || "Um refúgio seguro para acolher sua história, cultivar o autoconhecimento e encontrar paz no seu dia a dia.";
+const fotoPaisagem = (cliente.imagens as any)?.paisagem?.arquivo || (cliente.imagens as any)?.hero?.arquivo || "/images/hero.webp";
+
+const fundoTom = confMobile.fundo === "dark" ? "base" : "alt";
+const varBotaoMob = confMobile.variante_botao ?? "normal";
+const varBotaoDesk = confDesktop.variante_botao ?? "normal";
+---
+
+<Section id="inicio" tom={fundoTom} largura="ampla">
+  <!-- Barra superior elegante -->
+  <div class="flex justify-between items-center text-sm text-ink-soft pb-6 border-b border-line">
+    <span class="font-medium tracking-wider uppercase">{cliente.nome}</span>
+    <span>CRP {cliente.crp}</span>
+  </div>
+
+  <div class="mt-8 md:mt-12 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Texto Poético -->
+    <div class="text-center md:text-left">
+      <h1 class="texto-titulo text-ink text-balance leading-tight">
+        {titulo}
+      </h1>
+
+      <p class="text-base text-ink-soft mt-6 leading-relaxed">
+        {subtitulo}
+      </p>
+
+      <div class="mt-8">
+        <BotaoAgendamento
+          rotulo="Agende sua sessão"
+          varianteMobile={varBotaoMob}
+          varianteDesktop={varBotaoDesk}
+        />
+      </div>
+    </div>
+
+    <!-- Coluna da Fotografia Sereno-Orgânica -->
+    <div class="mt-8 md:mt-0 flex justify-center">
+      <div class="overflow-hidden rounded-card shadow-sm border border-line w-full max-w-sm md:max-w-none">
+        <img
+          src={fotoPaisagem}
+          alt={`Espaço de acolhimento e presença com ${cliente.nome}`}
+          class="w-full h-64 md:h-80 object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</Section>

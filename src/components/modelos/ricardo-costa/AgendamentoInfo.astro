@@ -1,0 +1,60 @@
+---
+// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-6, md:p-8, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-3, md:gap-6, flex, justify-center
+// cliente.json: informacoes_agendamento
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+const info = (cliente as any).informacoes_agendamento || {
+  particular: "Atendimento particular com emissão de recibo para reembolso no seu plano de saúde.",
+  modalidade: "Sessões 100% online por videoconferência em plataforma criptografada e segura.",
+  horarios: "Horários flexíveis de segunda a sexta-feira, das 08h às 20h.",
+};
+---
+
+<Section id="agendamento" tom="alt" largura="ampla">
+  <div class="text-center">
+    <h2 class="text-2xl md:text-3xl text-ink font-bold text-balance">
+      Agendamento
+    </h2>
+  </div>
+
+  <div class="mt-8 md:grid md:grid-cols-3 md:gap-6 space-y-4 md:space-y-0">
+    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg text-ink font-bold">
+          Atendimento Particular
+        </h3>
+        <p class="text-sm text-ink-soft mt-3 leading-relaxed">
+          {info.particular}
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg text-ink font-bold">
+          Modalidade Online
+        </h3>
+        <p class="text-sm text-ink-soft mt-3 leading-relaxed">
+          {info.modalidade}
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg text-ink font-bold">
+          Agenda e Horários
+        </h3>
+        <p class="text-sm text-ink-soft mt-3 leading-relaxed">
+          {info.horarios}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-10 flex justify-center">
+    <BotaoAgendamento rotulo="AGENDAR SUA SESSÃO" />
+  </div>
+</Section>

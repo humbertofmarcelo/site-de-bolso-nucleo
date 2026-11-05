@@ -1,0 +1,75 @@
+---
+// Tokens: text-sm, text-3xl, text-lg, text-base, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, rounded-card, border, border-line, mt-4, mt-6, mt-8, text-center, md:text-left, flex, justify-between, items-center, border-b, pb-6, md:grid, md:grid-cols-2, md:gap-12, md:items-center, shadow-sm
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+// Props: mobile, desktop (liberdade Item 6)
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+interface Props {
+  mobile?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const confMobile = props.mobile ?? {};
+const confDesktop = props.desktop ?? {};
+
+const titulo = cliente.titulo_hero || "Aprenda a se relacionar melhor com suas emoções e viver conforme seus próprios valores.";
+const subtitulo = cliente.subtitulo_hero || "Atendimento clínico online com base científica na Terapia Cognitivo-Comportamental para ajudar você a viver com mais clareza.";
+const foto = cliente.imagens?.hero?.arquivo || "/images/hero.webp";
+
+const fundoTom = confMobile.fundo === "dark" ? "base" : "alt";
+const varBotaoMob = confMobile.variante_botao ?? "normal";
+const varBotaoDesk = confDesktop.variante_botao ?? "normal";
+---
+
+<Section id="inicio" tom={fundoTom} largura="ampla">
+  <!-- Barra superior profissional -->
+  <div class="flex justify-between items-center text-sm text-ink-soft pb-6 border-b border-line">
+    <span class="font-medium uppercase tracking-wide">{cliente.nome}</span>
+    <span>CRP {cliente.crp}</span>
+  </div>
+
+  <div class="mt-8 md:mt-12 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Texto Estruturado -->
+    <div class="text-center md:text-left">
+      <h1 class="text-3xl md:text-4xl text-ink font-bold text-balance leading-tight">
+        {titulo}
+      </h1>
+
+      <p class="text-base text-ink-soft mt-6 leading-relaxed max-w-lg">
+        {subtitulo}
+      </p>
+
+      <div class="mt-8">
+        <BotaoAgendamento
+          rotulo="AGENDAR SUA SESSÃO"
+          varianteMobile={varBotaoMob}
+          varianteDesktop={varBotaoDesk}
+        />
+      </div>
+    </div>
+
+    <!-- Coluna da Foto Profissional -->
+    <div class="mt-8 md:mt-0 flex justify-center">
+      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-sm md:max-w-none">
+        <img
+          src={foto}
+          alt={`Retrato de ${cliente.nome}`}
+          class="w-full h-80 md:h-96 object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</Section>

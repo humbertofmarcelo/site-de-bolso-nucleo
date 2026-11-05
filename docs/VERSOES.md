@@ -3,9 +3,9 @@
 
 ### Templates
 
-cileide-ferreira-v1.1.1 - original
-cileide-ferreira-v1.2.1 - reorganização de pastas e caminhos de arquivos
-cileide-ferreira-v1.3.0 - motor multi-coleções, catálogo extensível de seções, tipografia local modular, paletas desacopladas e coleção editorial
+template-v1.1.1 - original
+template-v1.2.1 - reorganização de pastas e caminhos de arquivos
+template-v1.3.0 - motor multi-coleções, catálogo extensível de seções, tipografia local modular, paletas desacopladas e coleção editorial
 
 
 ### Entenda o que são:

@@ -1,0 +1,69 @@
+---
+// Tokens: text-3xl, text-4xl, text-lg, text-base, text-ink-light, text-ink-light-soft, rounded-card, rounded-button, mt-4, mt-6, mt-8, text-center, md:text-left, mx-auto, max-w-sm, md:max-w-none, md:grid, md:grid-cols-2, md:gap-12, md:items-center, bg-surface-alt, border, border-line-dark, shadow-sm
+// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+// Props: mobile, desktop (liberdade Item 6)
+import Section from "../../ui/Section.astro";
+import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
+import cliente from "../../../content/cliente.json";
+
+interface Props {
+  mobile?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  desktop?: {
+    fundo?: "dark" | "light";
+    tema_texto?: "light" | "dark";
+    variante_botao?: "normal" | "light" | "dark";
+  };
+  [key: string]: any;
+}
+
+const props = Astro.props;
+const confMobile = props.mobile ?? {};
+const confDesktop = props.desktop ?? {};
+
+const titulo = cliente.titulo_hero || "Sua vida merece mais leveza!";
+const subtitulo = cliente.subtitulo_hero || "Terapia online para uma rotina mais saudável, acolhedora e com mais sentido para suas escolhas.";
+const foto = cliente.imagens?.hero?.arquivo || "/images/hero.webp";
+
+const fundoTom = confMobile.fundo === "light" ? "alt" : "base";
+const varBotaoMob = confMobile.variante_botao ?? "normal";
+const varBotaoDesk = confDesktop.variante_botao ?? "normal";
+---
+
+<Section id="inicio" tom={fundoTom} largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna de Conteúdo Vibrante -->
+    <div class="text-center md:text-left">
+      <h1 class="text-3xl md:text-4xl text-ink-light font-bold text-balance leading-tight">
+        {titulo}
+      </h1>
+
+      <p class="text-base md:text-lg text-ink-light-soft mt-6 leading-relaxed max-w-lg">
+        {subtitulo}
+      </p>
+
+      <div class="mt-8">
+        <BotaoAgendamento
+          rotulo="QUERO AGENDAR UMA SESSÃO"
+          varianteMobile={varBotaoMob}
+          varianteDesktop={varBotaoDesk}
+        />
+      </div>
+    </div>
+
+    <!-- Coluna da Foto Acolhedora -->
+    <div class="mt-8 md:mt-0 flex justify-center">
+      <div class="w-full max-w-xs md:max-w-sm overflow-hidden rounded-card border border-line-dark shadow-sm bg-surface-alt p-3">
+        <img
+          src={foto}
+          alt={`Retrato de ${cliente.nome}`}
+          class="w-full h-80 md:h-96 object-cover rounded-card"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</Section>
