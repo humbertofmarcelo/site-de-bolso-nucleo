@@ -61,7 +61,20 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     paletaPadrao: "classico-pb",
     colecaoPadrao: "editorial",
     secoes: [
-      { id: "inicio", tipo: "hero-pb" },
+      {
+        id: "inicio",
+        tipo: "hero-pb",
+        mobile: {
+          fundo: "light",
+          tema_texto: "dark",
+          variante_botao: "dark",
+        },
+        desktop: {
+          fundo: "dark",
+          tema_texto: "light",
+          variante_botao: "light",
+        },
+      },
       { id: "para-quem", tipo: "para-quem-pb" },
       { id: "servicos", tipo: "servicos-pb" },
       { id: "passos", tipo: "passos-pb" },

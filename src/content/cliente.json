@@ -1,39 +1,43 @@
 {
   "modelo": "gabriela-alcantara",
   "paleta": "classico-pb",
-  "nome": "Marcelle Gonçalves",
-  "profissao": "Psicóloga",
-  "crp": "06/210464",
+  "nome": "Eduardo Afonso",
+  "profissao": "Psicólogo",
+  "crp": "06/197171",
   "cidade": "São Paulo",
   "uf": "SP",
   "bairro": "",
   "endereco": "",
   "email": "",
   "abordagem": "Psicanálise",
-  "modalidade": ["online"],
-  "titulo_hero": "Psicóloga Psicanalista em São Paulo",
-  "subtitulo_hero": "Todos nós precisamos de um espaço onde possamos ser ouvidos de verdade.",
+  "modalidade": [
+    "presencial",
+    "online"
+  ],
+  "titulo_hero": "Psicólogo Psicanalista em São Paulo",
+  "subtitulo_hero": "O que cura é o afeto: não há terapia sem simpatia - Ferenczi",
   "bio": "Se quiser, me chamar de Mah. Sou psicóloga formada pela Universidade Presbiteriana Mackenzie e atuo na clínica com abordagem psicanalítica, em atendimentos online.",
   "bio_complementar": "Minha trajetória começou com a educação: já fui auxiliar bilíngue e dou aulas de inglês há alguns anos. Sempre fui curiosa, observadora e apaixonada por ouvir histórias — e foi essa escuta atenta, junto do desejo de acolher e compreender o outro, que me levou à psicologia.",
   "descricao_seo": "Marcelle Gonçalves - Psicóloga Clínica (CRP 06/210464). Terapia Online em Santo André. Agende um atendimento.",
-  "demandas_titulo": "Existem muitos motivos para começar a terapia",
-  "demandas_subtitulo": "Se você já se viu pensando sobre...",
+  "demandas_titulo": "Por que psicanálise?",
+  "demandas_subtitulo": "É necessário recordar, repetir e elaborar",
   "demandas": [
-    "Conflitos Familiares",
-    "Relacionamentos",
-    "Vida no Exterior",
-    "Ansiedade",
-    "Vícios"
+    "A psicanálise inaugurou a ideia de que existe um tipo de sofrimento humano que só pode ser enfrentado através da fala e da escuta. Em uma cultura onde o desarranjo psíquico define nossa contemporaneidade, o mundo implora por um saber humano, simbólico e profundamente empático. O mundo precisa de terapia e dos insights da psicanálise.",
+    "Psicanálise pra mim, por mim e em mim. Na busca-descoberta por mim mesmo nos confins do inconsciente. Por uma jornada de autoconhecimento, mas ciente que as dores e as delícias da vida vão pintar por aí."
   ],
   "demandas_reflexao": "A terapia, ao contrário do que muitos pensam, não fornece respostas prontas mas cria um caminho de autoconhecimento. É como se fosse um gps: te ajuda a se localizar, entender onde está e escolher para onde deseja ir!",
   "servicos": [
     {
-      "titulo": "Terapia Online para todos",
-      "descricao": "A partir da Psicanálise, buscamos compreender os conflitos inconscientes, os desejos e as experiências que influenciam sua forma de sentir, pensar e se relacionar. Essa abordagem valoriza a escuta, a livre associação e a investigação dos sentidos que emergem ao longo da história de cada pessoa, favorecendo a compreensão de si e de seus modos de estar no mundo."
+      "titulo": "Terapia Presencial",
+      "descricao": "Meu consultório está localizado na Zona Leste de São Paulo, em um ambiente preparado para oferecer acolhimento, privacidade e tranquilidade durante os atendimentos. As sessões presenciais são realizadas às terças, quintas e sextas-feiras, das 13h às 17h. Para saber mais sobre o atendimento, esclarecer dúvidas ou consultar a disponibilidade de horários, entre em contato."
     },
     {
-      "titulo": "Terapia em inglês/português",
-      "descricao": "Ideal para brasileiros que vivem no exterior e desejam se sentir acolhidos em sua língua materna, encontrando um espaço de escuta e compreensão, e para estrangeiros que falam inglês e se conectam com a cultura brasileira por suas raízes, família, parceiros ou experiências que despertam o desejo de manter esse vínculo cultural e afetivo, mesmo à distância."
+      "titulo": "Terapia Online",
+      "descricao": "Atendo adolescentes e adultos de qualquer região do Brasil e também do exterior. Assim como no atendimento presencial, o processo terapêutico é conduzido com ética, sigilo e atenção às questões que você deseja trabalhar, proporcionando um espaço seguro para falar sobre seus sentimentos, compreender suas experiências e desenvolver novas formas de lidar com os desafios da vida. "
+    },
+    {
+      "titulo": "Palestras",
+      "descricao": "Realizo palestras sobre saúde mental no ambiente de trabalho, abordando temas relacionados ao bem-estar emocional, à qualidade de vida e aos desafios presentes no cotidiano profissional. Os encontros são pensados para promover reflexões, ampliar a conscientização e incentivar relações de trabalho mais saudáveis."
     }
   ],
   "modalidades_info": [
@@ -43,16 +47,21 @@
     }
   ],
   "passos_processo": [
-  {
+    {
       "numero": "01",
-      "titulo": "Como funciona o negócio?",
-      "descricao": "Cara, funciona assim..."
-  },
-  {
+      "titulo": "PRIMEIRO ATENDIMENTO",
+      "descricao": "No atendimento inicial, é realizada uma escuta clínica qualificada. Eu avalio as suas necessidades e explico como funcionam as sessões de psicoterapia."
+    },
+    {
       "numero": "02",
-      "titulo": "Mas funciona mesmo?",
-      "descricao": "Pitango o nargas pa..."
-  }  
+      "titulo": "FREQUÊNCIA E DURAÇÃO",
+      "descricao": "As sessões de psicoterapia duram 50 minutos e acontecem ao menos uma vez por semana, conforme a necessidade de cada caso. A psicanálise depende de encontros frequentes para que os conteúdos inconscientes possam emergir, se repetir e serem trabalhados ao longo do tempo. "
+    },
+    {
+      "numero": "03",
+      "titulo": "A ABORDAGEM PSICANALÍTICA",
+      "descricao": "A psicanálise não segue fórmulas prontas nem oferece conselhos. O objetivo é desenvolver, ao longo das sessões, um espaço de confiança em que você possa falar de si e elaborar sintomas, questões profundas, e pensamentos repetitivos que se manifestam na sua vida."
+    }
   ],
   "faq": [
     {
@@ -70,10 +79,10 @@
   ],
   "contato_texto": "Agende uma consulta e se permita dar o primeiro passo para uma vida mais leve.",
   "tipo_agendamento": "link",
-  "link_agendamento": "https://www.instagram.com/mahgon.psi/",
+  "link_agendamento": "https://www.instagram.com/psi.eduardoafonso/",
   "whatsapp": "551199999999",
   "whatsapp_mensagem": "Olá, Marcelle! Vim pelo site e gostaria de agendar um atendimento.",
-  "instagram": "mahgon.psi",
+  "instagram": "psi.eduardoafonso",
   "og_image": "/og2.jpg",
   "imagens": {
     "hero": {

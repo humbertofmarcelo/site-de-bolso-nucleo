@@ -1,11 +1,13 @@
 ---
-// Tokens: text-2xl, text-ink, text-ink-soft, text-base, text-balance, rounded-card, border, border-line, mt-4, mt-6, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
-// cliente.json: demandas_titulo, demandas_subtitulo, demandas, imagens.sobre
+// Tokens: text-2xl, text-ink, text-ink-soft, text-base, text-balance, border, border-line, mt-3, mt-6, mt-8, md:mt-0, space-y-4, flex, items-start, justify-center, gap-3, w-full, max-w-sm, h-80, object-cover, grayscale, contrast-125, overflow-hidden, shadow-sm, font-medium, font-bold, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, demandas_titulo, demandas_subtitulo, demandas, imagens.sobre
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
 
 const titulo = (cliente as any).demandas_titulo || "Para quem é a terapia?";
-const subtitulo = (cliente as any).demandas_subtitulo || "A psicoterapia é indicada se você tem vivenciado:";
+const subtitulo =
+  (cliente as any).demandas_subtitulo ||
+  "A psicoterapia é indicada se você tem vivenciado:";
 const itens = (cliente as any).demandas || [
   "Ansiedade e estresse constante",
   "Dificuldade nos relacionamentos afetivos e familiares",
@@ -27,18 +29,20 @@ const imgTextura = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
         {subtitulo}
       </p>
 
-      <ul class="mt-6 space-y-4 text-base text-ink">
-        {itens.map((item: string) => (
-          <li class="flex items-start gap-3">
-            <span class="text-ink font-bold" aria-hidden="true">•</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+      <div class="mt-6 space-y-4 text-base text-ink">
+        {
+          itens.map((item: string) => (
+            <p class="flex items-start ">
+              <span class="text-ink font-bold" aria-hidden="true" />
+              <span>{item}</span>
+            </p>
+          ))
+        }
+      </div>
     </div>
 
     <div class="mt-8 md:mt-0 flex justify-center">
-      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-sm">
+      <div class="overflow-hidden border border-line shadow-sm w-full max-w-sm">
         <img
           src={imgTextura}
           alt={`Acolhimento profissional com ${cliente.nome}`}
@@ -49,4 +53,3 @@ const imgTextura = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
     </div>
   </div>
 </Section>
-

@@ -1,5 +1,5 @@
 ---
-// Tokens: text-xs, text-base, text-lg, text-xl, text-2xl, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, bg-surface, bg-surface-alt, rounded-card, rounded-button, w-full, max-w-sm, mt-4, mt-6, mt-8, md:mt-0, px-5, py-3, flex, items-center, justify-between, justify-center, md:justify-start, text-left, md:grid, md:grid-cols-2, md:gap-12, md:items-center, overflow-hidden, shadow-sm, block, object-cover, aspect-4/5, grayscale, contrast-125, uppercase, tracking-wider, font-semibold, font-medium, font-normal, leading-relaxed, leading-snug, text-balance, ml-auto
+// Tokens: text-xs, text-base, text-lg, text-xl, text-2xl, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, md:text-ink, md:text-ink-soft, md:text-ink-light, md:text-ink-light-soft, bg-surface, bg-surface-alt, md:bg-surface, md:bg-surface-alt, mx-auto, max-w-4xl, w-full, max-w-sm, md:max-w-sm, mt-4, mt-6, md:mt-8, px-2, px-5, px-6, py-3, py-10, md:p-0, md:px-6, md:py-24, flex, items-center, justify-between, justify-center, md:justify-start, text-left, md:grid, md:grid-cols-2, md:gap-12, md:items-center, overflow-hidden, shadow-sm, block, object-cover, aspect-4/5, grayscale, contrast-125, uppercase, tracking-wider, font-semibold, font-medium, font-normal, leading-relaxed, leading-snug, text-balance, ml-auto
 // cliente.json: nome, crp, profissao, abordagem, titulo_hero, subtitulo_hero, bio, imagens.hero
 // Props: mobile, desktop (liberdade Item 6)
 import Section from "../../ui/Section.astro";
@@ -34,66 +34,77 @@ const especialidade = cliente.abordagem
   ? `${cliente.profissao} / ${cliente.abordagem}`.toUpperCase()
   : cliente.profissao.toUpperCase();
 
-const fundoTom = confMobile.fundo === "dark" ? "base" : "alt";
-const corTextoTitulo = confMobile.tema_texto === "light" ? "text-ink-light" : "text-ink";
-const corTextoSub = confMobile.tema_texto === "light" ? "text-ink-light-soft" : "text-ink-soft";
-const varBotaoMob = confMobile.variante_botao ?? (confMobile.fundo === "dark" ? "light" : "dark");
-const varBotaoDesk = confDesktop.variante_botao ?? (confDesktop.fundo === "dark" ? "light" : "dark");
+const fundoMob = confMobile.fundo ?? "light";
+const fundoDesk = confDesktop.fundo ?? "dark";
+
+const temaTextoMob = confMobile.tema_texto ?? (fundoMob === "dark" ? "light" : "dark");
+const temaTextoDesk = confDesktop.tema_texto ?? (fundoDesk === "dark" ? "light" : "dark");
+
+const varBotaoMob = confMobile.variante_botao ?? (fundoMob === "dark" ? "light" : "dark");
+const varBotaoDesk = confDesktop.variante_botao ?? (fundoDesk === "dark" ? "light" : "dark");
+
+const classeFundo = `${fundoMob === "dark" ? "bg-surface" : "bg-surface-alt"} ${fundoDesk === "dark" ? "md:bg-surface" : "md:bg-surface-alt"}`;
+const corTextoTitulo = `${temaTextoMob === "light" ? "text-ink-light" : "text-ink"} ${temaTextoDesk === "light" ? "md:text-ink-light" : "md:text-ink"}`;
+const corTextoSub = `${temaTextoMob === "light" ? "text-ink-light-soft" : "text-ink-soft"} ${temaTextoDesk === "light" ? "md:text-ink-light-soft" : "md:text-ink-soft"}`;
 ---
 
-<Section id="inicio" tom={fundoTom} largura="ampla">
-  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-    <!-- Coluna 1: Card Fotográfico com Moldura Superior e Inferior Assinadas (Layout de Referência) -->
-    <div class="flex justify-center md:justify-start">
-      <div class="bg-surface rounded-card overflow-hidden shadow-sm w-full max-w-sm">
-        <!-- Faixa superior com o nome do profissional em caixa alta -->
-        <div class="px-5 py-3 bg-surface text-ink-light text-xs font-semibold tracking-wider uppercase">
-          <span>{cliente.nome}</span>
-        </div>
+<Section id="inicio" tom="transparente" largura="total" semPadding={true}>
+  <div class={classeFundo}>
+    <div class="mx-auto max-w-4xl md:px-6 md:py-24 md:grid md:grid-cols-2 md:gap-12 md:items-center">
+      <!-- Coluna 1: Moldura Fotográfica Sem Bordas Arredondadas e Sem Margem no Mobile -->
+      <div class="flex justify-center md:justify-start">
+        <div class="bg-surface overflow-hidden shadow-sm w-full md:max-w-sm">
+          <!-- Faixa superior com o nome do profissional em caixa alta -->
+          <div class="px-5 py-3 bg-surface text-ink-light text-xs font-semibold tracking-wider uppercase">
+            <span>{cliente.nome}</span>
+          </div>
 
-        <!-- Retrato em Preto e Branco -->
-        <img
-          src={foto}
-          alt={heroImg?.alt || `Retrato de ${cliente.nome}`}
-          class="w-full object-cover aspect-4/5 grayscale contrast-125 block"
-          loading="eager"
-        />
+          <!-- Retrato em Preto e Branco com moldura lateral escura sutil -->
+          <div class="px-2 bg-surface">
+            <img
+              src={foto}
+              alt={heroImg?.alt || `Retrato de ${cliente.nome}`}
+              class="w-full object-cover aspect-4/5 grayscale contrast-125 block"
+              loading="eager"
+            />
+          </div>
 
-        <!-- Faixa inferior com CRP à esquerda e Especialidade / Abordagem à direita -->
-        <div class="flex items-center justify-between px-5 py-3 bg-surface text-ink-light text-xs tracking-wider uppercase">
-          <span class="text-ink-light-soft font-normal">{cliente.crp ? `CRP ${cliente.crp}` : ""}</span>
-          <span class="font-medium ml-auto">{especialidade}</span>
+          <!-- Faixa inferior com CRP à esquerda e Especialidade / Abordagem à direita -->
+          <div class="flex items-center justify-between px-5 py-3 bg-surface text-ink-light text-xs tracking-wider uppercase">
+            <span class="text-ink-light-soft font-normal">{cliente.crp ? `CRP ${cliente.crp}` : ""}</span>
+            <span class="font-medium ml-auto">{especialidade}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Coluna 2: Apresentação Editorial e Botão de Agendamento -->
-    <div class="mt-8 md:mt-0 text-left">
-      {temTitulo ? (
-        <>
-          <h1 class={`text-xl md:text-2xl ${corTextoTitulo} text-balance leading-snug`}>
-            {cliente.titulo_hero}
+      <!-- Coluna 2: Apresentação Editorial e Botão de Agendamento -->
+      <div class="px-6 py-10 md:p-0 text-left">
+        {temTitulo ? (
+          <>
+            <h1 class={`text-xl md:text-2xl ${corTextoTitulo} text-balance leading-snug`}>
+              {cliente.titulo_hero}
+            </h1>
+            {textoBio && (
+              <p class={`text-base md:text-lg ${corTextoSub} mt-4 leading-relaxed`}>
+                {textoBio}
+              </p>
+            )}
+          </>
+        ) : (
+          <h1 class={`text-base md:text-lg ${corTextoTitulo} font-normal leading-relaxed`}>
+            {textoBio}
           </h1>
-          {textoBio && (
-            <p class={`text-base md:text-lg ${corTextoSub} mt-4 leading-relaxed`}>
-              {textoBio}
-            </p>
-          )}
-        </>
-      ) : (
-        <h1 class={`text-base md:text-lg ${corTextoTitulo} font-normal leading-relaxed`}>
-          {textoBio}
-        </h1>
-      )}
+        )}
 
-      <div class="mt-6 md:mt-8">
-        <BotaoAgendamento
-          rotulo="AGENDE UMA SESSÃO"
-          comIcone={true}
-          icone="whatsapp"
-          varianteMobile={varBotaoMob}
-          varianteDesktop={varBotaoDesk}
-        />
+        <div class="mt-6 md:mt-8">
+          <BotaoAgendamento
+            rotulo="AGENDE UMA SESSÃO"
+            comIcone={true}
+            icone="whatsapp"
+            varianteMobile={varBotaoMob}
+            varianteDesktop={varBotaoDesk}
+          />
+        </div>
       </div>
     </div>
   </div>

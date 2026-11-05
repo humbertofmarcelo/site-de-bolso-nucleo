@@ -1,5 +1,5 @@
 ---
-// Tokens: text-2xl, text-3xl, text-xl, text-base, text-ink, text-ink-soft, text-balance, border-t, border-b, border-line, py-6, mt-4, mt-8, space-y-6, flex, justify-center, md:grid, md:grid-cols-3, md:gap-8, md:space-y-0
+// Tokens: text-2xl, text-3xl, text-xl, text-base, text-ink, text-ink-soft, text-balance, bg-surface, border-t, border-b, border-line, md:border-b-0, py-6, py-10, md:py-12, px-6, pb-6, md:pb-0, md:pt-8, mt-2, mt-3, mt-12, space-y-6, md:space-y-0, flex, justify-center, md:grid, md:grid-cols-3, md:gap-8, font-medium, font-bold, leading-relaxed, opacity-60, text-center
 // cliente.json: passos_processo (numero, titulo, descricao)
 import Section from "../../ui/Section.astro";
 import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
@@ -9,17 +9,20 @@ const passos = (cliente as any).passos_processo || [
   {
     numero: "01",
     titulo: "Primeiro contato",
-    descricao: "Conversamos brevemente pelo WhatsApp para entender suas necessidades e agendarmos a primeira sessão.",
+    descricao:
+      "Conversamos brevemente pelo WhatsApp para entender suas necessidades e agendarmos a primeira sessão.",
   },
   {
     numero: "02",
     titulo: "Sessões regulares",
-    descricao: "Encontros semanais online de 50 minutos, em ambiente seguro, sigiloso e acolhedor.",
+    descricao:
+      "Encontros semanais online de 50 minutos, em ambiente seguro, sigiloso e acolhedor.",
   },
   {
     numero: "03",
     titulo: "Acompanhamento contínuo",
-    descricao: "Trabalhamos juntos no seu ritmo, construindo ferramentas para o seu bem-estar emocional.",
+    descricao:
+      "Trabalhamos juntos no seu ritmo, construindo ferramentas para o seu bem-estar emocional.",
   },
 ];
 ---
@@ -31,23 +34,27 @@ const passos = (cliente as any).passos_processo || [
     </h2>
   </div>
 
-  <div class="mt-12 md:grid md:grid-cols-3 md:gap-8 md:border-t md:border-line md:pt-8 space-y-6 md:space-y-0">
-    {passos.map((passo: any) => (
-      <div class="border-b md:border-b-0 border-line pb-6 md:pb-0">
-        <span class="text-3xl font-bold text-ink-soft opacity-60">
-          {passo.numero}
-        </span>
-        <h3 class="text-xl text-ink font-medium mt-2 text-balance">
-          {passo.titulo}
-        </h3>
-        <p class="text-base text-ink-soft mt-3 leading-relaxed">
-          {passo.descricao}
-        </p>
-      </div>
-    ))}
-  </div>
-
-  <div class="mt-12 flex justify-center">
-    <BotaoAgendamento rotulo="Agendar consulta" />
+  <div
+    class="mt-12 md:grid md:grid-cols-3 md:gap-8 md:border-t md:border-line md:pt-8 space-y-6 md:space-y-0"
+  >
+    {
+      passos.map((passo: any) => (
+        <div class="border-b md:border-b-0 border-line pb-6 md:pb-0">
+          <span class="text-3xl font-bold text-ink-soft opacity-60">
+            {passo.numero}
+          </span>
+          <h3 class="text-xl text-ink font-medium mt-2 text-balance">
+            {passo.titulo}
+          </h3>
+          <p class="text-base text-ink-soft mt-3 leading-relaxed">
+            {passo.descricao}
+          </p>
+        </div>
+      ))
+    }
   </div>
 </Section>
+
+<div class="bg-surface py-10 md:py-12 px-6 flex justify-center">
+  <BotaoAgendamento rotulo="Agende uma Sessão" variante="light" />
+</div>

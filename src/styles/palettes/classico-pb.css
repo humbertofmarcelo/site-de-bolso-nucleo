@@ -4,14 +4,14 @@
   --color-primary: #18181b;
   --color-primary-dark: #27272a;
   --color-surface: #111113;
-  --color-surface-alt: #f4f4f5;
+  --color-surface-alt: #f0f0f0;
+  --color-surface-soft: #f7f7f7;
   --color-surface-card: #ffffff;
   --color-ink: #18181b;
-  --color-ink-soft: #52525b;
+  --color-ink-soft: #404040;
   --color-ink-light: #ffffff;
   --color-ink-light-soft: #d4d4d8;
   --color-line: #e4e4e7;
   --color-line-dark: #27272a;
   --color-white: #ffffff;
 }
-
