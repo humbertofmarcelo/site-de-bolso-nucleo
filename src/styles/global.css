@@ -21,6 +21,7 @@
 
   /* Tipografia compartilhada */
   --font-sans: "Inter Variable", system-ui, sans-serif;
+  --text-xs: 0.75rem;   --text-xs--line-height: 1.4;
   --text-sm: 0.875rem;  --text-sm--line-height: 1.5;
   --text-base: 1rem;    --text-base--line-height: 1.6;
   --text-lg: 1.25rem;   --text-lg--line-height: 1.5;
