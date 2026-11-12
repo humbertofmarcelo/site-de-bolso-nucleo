@@ -1,30 +1,4 @@
 {
-  "colecao": "editorial",
-  "paleta": "purpura",
-  "tipografia": "editorial",
-  "secoes": [
-    {
-      "id": "inicio",
-      "tipo": "hero",
-      "variante": "overlay",
-      "mobile": {
-        "gradiente": "nenhum",
-        "tema_texto": "light",
-        "tema_texto_topo": "dark"
-      },
-      "desktop": {
-        "fundo": "gradiente",
-        "direcao_gradiente": "light-para-dark",
-        "extensao_gradiente": 45,
-        "gradiente": "nenhum",
-        "tema_texto": "dark"
-      }
-    },
-    { "id": "demandas", "tipo": "demandas" },
-    { "id": "servicos", "tipo": "servicos" },
-    { "id": "sobre", "tipo": "sobre" },
-    { "id": "modalidades", "tipo": "modalidades" },
-    { "id": "faq", "tipo": "faq" },
-    { "id": "contato", "tipo": "contato" }
-  ]
+  "modelo": "silvia-volpatto",
+  "paleta": "volpatto"
 }

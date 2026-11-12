@@ -1,18 +1,13 @@
-// Modelo 1 (Silvia Volpatto / Editorial Padrão)
-import Hero from "./sections/Hero.astro";
-import Sobre from "./sections/Sobre.astro";
-import Servicos from "./sections/Servicos.astro";
-import Faq from "./sections/Faq.astro";
-import Contato from "./sections/Contato.astro";
-import Formacao from "./sections/Formacao.astro";
-import HeroEditorial from "./sections/editorial/HeroEditorial.astro";
-import HeroOverlay from "./sections/editorial/HeroOverlay.astro";
-import DemandasEditorial from "./sections/editorial/DemandasEditorial.astro";
-import ServicosEditorial from "./sections/editorial/ServicosEditorial.astro";
-import SobreEditorial from "./sections/editorial/SobreEditorial.astro";
-import ModalidadesEditorial from "./sections/editorial/ModalidadesEditorial.astro";
-import FaqEditorial from "./sections/editorial/FaqEditorial.astro";
-import ContatoEditorial from "./sections/editorial/ContatoEditorial.astro";
+// Modelo 1 (Silvia Volpatto / Editorial Terroso)
+import HeroEditorial from "./modelos/silvia-volpatto/HeroEditorial.astro";
+import HeroOverlay from "./modelos/silvia-volpatto/HeroOverlay.astro";
+import DemandasEditorial from "./modelos/silvia-volpatto/DemandasEditorial.astro";
+import ServicosEditorial from "./modelos/silvia-volpatto/ServicosEditorial.astro";
+import SobreEditorial from "./modelos/silvia-volpatto/SobreEditorial.astro";
+import ModalidadesEditorial from "./modelos/silvia-volpatto/ModalidadesEditorial.astro";
+import FaqEditorial from "./modelos/silvia-volpatto/FaqEditorial.astro";
+import ContatoEditorial from "./modelos/silvia-volpatto/ContatoEditorial.astro";
+import FormacaoEditorial from "./modelos/silvia-volpatto/FormacaoEditorial.astro";
 
 // Modelo 2 (Gabriela Alcântara / Editorial P&B)
 import HeroPb from "./modelos/gabriela-alcantara/HeroPb.astro";
@@ -56,19 +51,19 @@ import ProcessoVibrante from "./modelos/bruno-freitas/ProcessoVibrante.astro";
 import FaqVibrante from "./modelos/bruno-freitas/FaqVibrante.astro";
 import ContatoVibrante from "./modelos/bruno-freitas/ContatoVibrante.astro";
 
-// Seções compartilhadas e tipos diretos
+// Catálogo de seções diretas por identificador de tipo
 export const secoesCompartilhadas: Record<string, any> = {
   // Modelo 1 (Silvia Volpatto)
-  hero: Hero,
-  sobre: Sobre,
-  servicos: Servicos,
-  faq: Faq,
-  contato: Contato,
-  formacao: Formacao,
-  demandas: DemandasEditorial,
-  modalidades: ModalidadesEditorial,
+  hero: HeroEditorial,
   "hero-overlay": HeroOverlay,
   "hero-editorial": HeroEditorial,
+  demandas: DemandasEditorial,
+  servicos: ServicosEditorial,
+  sobre: SobreEditorial,
+  modalidades: ModalidadesEditorial,
+  faq: FaqEditorial,
+  contato: ContatoEditorial,
+  formacao: FormacaoEditorial,
 
   // Modelo 2 (Gabriela Alcântara)
   "hero-pb": HeroPb,
@@ -116,7 +111,7 @@ export const secoesCompartilhadas: Record<string, any> = {
 // Catálogo de variantes por seção base
 export const variantesSecoes: Record<string, Record<string, any>> = {
   hero: {
-    padrao: Hero,
+    padrao: HeroEditorial,
     editorial: HeroEditorial,
     overlay: HeroOverlay,
     pb: HeroPb,
@@ -126,20 +121,21 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     vibrante: HeroVibrante,
   },
   sobre: {
-    padrao: Sobre,
+    padrao: SobreEditorial,
     editorial: SobreEditorial,
     organico: ApresentacaoOrganica,
     estruturado: SobreEstruturado,
     vibrante: SobreVibrante,
   },
   servicos: {
-    padrao: Servicos,
+    padrao: ServicosEditorial,
     editorial: ServicosEditorial,
     pb: ServicosPb,
     organico: ServicosOrganicos,
     "como-ajudar": ComoAjudarVibrante,
   },
   demandas: {
+    padrao: DemandasEditorial,
     editorial: DemandasEditorial,
     pb: ParaQuemPb,
     ludico: PorQueTerapia,
@@ -147,13 +143,14 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     vibrante: QuandoBuscarVibrante,
   },
   modalidades: {
+    padrao: ModalidadesEditorial,
     editorial: ModalidadesEditorial,
     estruturado: AgendamentoInfo,
     processo: ProcessoVibrante,
     passos: PassosPb,
   },
   faq: {
-    padrao: Faq,
+    padrao: FaqEditorial,
     editorial: FaqEditorial,
     pb: FaqPb,
     ludico: FaqLudico,
@@ -162,7 +159,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     vibrante: FaqVibrante,
   },
   contato: {
-    padrao: Contato,
+    padrao: ContatoEditorial,
     editorial: ContatoEditorial,
     pb: ContatoPb,
     ludico: ContatoLudico,
@@ -171,27 +168,15 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     vibrante: ContatoVibrante,
   },
   formacao: {
-    padrao: Formacao,
-  },
-};
-
-// Variantes registradas por coleção visual
-export const variantesColecoes: Record<string, Record<string, any>> = {
-  editorial: {
-    hero: HeroEditorial,
-    demandas: DemandasEditorial,
-    servicos: ServicosEditorial,
-    sobre: SobreEditorial,
-    modalidades: ModalidadesEditorial,
-    faq: FaqEditorial,
-    contato: ContatoEditorial,
+    padrao: FormacaoEditorial,
+    editorial: FormacaoEditorial,
   },
 };
 
 /**
- * Resolve o componente Astro apropriado com base na coleção, tipo e variante opcional.
+ * Resolve o componente Astro apropriado com base no tipo e variante opcional.
  */
-export function obterComponenteSecao(colecao: string, tipo: string, variante?: string): any {
+export function obterComponenteSecao(_colecao: string, tipo: string, variante?: string): any {
   // 1. Variante explícita no item (ex.: { tipo: "hero", variante: "overlay" })
   if (variante && variantesSecoes[tipo]?.[variante]) {
     return variantesSecoes[tipo][variante];
@@ -202,7 +187,7 @@ export function obterComponenteSecao(colecao: string, tipo: string, variante?: s
     return HeroOverlay;
   }
 
-  // 2. Tipo direto em seções registradas (ex.: "hero-pb", "motivos-grid", etc.)
+  // 2. Tipo direto em seções registradas (ex.: "sobre", "hero-pb", "motivos-grid", etc.)
   if (secoesCompartilhadas[tipo]) {
     return secoesCompartilhadas[tipo];
   }
@@ -215,17 +200,7 @@ export function obterComponenteSecao(colecao: string, tipo: string, variante?: s
     }
   }
 
-  // 4. Especialização da coleção ativa
-  if (variantesColecoes[colecao]?.[tipo]) {
-    return variantesColecoes[colecao][tipo];
-  }
-
-  // 5. Se a seção tiver variante com nome da coleção
-  if (variantesSecoes[tipo]?.[colecao]) {
-    return variantesSecoes[tipo][colecao];
-  }
-
-  // 6. Variante padrão da seção
+  // 4. Variante padrão da seção
   if (variantesSecoes[tipo]?.padrao) {
     return variantesSecoes[tipo].padrao;
   }

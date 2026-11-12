@@ -1,12 +1,13 @@
 ---
-// Tokens: text-ink-light, text-ink-light-soft, text-sm, text-lg, text-3xl, text-balance, rounded-card, border, border-line-dark, mt-4, mt-6, mt-8, pb-6, gap-8, flex, justify-between, items-center, md:grid, md:grid-cols-2, md:gap-12, md:items-center
-// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero
+// Tokens: text-ink-light, text-ink-light-soft, text-sm, text-base, text-balance, rounded-card, border, border-b, border-line-dark, mt-6, mt-8, mb-8, md:mb-0, pb-6, flex, justify-between, justify-center, items-center, order-first, md:order-last, object-cover, w-full, max-w-sm, shadow-sm, font-medium, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, crp, profissao, cidade, titulo_hero, subtitulo_hero, bio, imagens.hero
 import Section from "../../ui/Section.astro";
 import BotaoWhatsapp from "../../common/BotaoWhatsapp.astro";
 import cliente from "../../../content/cliente.json";
 
 const heroImg = cliente.imagens?.hero;
-const temImagem = Boolean(heroImg?.arquivo);
+const fotoHero = heroImg?.arquivo || heroImg?.desktop || heroImg?.mobile;
+const temImagem = Boolean(fotoHero);
 const titulo = cliente.titulo_hero || `${cliente.profissao} em ${cliente.cidade}`;
 const descricao = cliente.subtitulo_hero || cliente.bio;
 ---
@@ -21,8 +22,8 @@ const descricao = cliente.subtitulo_hero || cliente.bio;
     {temImagem && (
       <div class="mb-8 md:mb-0 flex justify-center order-first md:order-last">
         <img
-          src={heroImg.arquivo}
-          alt={heroImg.alt || `Retrato de ${cliente.nome}`}
+          src={fotoHero}
+          alt={heroImg?.alt || `Retrato de ${cliente.nome}`}
           class="rounded-card border border-line-dark object-cover w-full max-w-sm shadow-sm"
           loading="eager"
         />
@@ -44,3 +45,4 @@ const descricao = cliente.subtitulo_hero || cliente.bio;
     </div>
   </div>
 </Section>
+

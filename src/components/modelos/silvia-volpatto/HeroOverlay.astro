@@ -1,12 +1,10 @@
 ---
 // Tokens: relative, w-full, h-full, object-cover, object-top, pointer-events-none, z-10, mx-auto, max-w-4xl, max-w-lg, px-6, py-8, md:py-16, flex, flex-col, justify-between, items-center, text-sm, font-medium, mt-48, md:mt-16, mt-4, mt-8, texto-titulo, text-balance, texto-corpo, leading-relaxed, bg-surface, bg-surface-alt, absolute, inset-0, overflow-hidden, text-ink-soft, text-ink-light-soft, text-ink, text-ink-light, md:text-ink-soft, md:text-ink-light-soft, md:text-ink, md:text-ink-light, md:bg-surface, md:bg-surface-alt
-// cliente.json: nome, crp, titulo_hero, subtitulo_hero, imagens.hero, hero
-// site.json: hero, secoes
-// Props: id, mobile (objeto com estilos para mobile), desktop (objeto com estilos para desktop), e props diretas
+// cliente.json: nome, crp, profissao, cidade, titulo_hero, subtitulo_hero, bio, imagens.hero, hero
+// Props: id, mobile (objeto com estilos para mobile), desktop (objeto com estilos para desktop)
 import Section from "../../ui/Section.astro";
 import BotaoWhatsapp from "../../common/BotaoWhatsapp.astro";
 import cliente from "../../../content/cliente.json";
-import site from "../../../config/site.json";
 
 interface Props {
   id?: string;
@@ -20,7 +18,7 @@ interface Props {
     variante_botao?: "normal" | "light" | "dark";
   };
   desktop?: {
-    fundo?: "solido" | "gradiente";
+    fundo?: "solido" | "gradiente" | "dark" | "light";
     direcao_gradiente?: "light-para-dark" | "dark-para-light";
     extensao_gradiente?: number | string;
     gradiente?: "light" | "dark" | "nenhum" | boolean;
@@ -45,20 +43,17 @@ const altTexto = heroImg?.alt || `Retrato de ${cliente.nome}`;
 const titulo = cliente.titulo_hero || `${cliente.profissao} em ${cliente.cidade}`;
 const descricao = cliente.subtitulo_hero || cliente.bio;
 
-const siteHero = (site as any).hero || {};
 const clienteHero = (cliente as any).hero || (cliente as any).hero_config || {};
 
 // ==========================================
 // 1. RESOLUÇÃO DE CONFIGURAÇÕES PARA MOBILE
 // ==========================================
-const confMobile = props.mobile ?? siteHero.mobile ?? clienteHero.mobile ?? {};
+const confMobile = { ...(props.mobile || {}), ...(clienteHero.mobile || {}) };
 
 const gradienteMobileRaw =
   confMobile.gradiente ??
   props.gradiente_mobile ??
-  (props.mobile ? undefined : props.gradiente) ??
-  siteHero.gradiente_mobile ??
-  siteHero.gradiente ??
+  props.gradiente ??
   "dark";
 
 const temGradienteMobile =
@@ -78,9 +73,7 @@ const classeFundoMobile = fundoMobileTipo === "light" ? "bg-surface-alt" : "bg-s
 const temaTextoMobileGeral =
   confMobile.tema_texto ??
   props.tema_texto_mobile ??
-  (props.mobile ? undefined : props.tema_texto) ??
-  siteHero.tema_texto_mobile ??
-  siteHero.tema_texto ??
+  props.tema_texto ??
   (temaGradienteMobile === "dark" ? "light" : "dark");
 
 const temaTopoMobile =
@@ -102,14 +95,12 @@ const temaSubtituloMobile =
 // ==========================================
 // 2. RESOLUÇÃO DE CONFIGURAÇÕES PARA DESKTOP
 // ==========================================
-const confDesktop = props.desktop ?? siteHero.desktop ?? clienteHero.desktop ?? {};
+const confDesktop = { ...(props.desktop || {}), ...(clienteHero.desktop || {}) };
 
 const fundoTipoDesktop =
   confDesktop.fundo ??
   props.fundo_desktop ??
-  (props.desktop ? undefined : props.fundo) ??
-  siteHero.fundo_desktop ??
-  siteHero.fundo ??
+  props.fundo ??
   "gradiente";
 
 const ehFundoGradienteDesktop = fundoTipoDesktop === "gradiente";
@@ -117,14 +108,12 @@ const direcaoGradienteDesktop =
   confDesktop.direcao_gradiente ??
   props.direcao_gradiente_desktop ??
   props.direcao_gradiente ??
-  siteHero.direcao_gradiente ??
   "light-para-dark";
 
 const extensaoRaw =
   confDesktop.extensao_gradiente ??
   props.extensao_gradiente_desktop ??
   props.extensao_gradiente ??
-  siteHero.extensao_gradiente ??
   45;
 const extensaoNum = typeof extensaoRaw === "string" ? parseInt(extensaoRaw, 10) : extensaoRaw;
 const extensaoFinal = isNaN(extensaoNum) ? 45 : Math.max(5, Math.min(95, extensaoNum));
@@ -132,7 +121,7 @@ const extensaoFinal = isNaN(extensaoNum) ? 45 : Math.max(5, Math.min(95, extensa
 const gradienteDesktopRaw =
   confDesktop.gradiente ??
   props.gradiente_desktop ??
-  (ehFundoGradienteDesktop ? "nenhum" : (props.desktop ? undefined : props.gradiente) ?? "nenhum");
+  (ehFundoGradienteDesktop ? "nenhum" : props.gradiente ?? "nenhum");
 
 const temGradienteDesktop =
   gradienteDesktopRaw !== "nenhum" && gradienteDesktopRaw !== false && gradienteDesktopRaw !== "desativado";
@@ -151,9 +140,7 @@ const temaTextoDesktopPadrao = ladoEsquerdoDesktopEhClaro ? "dark" : "light";
 const temaTextoDesktopGeral =
   confDesktop.tema_texto ??
   props.tema_texto_desktop ??
-  (props.desktop ? undefined : props.tema_texto) ??
-  siteHero.tema_texto_desktop ??
-  siteHero.tema_texto ??
+  props.tema_texto ??
   temaTextoDesktopPadrao;
 
 const temaTopoDesktop =
@@ -181,7 +168,7 @@ if (ehFundoGradienteDesktop) {
       : "hero-fundo-desktop-light-dark";
 } else {
   classeFundoDesktop =
-    (confDesktop.fundo === "dark" || temaGradienteDesktop === "dark")
+    confDesktop.fundo === "dark" || temaGradienteDesktop === "dark"
       ? "md:bg-surface"
       : "md:bg-surface-alt";
 }
@@ -282,3 +269,4 @@ if (confDesktop.variante_botao) varBotaoDesktop = confDesktop.variante_botao;
     </div>
   </div>
 </Section>
+

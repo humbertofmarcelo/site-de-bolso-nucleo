@@ -1,24 +1,24 @@
 {
-  "modelo": "gabriela-alcantara",
-  "paleta": "classico-pb",
-  "nome": "Eduardo Afonso",
-  "profissao": "Psicólogo",
-  "crp": "06/197171",
+  "modelo": "silvia-volpatto",
+  "paleta": "creme-acolhedor",
+  "nome": "Victória Carvalho",
+  "profissao": "Psicóloga",
+  "crp": "06/196398",
   "cidade": "São Paulo",
   "uf": "SP",
   "bairro": "",
   "endereco": "",
   "email": "",
-  "abordagem": "Psicanálise",
+  "abordagem": "Terapia Cognitivo-Comportamental",
   "modalidade": [
     "presencial",
     "online"
   ],
-  "titulo_hero": "Psicólogo Psicanalista em São Paulo",
-  "subtitulo_hero": "O que cura é o afeto: não há terapia sem simpatia - Ferenczi",
-  "bio": "Se quiser, me chamar de Mah. Sou psicóloga formada pela Universidade Presbiteriana Mackenzie e atuo na clínica com abordagem psicanalítica, em atendimentos online.",
-  "bio_complementar": "Minha trajetória começou com a educação: já fui auxiliar bilíngue e dou aulas de inglês há alguns anos. Sempre fui curiosa, observadora e apaixonada por ouvir histórias — e foi essa escuta atenta, junto do desejo de acolher e compreender o outro, que me levou à psicologia.",
-  "descricao_seo": "Marcelle Gonçalves - Psicóloga Clínica (CRP 06/210464). Terapia Online em Santo André. Agende um atendimento.",
+  "titulo_hero": "Psicóloga TCC em São Paulo",
+  "subtitulo_hero": "A vida não é o que nos acontece. É o que a gente faz do que nos acontece.",
+  "bio": "Me formei em 2023 e tenho pós-graduação em Terapia Cognitivo-Comportamental(TCC). Ajudar as pessoas a entenderem seus pensamentos é literalmente a minha paixão.",
+  "bio_complementar": "Teste teste grande teste teste",
+  "descricao_seo": "Victória Carvalho - Psicóloga Clínica (CRP 06/197171). Terapia Online em São Paulo. Agende um atendimento.",
   "demandas_titulo": "Por que psicanálise?",
   "demandas_subtitulo": "É necessário recordar, repetir e elaborar",
   "demandas": [
@@ -43,7 +43,7 @@
   "modalidades_info": [
     {
       "titulo": "Atendimento Online",
-      "descricao": "Os atendimentos realizados de maneira online proporcionam a mesma eficácia e qualidade das sessões presenciais, realizados por videoconferência. Conduzidas em ambientes escolhidos por você, a distância física entre paciente e psicólogo não interfere."
+      "descricao": "Os atendimentos realizados de maneira online proporcionam a mesma eficácia e qualidade das sessões presenciais, realizados por videoconferência. Conduzidas em ambientes escolhidos por você, a distância física entre paciente e Psicóloga não interfere."
     }
   ],
   "passos_processo": [
@@ -81,20 +81,20 @@
   "tipo_agendamento": "link",
   "link_agendamento": "https://www.instagram.com/psi.eduardoafonso/",
   "whatsapp": "551199999999",
-  "whatsapp_mensagem": "Olá, Marcelle! Vim pelo site e gostaria de agendar um atendimento.",
+  "whatsapp_mensagem": "Olá, Eduardo! Vim pelo site e gostaria de agendar um atendimento.",
   "instagram": "psi.eduardoafonso",
-  "og_image": "/og2.jpg",
+  "og_image": "/og.jpg",
   "imagens": {
     "hero": {
-      "desktop": "/images/hero-marcelle-desktop.webp",
-      "mobile": "/images/hero-marcelle-mobile.webp",
-      "arquivo": "/images/hero-marcelle-mobile.webp",
-      "alt": "Retrato de Marcelle Gonçalves, Psicóloga Clínica",
+      "desktop": "/images/hero.webp",
+      "mobile": "/images/hero.webp",
+      "arquivo": "/images/hero.webp",
+      "alt": "Retrato de Victória Carvalho, Psicóloga Clínica",
       "obrigatoria": false
     },
     "sobre": {
       "arquivo": "/images/sobre.webp",
-      "alt": "Marcelle Gonçalves em seu consultório",
+      "alt": "Victória Carvalho em foto profissional",
       "obrigatoria": false
     }
   }

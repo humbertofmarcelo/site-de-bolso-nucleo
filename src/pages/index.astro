@@ -13,19 +13,16 @@ interface SecaoConfig {
 }
 
 // 1. Resolve o modelo ativo (definido no cliente.json, ou fallback em site.json)
-const modeloId = (cliente as any).modelo || (site as any).modelo;
+const modeloId = (cliente as any).modelo || (site as any).modelo || "silvia-volpatto";
 const modelo = resolverModelo(modeloId);
 
 // 2. Configurações globais de Hero fornecidas diretamente no cliente.json
 const clienteHero = (cliente as any).hero || (cliente as any).hero_config || {};
-const siteHero = (site as any).hero || {};
 
-// 3. Determina a lista de seções a renderizar:
-const secoesOriginais: SecaoConfig[] =
-  (cliente as any).secoes ??
-  (modeloId ? modelo.secoes : ((site as any).secoes ?? modelo.secoes));
+// 3. Determina a lista de seções a renderizar (permite sobrescrita no cliente.json ou usa o padrão do modelo)
+const secoesOriginais: SecaoConfig[] = (cliente as any).secoes ?? modelo.secoes;
 
-const colecaoAtiva = (cliente as any).colecao || (site as any).colecao || modelo.colecaoPadrao || "editorial";
+const colecaoAtiva = modelo.colecaoPadrao || "editorial";
 
 // 4. Mapeia e injeta configurações de liberdade (como Hero mobile/desktop do item 6)
 const secoes = secoesOriginais
@@ -35,19 +32,15 @@ const secoes = secoesOriginais
     // Se for a seção Hero (tipo "hero", "hero-*" ou id "inicio"), injeta opções de liberdade
     const ehHero = item.tipo.startsWith("hero") || item.id === "inicio";
     if (ehHero) {
-      // Permite que cliente.hero.variante sobrescreva o layout (ex.: ativar "overlay" em qualquer modelo)
       if (clienteHero.variante) {
         itemConfig.variante = clienteHero.variante;
       }
-      // Mescla opções de mobile e desktop
       itemConfig.mobile = {
         ...(item.mobile || {}),
-        ...(siteHero.mobile || {}),
         ...(clienteHero.mobile || {}),
       };
       itemConfig.desktop = {
         ...(item.desktop || {}),
-        ...(siteHero.desktop || {}),
         ...(clienteHero.desktop || {}),
       };
     }

@@ -1,0 +1,17 @@
+@theme {
+  --color-*: initial;
+
+  /* Paleta: "creme-acolhedor" */
+  --color-primary: #8a5a3c;          /* marrom-café, cor do sublinhado e dos destaques */
+  --color-primary-dark: #6b4329;     /* hover / estados ativos */
+  --color-surface: #2b2018;          /* seções escuras (café bem fechado) */
+  --color-surface-alt: #F8F7F3;      /* creme dos fundos dos posts */
+  --color-surface-card: #ebe2d3;     /* bege dos cards */
+  --color-ink: #1c1814;              /* preto quente dos títulos serifados */
+  --color-ink-soft: #5c5047;         /* texto secundário */
+  --color-ink-light: #faf7f2;        /* texto sobre fundo escuro */
+  --color-ink-light-soft: #d9cdbd;   /* texto secundário sobre fundo escuro */
+  --color-line: #ddd2c1;             /* bordas claras */
+  --color-line-dark: #4a3a2e;        /* bordas em seções escuras */
+  --color-white: #ffffff;
+}
