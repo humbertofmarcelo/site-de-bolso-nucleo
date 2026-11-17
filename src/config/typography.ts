@@ -70,6 +70,7 @@ export function gerarCssTipografia(): string {
   css += `
 :root {
   --font-titulos: ${fontTituloVal};
+  --font-serif: ${fontTituloVal};
   --font-corpo: ${fontCorpoVal};
   --font-sans: ${fontCorpoVal};
 }

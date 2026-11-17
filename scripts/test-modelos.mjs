@@ -7,11 +7,17 @@ const modelos = [
   "amanda-botelho",
   "leticia-malta",
   "ricardo-costa",
-  "bruno-freitas"
+  "bruno-freitas",
+  "silvia-leticia"
 ];
 
 const clientePath = "src/content/cliente.json";
 const originalCliente = readFileSync(clientePath, "utf8");
+
+const execOpts = {
+  stdio: "inherit",
+  env: { ...process.env, ASTRO_TELEMETRY_DISABLED: "1" },
+};
 
 try {
   for (const mod of modelos) {
@@ -26,14 +32,14 @@ try {
 
     writeFileSync(clientePath, JSON.stringify(clienteObj, null, 2), "utf8");
 
-    execSync("npm run check", { stdio: "inherit" });
-    execSync("npm run build", { stdio: "inherit" });
+    execSync("npm run check", execOpts);
+    execSync("npm run build", execOpts);
     console.log(`✓ Modelo ${mod} compilou com sucesso!`);
   }
 } finally {
   writeFileSync(clientePath, originalCliente, "utf8");
-  execSync("npm run check", { stdio: "inherit" });
-  execSync("npm run build", { stdio: "inherit" });
+  execSync("npm run check", execOpts);
+  execSync("npm run build", execOpts);
   console.log(`\n✓ Restaurado cliente.json original e reconstruído com sucesso!`);
 }
 

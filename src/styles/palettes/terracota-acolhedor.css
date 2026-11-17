@@ -1,0 +1,17 @@
+@theme {
+  --color-*: initial;
+
+  /* Paleta: "terracota-acolhedor" */
+  --color-primary: #3F6B57;          /* verde-floresta, CTA e destaques (texto branco por cima) */
+  --color-primary-dark: #2F5242;     /* hover / estados ativos */
+  --color-surface: #3A2E29;          /* seções escuras (marrom-grafite) */
+  --color-surface-alt: #F6F1EC;      /* creme-rosado dos fundos */
+  --color-surface-card: #EBDCCF;     /* bege-terracota suave dos cards e seções alternadas */
+  --color-ink: #3A2E29;              /* texto principal e títulos */
+  --color-ink-soft: #6A5B53;         /* texto secundário */
+  --color-ink-light: #F6F1EC;        /* texto sobre fundo escuro */
+  --color-ink-light-soft: #E0BFB1;   /* texto secundário sobre fundo escuro (terracota claro) */
+  --color-line: #E3D5CB;             /* bordas claras */
+  --color-line-dark: #5A4A41;        /* bordas em seções escuras */
+  --color-white: #ffffff;
+}

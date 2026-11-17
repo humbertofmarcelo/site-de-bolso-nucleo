@@ -1,0 +1,17 @@
+@theme {
+  --color-*: initial;
+
+  /* Paleta: "petroleo-sereno" */
+  --color-primary: #2F5D5A;          /* verde-petróleo, CTA e destaques (texto branco por cima) */
+  --color-primary-dark: #234846;     /* hover / estados ativos */
+  --color-surface: #26302E;          /* seções escuras (grafite esverdeado) */
+  --color-surface-alt: #F6F4F0;      /* creme dos fundos */
+  --color-surface-card: #E4EBE5;     /* verde-sálvia bem claro dos cards e seções alternadas */
+  --color-ink: #26302E;              /* texto principal e títulos */
+  --color-ink-soft: #55615E;         /* texto secundário */
+  --color-ink-light: #F6F4F0;        /* texto sobre fundo escuro */
+  --color-ink-light-soft: #B9CFC3;   /* texto secundário sobre fundo escuro (sálvia claro) */
+  --color-line: #D9DED7;             /* bordas claras */
+  --color-line-dark: #3F4C49;        /* bordas em seções escuras */
+  --color-white: #ffffff;
+}

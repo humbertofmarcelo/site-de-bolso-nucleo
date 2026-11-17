@@ -1,10 +1,34 @@
 ---
-// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-4, p-6, md:p-8, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-3, md:gap-6
-// cliente.json: passos_timeline
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, text-ink-light, text-ink-light-soft, text-center, text-balance, font-bold, leading-relaxed, bg-surface-card, border, border-2, border-dashed, border-line, rounded-card, p-6, md:p-8, mt-2, mt-3, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-3, md:gap-6, flex, flex-col, justify-between, shadow-sm
+// cliente.json: passos_timeline, blocos_texto
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
 
-const passos = (cliente as any).passos_timeline || [
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+const confPassos: EstiloBloco = blocosTexto.como_funciona_passos || {};
+
+function resolverClassesPasso(item?: EstiloBloco): string {
+  const arredondado =
+    item?.arredondado ?? confPassos.arredondado ?? padraoGlobal.arredondado ?? false;
+  const tracejado =
+    item?.tracejado ?? confPassos.tracejado ?? padraoGlobal.tracejado ?? true;
+
+  const classeRaio = arredondado ? "rounded-card" : "";
+  const classeBorda = tracejado
+    ? "border-2 border-dashed border-line"
+    : "border border-line";
+
+  return `${classeRaio} ${classeBorda}`.trim();
+}
+
+const passos = clienteAny.passos_timeline || [
   {
     titulo: "1. Agendamento",
     descricao: "Você me envia uma mensagem no WhatsApp e escolhemos o melhor dia e horário para a sua rotina.",
@@ -20,19 +44,19 @@ const passos = (cliente as any).passos_timeline || [
 ];
 ---
 
-<Section id="como-funciona" tom="alt" largura="ampla">
+<Section id="como-funciona" tom="base" largura="ampla">
   <div class="text-center">
-    <h2 class="text-2xl text-ink font-bold text-balance">
+    <h2 class="text-2xl text-ink-light font-bold text-balance">
       Como funciona?
     </h2>
-    <p class="text-base text-ink-soft mt-2">
+    <p class="text-base text-ink-light-soft mt-2">
       Passo a passo simples para iniciar sua jornada
     </p>
   </div>
 
   <div class="mt-8 md:grid md:grid-cols-3 md:gap-6 space-y-4 md:space-y-0">
     {passos.map((item: any) => (
-      <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+      <div class={`bg-surface-card ${resolverClassesPasso(item)} p-6 md:p-8 shadow-sm flex flex-col justify-between`}>
         <div>
           <h3 class="text-lg text-ink font-bold text-balance">
             {item.titulo}

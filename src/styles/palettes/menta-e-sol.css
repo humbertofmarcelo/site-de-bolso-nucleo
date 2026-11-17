@@ -1,0 +1,15 @@
+@theme {
+    --color-*: initial; /* Paleta: "menta-e-sol" */
+    --color-primary: #F2A488;/* coral, CTA e destaques (texto ESCURO por cima) */
+    --color-primary-dark: #E58A68;/* hover / estados ativos */
+    --color-surface: #24403A;/* seções escuras (verde-floresta) */
+    --color-surface-alt: #FBF8F1;/* creme quente dos fundos */
+    --color-surface-card: #DDF1E5;/* menta bem claro dos cards e seções alternadas */
+    --color-ink: #24403A;/* texto principal e títulos */
+    --color-ink-soft: #55706A;/* texto secundário */
+    --color-ink-light: #FBF8F1;/* texto sobre fundo escuro */
+    --color-ink-light-soft: #A8DCC0;/* texto secundário sobre fundo escuro (menta) */
+    --color-line: #E3E6D6;/* bordas claras */
+    --color-line-dark: #3B6358;/* bordas em seções escuras */
+    --color-white: #ffffff;
+}

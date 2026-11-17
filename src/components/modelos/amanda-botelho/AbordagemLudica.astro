@@ -1,8 +1,47 @@
 ---
-// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, p-6, md:p-8, mt-4, mt-6, mt-8, space-y-6, md:space-y-0, md:grid, md:grid-cols-2, md:gap-8, md:items-stretch
-// cliente.json: abordagem, servicos
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, text-center, text-balance, font-bold, italic, leading-relaxed, bg-surface-card, border, border-2, border-dashed, border-line, border-line-dark, rounded-card, p-6, md:p-8, mt-2, mt-4, mt-8, space-y-6, md:space-y-0, md:grid, md:grid-cols-2, md:gap-8, md:items-stretch, flex, flex-col, justify-center, shadow-sm
+// cliente.json: abordagem, servicos, blocos_texto
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
+
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+
+function resolverClassesBloco(
+  chave: string,
+  padraoBloco: { arredondado: boolean; tracejado: boolean },
+  corBorda: "border-line" | "border-line-dark" = "border-line"
+): string {
+  const confEspecifica: EstiloBloco = blocosTexto[chave] || {};
+  const arredondado =
+    confEspecifica.arredondado ?? padraoGlobal.arredondado ?? padraoBloco.arredondado;
+  const tracejado =
+    confEspecifica.tracejado ?? padraoGlobal.tracejado ?? padraoBloco.tracejado;
+
+  const classeRaio = arredondado ? "rounded-card" : "";
+  const classeBorda = tracejado
+    ? `border-2 border-dashed ${corBorda}`
+    : `border ${corBorda}`;
+
+  return `${classeRaio} ${classeBorda}`.trim();
+}
+
+const classesCitacao = resolverClassesBloco(
+  "abordagem_citacao",
+  { arredondado: false, tracejado: true },
+  "border-line-dark"
+);
+const classesNota = resolverClassesBloco(
+  "abordagem_nota",
+  { arredondado: true, tracejado: false },
+  "border-line"
+);
 
 const abordagem = cliente.abordagem || "Terapia Cognitivo-Comportamental e Humanista";
 ---
@@ -18,15 +57,15 @@ const abordagem = cliente.abordagem || "Terapia Cognitivo-Comportamental e Human
   </div>
 
   <div class="mt-8 md:grid md:grid-cols-2 md:gap-8 md:items-stretch space-y-6 md:space-y-0">
-    <!-- Card Citação Tracejado -->
-    <div class="bg-surface-card border-2 border-dashed border-line rounded-card p-6 md:p-8 flex flex-col justify-center">
+    <!-- Card 1: Citação / Explicação da Abordagem -->
+    <div class={`bg-surface-card ${classesCitacao} p-6 md:p-8 flex flex-col justify-center`}>
       <p class="text-lg text-ink italic leading-relaxed">
         "Muitos estudos mostram que a aliança terapêutica — a confiança, o vínculo e a sintonia entre você e seu psicólogo — é o fator mais determinante para o sucesso da terapia."
       </p>
     </div>
 
-    <!-- Card Post-it / Nota Adesiva -->
-    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-center">
+    <!-- Card 2: Nota Adesiva / Complemento -->
+    <div class={`bg-surface-card ${classesNota} p-6 md:p-8 shadow-sm flex flex-col justify-center`}>
       <h3 class="text-lg text-ink font-bold">
         O que realmente faz a diferença:
       </h3>

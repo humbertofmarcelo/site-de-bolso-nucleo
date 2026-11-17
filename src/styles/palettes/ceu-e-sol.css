@@ -1,0 +1,17 @@
+@theme {
+  --color-*: initial;
+
+  /* Paleta: "ceu-e-sol" */
+  --color-primary: #F2A488;          /* coral, CTA e destaques (texto ESCURO por cima) */
+  --color-primary-dark: #E58A68;     /* hover / estados ativos */
+  --color-surface: #2B3A55;          /* seções escuras (azul-marinho) */
+  --color-surface-alt: #FBF8F1;      /* creme quente dos fundos */
+  --color-surface-card: #DCEBF4;     /* azul-céu bem claro dos cards e seções alternadas */
+  --color-ink: #2B3A55;              /* texto principal e títulos */
+  --color-ink-soft: #5A6781;         /* texto secundário */
+  --color-ink-light: #FBF8F1;        /* texto sobre fundo escuro */
+  --color-ink-light-soft: #A8D0E6;   /* texto secundário sobre fundo escuro (azul-céu) */
+  --color-line: #E5E1D6;             /* bordas claras */
+  --color-line-dark: #43537A;        /* bordas em seções escuras */
+  --color-white: #ffffff;
+}

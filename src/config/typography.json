@@ -7,6 +7,55 @@
       "origem": "npm",
       "pesos": [400, 500, 600, 700]
     },
+    "agrave-pro": {
+      "nome": "Agrave Pro",
+      "tipo": "serif",
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 400,
+          "estilo": "normal",
+          "caminho": "/fonts/agrave-pro.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "normal",
+          "caminho": "/fonts/agrave-pro.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "italic",
+          "caminho": "/fonts/agrave-pro.woff2"
+        },
+        {
+          "peso": 700,
+          "estilo": "normal",
+          "caminho": "/fonts/agrave-pro.woff2"
+        }
+      ]
+    },
+    "nunito": {
+      "nome": "Nunito",
+      "tipo": "sans",
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 400,
+          "estilo": "normal",
+          "caminho": "/fonts/nunito-400.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "normal",
+          "caminho": "/fonts/nunito-700.woff2"
+        },
+        {
+          "peso": 700,
+          "estilo": "normal",
+          "caminho": "/fonts/nunito-700.woff2"
+        }
+      ]
+    },
     "lora": {
       "nome": "Lora",
       "tipo": "serif",
@@ -49,22 +98,22 @@
   },
   "papeis": {
     "titulo": {
-      "familia": "lora",
+      "familia": "agrave-pro",
       "peso": 600,
       "tamanho": "text-3xl"
     },
     "subtitulo": {
-      "familia": "lora",
+      "familia": "agrave-pro",
       "peso": 600,
       "tamanho": "text-2xl"
     },
     "corpo": {
-      "familia": "lato",
+      "familia": "nunito",
       "peso": 400,
       "tamanho": "text-base"
     },
     "legenda": {
-      "familia": "lato",
+      "familia": "nunito",
       "peso": 400,
       "tamanho": "text-sm"
     }

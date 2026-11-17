@@ -1,0 +1,28 @@
+@theme {
+    --color-*: initial;
+
+    /* Paleta: "salvia-acolhedor" */
+    --color-primary: #A25B45;
+    /* terracota, CTA e destaques (texto branco por cima) */
+    --color-primary-dark: #854733;
+    /* hover / estados ativos */
+    --color-surface: #2E3A35;
+    /* seções escuras (verde-grafite) */
+    --color-surface-alt: #F4F5EF;
+    /* creme-esverdeado dos fundos */
+    --color-surface-card: #EFEDC4;
+    /* amarelo suave dos cards e seções alternadas */
+    --color-ink: #2E3A35;
+    /* texto principal e títulos */
+    --color-ink-soft: #5C6660;
+    /* texto secundário */
+    --color-ink-light: #F4F5EF;
+    /* texto sobre fundo escuro */
+    --color-ink-light-soft: #B5D5BF;
+    /* texto secundário sobre fundo escuro (sálvia) */
+    --color-line: #D3DCCB;
+    /* bordas claras */
+    --color-line-dark: #46564E;
+    /* bordas em seções escuras */
+    --color-white: #ffffff;
+}

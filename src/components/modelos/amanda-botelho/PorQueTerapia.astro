@@ -1,17 +1,58 @@
 ---
-// Tokens: text-2xl, text-lg, text-base, text-sm, text-ink, text-ink-light, text-ink-light-soft, bg-surface-card, border, border-line, border-line-dark, rounded-card, p-6, md:p-8, mt-4, mt-6, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-8, md:items-stretch
-// cliente.json: motivos_checklist, demandas
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-light, text-ink-light-soft, text-primary, text-center, text-balance, font-bold, leading-relaxed, bg-surface, bg-surface-card, border, border-2, border-dashed, border-line, border-line-dark, rounded-card, p-6, md:p-8, mt-4, mt-8, space-y-3, space-y-6, md:space-y-0, md:grid, md:grid-cols-2, md:gap-8, md:items-stretch, flex, flex-col, justify-between, justify-center, items-center, gap-3, shadow-sm, opacity-95
+// cliente.json: motivos_checklist, demandas, demandas_reflexao, blocos_texto
 import Section from "../../ui/Section.astro";
 import Icone from "../../common/Icone.astro";
 import cliente from "../../../content/cliente.json";
 
-const checklist = (cliente as any).motivos_checklist || (cliente as any).demandas || [
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+
+function resolverClassesBloco(
+  chave: string,
+  padraoBloco: { arredondado: boolean; tracejado: boolean },
+  corBorda: "border-line" | "border-line-dark" = "border-line"
+): string {
+  const confEspecifica: EstiloBloco = blocosTexto[chave] || {};
+  const arredondado =
+    confEspecifica.arredondado ?? padraoGlobal.arredondado ?? padraoBloco.arredondado;
+  const tracejado =
+    confEspecifica.tracejado ?? padraoGlobal.tracejado ?? padraoBloco.tracejado;
+
+  const classeRaio = arredondado ? "rounded-card" : "";
+  const classeBorda = tracejado
+    ? `border-2 border-dashed ${corBorda}`
+    : `border ${corBorda}`;
+
+  return `${classeRaio} ${classeBorda}`.trim();
+}
+
+const classesChecklist = resolverClassesBloco(
+  "por_que_checklist",
+  { arredondado: true, tracejado: false },
+  "border-line"
+);
+const classesReflexao = resolverClassesBloco(
+  "por_que_reflexao",
+  { arredondado: false, tracejado: true },
+  "border-line-dark"
+);
+
+const checklist = clienteAny.motivos_checklist || clienteAny.demandas || [
   "Ansiedade e pensamentos acelerados",
   "Sentimento de sobrecarga constante",
   "Dificuldade de impor limites saudáveis",
   "Insegurança e autocrítica severa",
   "Relacionamentos que causam sofrimento",
 ];
+
+const textoReflexao = clienteAny.demandas_reflexao;
 ---
 
 <Section id="por-que-terapia" tom="base" largura="ampla">
@@ -22,8 +63,8 @@ const checklist = (cliente as any).motivos_checklist || (cliente as any).demanda
   </div>
 
   <div class="mt-8 md:grid md:grid-cols-2 md:gap-8 md:items-stretch space-y-6 md:space-y-0">
-    <!-- Card 1: Checklist Branco -->
-    <div class="bg-surface-card border border-line rounded-card p-6 md:p-8 shadow-sm flex flex-col justify-between">
+    <!-- Card 1: Checklist -->
+    <div class={`bg-surface-card ${classesChecklist} p-6 md:p-8 shadow-sm flex flex-col justify-between`}>
       <div>
         <h3 class="text-lg text-ink font-bold text-balance">
           A psicoterapia pode te ajudar com:
@@ -41,14 +82,22 @@ const checklist = (cliente as any).motivos_checklist || (cliente as any).demanda
       </div>
     </div>
 
-    <!-- Card 2: Reflexão Lilás Suave -->
-    <div class="border border-line-dark rounded-card p-6 md:p-8 bg-surface opacity-95 flex flex-col justify-center">
-      <p class="text-lg text-ink-light-soft leading-relaxed">
-        Sabia que terapia não é só para quando você está no fundo do poço?
-      </p>
-      <p class="text-base text-ink-light-soft leading-relaxed mt-4">
-        Cuidar da mente é um ato contínuo de autocompaixão e autoconhecimento. Criar esse espaço semanal para você é o melhor investimento na sua paz interior e nas suas relações.
-      </p>
+    <!-- Card 2: Reflexão -->
+    <div class={`${classesReflexao} p-6 md:p-8 bg-surface opacity-95 flex flex-col justify-center`}>
+      {textoReflexao ? (
+        <p class="text-lg text-ink-light-soft leading-relaxed">
+          {textoReflexao}
+        </p>
+      ) : (
+        <>
+          <p class="text-lg text-ink-light-soft leading-relaxed">
+            Sabia que terapia não é só para quando você está no fundo do poço?
+          </p>
+          <p class="text-base text-ink-light-soft leading-relaxed mt-4">
+            Cuidar da mente é um ato contínuo de autocompaixão e autoconhecimento. Criar esse espaço semanal para você é o melhor investimento na sua paz interior e nas suas relações.
+          </p>
+        </>
+      )}
     </div>
   </div>
 </Section>

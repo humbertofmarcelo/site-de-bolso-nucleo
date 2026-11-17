@@ -1,13 +1,32 @@
 ---
-// Tokens: text-xl, text-sm, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-6, mt-4, mt-6, text-center, flex, justify-center, gap-4
-// cliente.json: nome, crp, instagram, whatsapp
+// Tokens: text-xl, text-sm, text-xs, text-ink, text-ink-soft, font-bold, bg-surface-card, hover:bg-surface-alt, border, border-2, border-dashed, border-t, border-line, rounded-card, rounded-button, p-3, p-6, md:p-8, pt-6, mt-1, mt-2, mt-6, text-center, flex, justify-center, gap-4, opacity-75, transition-colors, shadow-sm
+// cliente.json: nome, profissao, crp, instagram, whatsapp, blocos_texto
 import Section from "../../ui/Section.astro";
 import Icone from "../../common/Icone.astro";
 import cliente from "../../../content/cliente.json";
+
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+const confContato: EstiloBloco = blocosTexto.contato_card || {};
+
+const arredondado = confContato.arredondado ?? padraoGlobal.arredondado ?? true;
+const tracejado = confContato.tracejado ?? padraoGlobal.tracejado ?? false;
+
+const classeRaio = arredondado ? "rounded-card" : "";
+const classeBorda = tracejado
+  ? "border-2 border-dashed border-line"
+  : "border-2 border-line";
+const classesContatoCard = `${classeRaio} ${classeBorda}`.trim();
 ---
 
 <Section id="contato" tom="alt" largura="padrao">
-  <div class="bg-surface-card border-2 border-line rounded-card p-6 md:p-8 text-center shadow-sm">
+  <div class={`bg-surface-card ${classesContatoCard} p-6 md:p-8 text-center shadow-sm`}>
     <h2 class="text-xl text-ink font-bold">
       {cliente.nome}
     </h2>
@@ -50,4 +69,3 @@ import cliente from "../../../content/cliente.json";
     </div>
   </div>
 </Section>
-

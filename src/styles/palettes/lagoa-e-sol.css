@@ -1,0 +1,28 @@
+@theme {
+    --color-*: initial;
+
+    /* Paleta: "lagoa-e-sol" */
+    --color-primary: #F2A488;
+    /* coral, CTA e destaques (texto ESCURO por cima) */
+    --color-primary-dark: #E58A68;
+    /* hover / estados ativos */
+    --color-surface: #1F4547;
+    /* seções escuras (teal profundo) */
+    --color-surface-alt: #FBF8F1;
+    /* creme quente dos fundos */
+    --color-surface-card: #D9EEEA;
+    /* aqua bem claro dos cards e seções alternadas */
+    --color-ink: #1F4547;
+    /* texto principal e títulos */
+    --color-ink-soft: #52706F;
+    /* texto secundário */
+    --color-ink-light: #FBF8F1;
+    /* texto sobre fundo escuro */
+    --color-ink-light-soft: #9FD8D0;
+    /* texto secundário sobre fundo escuro (turquesa claro) */
+    --color-line: #E0E6DA;
+    /* bordas claras */
+    --color-line-dark: #386064;
+    /* bordas em seções escuras */
+    --color-white: #ffffff;
+}

@@ -1,8 +1,32 @@
 ---
-// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, text-ink-light, text-balance, bg-surface-card, border, border-line, rounded-card, p-6, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-6, md:items-start, flex, justify-between, items-center
-// cliente.json: faq (pergunta, resposta)
+// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, text-ink-light, text-center, text-balance, font-bold, leading-relaxed, bg-surface-card, border, border-2, border-dashed, border-t, border-line, rounded-card, p-6, pt-4, mt-4, mt-8, space-y-4, md:space-y-0, md:grid, md:grid-cols-2, md:gap-6, md:items-start, flex, justify-between, items-center, gap-4, shrink-0, cursor-pointer, list-none, group, transition-transform, group-open:rotate-180, shadow-sm
+// cliente.json: faq (pergunta, resposta), blocos_texto
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
+
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+const confFaq: EstiloBloco = blocosTexto.faq_itens || {};
+
+function resolverClassesFaq(item?: EstiloBloco): string {
+  const arredondado =
+    item?.arredondado ?? confFaq.arredondado ?? padraoGlobal.arredondado ?? true;
+  const tracejado =
+    item?.tracejado ?? confFaq.tracejado ?? padraoGlobal.tracejado ?? false;
+
+  const classeRaio = arredondado ? "rounded-card" : "";
+  const classeBorda = tracejado
+    ? "border-2 border-dashed border-line"
+    : "border border-line";
+
+  return `${classeRaio} ${classeBorda}`.trim();
+}
 
 const faq = cliente.faq || [];
 ---
@@ -16,7 +40,7 @@ const faq = cliente.faq || [];
 
   <div class="mt-8 md:grid md:grid-cols-2 md:gap-6 md:items-start space-y-4 md:space-y-0">
     {faq.map((item: any) => (
-      <details class="bg-surface-card border border-line rounded-card p-6 group shadow-sm">
+      <details class={`bg-surface-card ${resolverClassesFaq(item)} p-6 group shadow-sm`}>
         <summary class="text-lg text-ink font-bold cursor-pointer list-none flex gap-4 justify-between items-center">
           <span>{item.pergunta}</span>
           <span aria-hidden="true" class="shrink-0 text-ink-soft transition-transform group-open:rotate-180">

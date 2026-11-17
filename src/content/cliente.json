@@ -1,7 +1,7 @@
 {
-  "modelo": "silvia-volpatto",
-  "paleta": "creme-acolhedor",
-  "nome": "Victória Carvalho",
+  "modelo": "silvia-leticia",
+  "paleta": "ceu-e-sol",
+  "nome": "Joice Feitosa",
   "profissao": "Psicóloga",
   "crp": "06/196398",
   "cidade": "São Paulo",
@@ -16,9 +16,9 @@
   ],
   "titulo_hero": "Psicóloga TCC em São Paulo",
   "subtitulo_hero": "A vida não é o que nos acontece. É o que a gente faz do que nos acontece.",
-  "bio": "Me formei em 2023 e tenho pós-graduação em Terapia Cognitivo-Comportamental(TCC). Ajudar as pessoas a entenderem seus pensamentos é literalmente a minha paixão.",
-  "bio_complementar": "Teste teste grande teste teste",
-  "descricao_seo": "Victória Carvalho - Psicóloga Clínica (CRP 06/197171). Terapia Online em São Paulo. Agende um atendimento.",
+  "bio": "A criança carrega uma das formas mais genuínas e singelas da natureza humana. Quando necessário, nós, adultos, podemos oferecer apoio, acolhimento e suporte para que ela atravesse suas dificuldades com mais segurança.",
+  "bio_complementar": "Estar presente na infância é também uma forma de cuidar do adulto que essa criança irá se tornar. ",
+  "descricao_seo": "Joice Feitosa - Psicóloga Clínica (CRP 06/197171). Terapia Online em São Paulo. Agende um atendimento.",
   "demandas_titulo": "Por que psicanálise?",
   "demandas_subtitulo": "É necessário recordar, repetir e elaborar",
   "demandas": [
@@ -86,16 +86,29 @@
   "og_image": "/og.jpg",
   "imagens": {
     "hero": {
-      "desktop": "/images/hero.webp",
-      "mobile": "/images/hero.webp",
-      "arquivo": "/images/hero.webp",
-      "alt": "Retrato de Victória Carvalho, Psicóloga Clínica",
+      "desktop": "/images/hero-joice-mobile.webp",
+      "mobile": "/images/hero-joice-mobile.webp",
+      "arquivo": "/images/hero-joice-mobile.webp",
+      "alt": "Retrato de Joice Feitosa, Psicóloga Clínica",
       "obrigatoria": false
     },
     "sobre": {
       "arquivo": "/images/sobre.webp",
-      "alt": "Victória Carvalho em foto profissional",
+      "alt": "Joice Feitosa em foto profissional",
       "obrigatoria": false
     }
+  },
+  "blocos_texto": {
+    "hero_identificacao": { "arredondado": false, "tracejado": true },
+    "hero_bio_1": { "arredondado": true, "tracejado": false },
+    "hero_bio_2": { "arredondado": true, "tracejado": false },
+    "por_que_checklist": { "arredondado": true, "tracejado": false },
+    "por_que_reflexao": { "arredondado": false, "tracejado": true },
+    "abordagem_citacao": { "arredondado": false, "tracejado": true },
+    "abordagem_nota": { "arredondado": true, "tracejado": false },
+    "como_funciona_passos": { "arredondado": false, "tracejado": true },
+    "mini_cta_balao": { "arredondado": false, "tracejado": true },
+    "faq_itens": { "arredondado": true, "tracejado": false },
+    "contato_card": { "arredondado": true, "tracejado": false }
   }
 }

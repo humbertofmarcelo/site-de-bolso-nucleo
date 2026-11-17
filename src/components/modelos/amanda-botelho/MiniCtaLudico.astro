@@ -1,17 +1,54 @@
 ---
-// Tokens: text-2xl, text-lg, text-base, text-ink, text-ink-soft, bg-surface-card, border, border-line, rounded-card, rounded-button, p-6, md:p-8, mt-4, mt-6, text-center, md:text-left, flex, flex-col, md:flex-row, items-center, md:justify-between, md:gap-8
-// cliente.json: imagens.sobre, nome
+// Tokens: text-base, text-ink, font-medium, leading-relaxed, bg-surface-alt, border, border-2, border-dashed, border-line, border-line-dark, rounded-card, rounded-button, p-4, md:py-4, w-20, h-20, w-full, h-full, max-w-md, shrink-0, overflow-hidden, object-cover, text-center, md:text-left, flex, flex-col, md:flex-row, items-center, md:justify-between, gap-6, md:gap-8, shadow-sm
+// cliente.json: imagens.sobre, imagens.hero, nome, contato_texto, blocos_texto
 import Section from "../../ui/Section.astro";
 import BotaoAgendamento from "../../common/BotaoAgendamento.astro";
 import cliente from "../../../content/cliente.json";
 
+interface EstiloBloco {
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+const clienteAny = cliente as any;
+const blocosTexto = clienteAny.blocos_texto || {};
+const padraoGlobal: EstiloBloco = blocosTexto.padrao || {};
+
+function resolverClassesBloco(
+  chave: string,
+  padraoBloco: { arredondado: boolean; tracejado: boolean },
+  corBorda: "border-line" | "border-line-dark" = "border-line-dark"
+): string {
+  const confEspecifica: EstiloBloco = blocosTexto[chave] || {};
+  const arredondado =
+    confEspecifica.arredondado ?? padraoGlobal.arredondado ?? padraoBloco.arredondado;
+  const tracejado =
+    confEspecifica.tracejado ?? padraoGlobal.tracejado ?? padraoBloco.tracejado;
+
+  const classeRaio = arredondado ? "rounded-card" : "";
+  const classeBorda = tracejado
+    ? `border-2 border-dashed ${corBorda}`
+    : `border ${corBorda}`;
+
+  return `${classeRaio} ${classeBorda}`.trim();
+}
+
+const classesBalao = resolverClassesBloco(
+  "mini_cta_balao",
+  { arredondado: false, tracejado: true },
+  "border-line-dark"
+);
+
 const foto = cliente.imagens?.sobre?.arquivo || cliente.imagens?.hero?.arquivo || "/images/sobre.webp";
+const textoConvite =
+  cliente.contato_texto ||
+  "Quer dar esse passo? Vamos conversar e encontrar o melhor caminho para você!";
 ---
 
-<Section id="mini-cta" tom="alt" largura="ampla">
-  <div class="bg-surface-card border-2 border-line rounded-card p-6 md:p-10 text-center md:text-left flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-8 shadow-sm">
+<Section id="mini-cta" tom="primary" largura="ampla">
+  <div class="md:py-4 text-center md:text-left flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-8">
     <div class="flex flex-col md:flex-row items-center gap-6">
-      <div class="w-20 h-20 shrink-0 overflow-hidden rounded-button border-2 border-line shadow-sm">
+      <div class="w-40 h-40 shrink-0 overflow-hidden rounded-button border-2 border-line shadow-sm">
         <img
           src={foto}
           alt={`Fale com ${cliente.nome}`}
@@ -20,16 +57,16 @@ const foto = cliente.imagens?.sobre?.arquivo || cliente.imagens?.hero?.arquivo |
         />
       </div>
 
-      <!-- Balão de conversa -->
-      <div class="p-4 rounded-card border border-line bg-surface-alt max-w-md">
+      <!-- Balão de conversa branco e tracejado -->
+      <div class={`p-4 ${classesBalao} bg-surface-alt max-w-md shadow-sm`}>
         <p class="text-base text-ink font-medium leading-relaxed">
-          "Quer dar esse passo? Vamos conversar e encontrar o melhor caminho para você!"
+          "{textoConvite}"
         </p>
       </div>
     </div>
 
     <div class="shrink-0">
-      <BotaoAgendamento rotulo="AGENDAR CONSULTA" />
+      <BotaoAgendamento rotulo="AGENDAR CONSULTA" variante="dark" />
     </div>
   </div>
 </Section>

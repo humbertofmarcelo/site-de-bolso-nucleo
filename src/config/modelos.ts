@@ -148,6 +148,38 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
       { id: "contato", tipo: "contato-vibrante" },
     ],
   },
+  "silvia-leticia": {
+    id: "silvia-leticia",
+    aliases: ["modelo-7", "modelo7", "volpatto-malta"],
+    nome: "Silvia & Letícia",
+    descricao: "Editorial & Orgânico — Mescla a Hero, Modalidades, FAQ e Contato do modelo Silvia Volpatto com os Serviços e Apresentação do modelo Letícia Malta",
+    paletaPadrao: "volpatto",
+    colecaoPadrao: "editorial",
+    secoes: [
+      {
+        id: "inicio",
+        tipo: "hero",
+        variante: "overlay",
+        mobile: {
+          gradiente: "nenhum",
+          tema_texto: "light",
+          tema_texto_topo: "dark",
+        },
+        desktop: {
+          fundo: "gradiente",
+          direcao_gradiente: "light-para-dark",
+          extensao_gradiente: 45,
+          gradiente: "nenhum",
+          tema_texto: "dark",
+        },
+      },
+      { id: "servicos", tipo: "servicos-organicos" },
+      { id: "sobre", tipo: "apresentacao-organica" },
+      { id: "modalidades", tipo: "modalidades" },
+      { id: "faq", tipo: "faq" },
+      { id: "contato", tipo: "contato" },
+    ],
+  },
 };
 
 /**

@@ -1,8 +1,8 @@
 @theme {
   --color-*: initial;
 
-  --color-primary: #facc15;
-  --color-primary-dark: #eab308;
+  --color-primary: #8b6ff5;
+  --color-primary-dark: #6d4de6;
   --color-surface: #4a3055;
   --color-surface-alt: #f5effa;
   --color-surface-card: #ffffff;
@@ -14,4 +14,3 @@
   --color-line-dark: #6b497a;
   --color-white: #ffffff;
 }
-

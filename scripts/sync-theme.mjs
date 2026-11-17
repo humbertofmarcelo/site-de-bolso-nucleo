@@ -20,6 +20,9 @@ const ALIASES_MODELOS = {
   "modelo-6": "bruno-freitas",
   "modelo6": "bruno-freitas",
   "lucas-santos": "bruno-freitas",
+  "modelo-7": "silvia-leticia",
+  "modelo7": "silvia-leticia",
+  "volpatto-malta": "silvia-leticia",
 };
 
 const PALETAS_PADRAO_MODELO = {
@@ -29,6 +32,7 @@ const PALETAS_PADRAO_MODELO = {
   "leticia-malta": "salvia",
   "ricardo-costa": "azul-confiante",
   "bruno-freitas": "vibrante-roxo",
+  "silvia-leticia": "volpatto",
 };
 
 /**

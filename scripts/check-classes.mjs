@@ -30,6 +30,7 @@ try {
     "modelo-4": "leticia-malta", "modelo4": "leticia-malta", "minimal-sereno": "leticia-malta",
     "modelo-5": "ricardo-costa", "modelo5": "ricardo-costa", "eduardo-sousa": "ricardo-costa",
     "modelo-6": "bruno-freitas", "modelo6": "bruno-freitas", "lucas-santos": "bruno-freitas",
+    "modelo-7": "silvia-leticia", "modelo7": "silvia-leticia", "volpatto-malta": "silvia-leticia",
   };
 
   const PALETAS_PADRAO_MODELO = {
@@ -39,6 +40,7 @@ try {
     "leticia-malta": "salvia",
     "ricardo-costa": "azul-confiante",
     "bruno-freitas": "vibrante-roxo",
+    "silvia-leticia": "volpatto",
   };
 
   let paletaAtiva = cliente.paleta;
