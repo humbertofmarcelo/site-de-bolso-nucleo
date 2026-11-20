@@ -77,6 +77,9 @@ export function gerarCssTipografia(): string {
 body {
   font-family: var(--font-corpo);
 }
+h1, h2, h3 {
+  font-family: var(--font-titulos);
+}
 `;
 
   return css;

@@ -51,6 +51,15 @@ import ProcessoVibrante from "./modelos/bruno-freitas/ProcessoVibrante.astro";
 import FaqVibrante from "./modelos/bruno-freitas/FaqVibrante.astro";
 import ContatoVibrante from "./modelos/bruno-freitas/ContatoVibrante.astro";
 
+// Modelo 7 (Silvia & Letícia / Editorial & Orgânico)
+import HeroSilviaLeticia from "./modelos/silvia-leticia/HeroSilviaLeticia.astro";
+import FraseSilviaLeticia from "./modelos/silvia-leticia/FraseSilviaLeticia.astro";
+import ServicosSilviaLeticia from "./modelos/silvia-leticia/ServicosSilviaLeticia.astro";
+import SobreSilviaLeticia from "./modelos/silvia-leticia/SobreSilviaLeticia.astro";
+import ModalidadesSilviaLeticia from "./modelos/silvia-leticia/ModalidadesSilviaLeticia.astro";
+import FaqSilviaLeticia from "./modelos/silvia-leticia/FaqSilviaLeticia.astro";
+import ContatoSilviaLeticia from "./modelos/silvia-leticia/ContatoSilviaLeticia.astro";
+
 // Catálogo de seções diretas por identificador de tipo
 export const secoesCompartilhadas: Record<string, any> = {
   // Modelo 1 (Silvia Volpatto)
@@ -106,19 +115,36 @@ export const secoesCompartilhadas: Record<string, any> = {
   "processo-vibrante": ProcessoVibrante,
   "faq-vibrante": FaqVibrante,
   "contato-vibrante": ContatoVibrante,
+
+  // Modelo 7 (Silvia & Letícia)
+  "hero-silvia-leticia": HeroSilviaLeticia,
+  "frase-silvia-leticia": FraseSilviaLeticia,
+  "servicos-silvia-leticia": ServicosSilviaLeticia,
+  "sobre-silvia-leticia": SobreSilviaLeticia,
+  "modalidades-silvia-leticia": ModalidadesSilviaLeticia,
+  "faq-silvia-leticia": FaqSilviaLeticia,
+  "contato-silvia-leticia": ContatoSilviaLeticia,
 };
 
 // Catálogo de variantes por seção base
 export const variantesSecoes: Record<string, Record<string, any>> = {
   hero: {
-    padrao: HeroEditorial,
-    editorial: HeroEditorial,
+    padrao: HeroOverlay,
+    editorial: HeroOverlay,
     overlay: HeroOverlay,
+    nenhum: HeroOverlay,
     pb: HeroPb,
     ludico: HeroLudico,
     organico: HeroOrganico,
     estruturado: HeroEstruturado,
     vibrante: HeroVibrante,
+    "silvia-leticia": HeroSilviaLeticia,
+  },
+  "hero-silvia-leticia": {
+    padrao: HeroSilviaLeticia,
+    editorial: HeroSilviaLeticia,
+    overlay: HeroSilviaLeticia,
+    nenhum: HeroSilviaLeticia,
   },
   sobre: {
     padrao: SobreEditorial,
@@ -126,6 +152,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     organico: ApresentacaoOrganica,
     estruturado: SobreEstruturado,
     vibrante: SobreVibrante,
+    "silvia-leticia": SobreSilviaLeticia,
   },
   servicos: {
     padrao: ServicosEditorial,
@@ -133,6 +160,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     pb: ServicosPb,
     organico: ServicosOrganicos,
     "como-ajudar": ComoAjudarVibrante,
+    "silvia-leticia": ServicosSilviaLeticia,
   },
   demandas: {
     padrao: DemandasEditorial,
@@ -148,6 +176,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     estruturado: AgendamentoInfo,
     processo: ProcessoVibrante,
     passos: PassosPb,
+    "silvia-leticia": ModalidadesSilviaLeticia,
   },
   faq: {
     padrao: FaqEditorial,
@@ -157,6 +186,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     organico: FaqOrganico,
     estruturado: FaqEstruturado,
     vibrante: FaqVibrante,
+    "silvia-leticia": FaqSilviaLeticia,
   },
   contato: {
     padrao: ContatoEditorial,
@@ -166,6 +196,7 @@ export const variantesSecoes: Record<string, Record<string, any>> = {
     organico: RodapeOrganico,
     estruturado: ContatoEstruturado,
     vibrante: ContatoVibrante,
+    "silvia-leticia": ContatoSilviaLeticia,
   },
   formacao: {
     padrao: FormacaoEditorial,

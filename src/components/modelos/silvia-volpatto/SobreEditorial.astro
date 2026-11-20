@@ -1,5 +1,5 @@
 ---
-// Tokens: text-ink, text-ink-soft, text-sm, text-base, text-balance, rounded-card, border, border-line, mt-2, mt-6, mb-8, md:mb-0, space-y-4, flex, justify-center, object-cover, w-full, max-w-sm, shadow-sm, uppercase, tracking-wider, leading-relaxed, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// Tokens: -mx-6, -mt-16, mb-8, md:mx-0, md:mt-0, md:mb-0, flex, justify-center, md:rounded-card, md:border, md:border-line, object-cover, w-full, md:max-w-sm, md:shadow-sm, block, text-ink, text-ink-soft, text-sm, text-base, text-balance, texto-titulo, mt-2, mt-6, space-y-4, uppercase, tracking-wider, leading-relaxed, md:grid, md:grid-cols-2, md:gap-12, md:items-center
 // cliente.json: nome, bio, bio_complementar, imagens.sobre
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
@@ -11,11 +11,11 @@ const temImagem = Boolean(fotoSobre);
 <Section id="sobre" tom="alt" largura="ampla">
   <div class={temImagem ? "md:grid md:grid-cols-2 md:gap-12 md:items-center" : ""}>
     {temImagem && (
-      <div class="mb-8 md:mb-0 flex justify-center">
+      <div class="-mx-6 -mt-16 mb-8 md:mx-0 md:mt-0 md:mb-0 flex justify-center">
         <img
           src={fotoSobre}
           alt={sobreImg?.alt || `Sobre ${cliente.nome}`}
-          class="rounded-card border border-line object-cover w-full max-w-sm shadow-sm"
+          class="md:rounded-card md:border md:border-line object-cover w-full md:max-w-sm md:shadow-sm block"
           loading="lazy"
         />
       </div>
@@ -42,4 +42,3 @@ const temImagem = Boolean(fotoSobre);
     </div>
   </div>
 </Section>
-

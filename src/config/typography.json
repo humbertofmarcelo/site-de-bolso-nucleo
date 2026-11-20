@@ -1,11 +1,64 @@
 {
   "colecao": "editorial",
   "familias": {
+    "playfair-display": {
+      "nome": "Playfair Display",
+      "tipo": "serif",
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 500,
+          "estilo": "normal",
+          "caminho": "/fonts/playfair-display-600.woff2"
+        },
+        {
+          "peso": 500,
+          "estilo": "italic",
+          "caminho": "/fonts/playfair-display-500-italic.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "normal",
+          "caminho": "/fonts/playfair-display-600.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "italic",
+          "caminho": "/fonts/playfair-display-600-italic.woff2"
+        },
+        {
+          "peso": 700,
+          "estilo": "normal",
+          "caminho": "/fonts/playfair-display-600.woff2"
+        }
+      ]
+    },
     "inter": {
-      "nome": "Inter Variable",
+      "nome": "Inter",
       "tipo": "sans",
-      "origem": "npm",
-      "pesos": [400, 500, 600, 700]
+      "origem": "local",
+      "arquivos": [
+        {
+          "peso": 400,
+          "estilo": "normal",
+          "caminho": "/fonts/inter-var.woff2"
+        },
+        {
+          "peso": 500,
+          "estilo": "normal",
+          "caminho": "/fonts/inter-var.woff2"
+        },
+        {
+          "peso": 600,
+          "estilo": "normal",
+          "caminho": "/fonts/inter-var.woff2"
+        },
+        {
+          "peso": 700,
+          "estilo": "normal",
+          "caminho": "/fonts/inter-var.woff2"
+        }
+      ]
     },
     "agrave-pro": {
       "nome": "Agrave Pro",
@@ -98,22 +151,22 @@
   },
   "papeis": {
     "titulo": {
-      "familia": "agrave-pro",
+      "familia": "playfair-display",
       "peso": 600,
       "tamanho": "text-3xl"
     },
     "subtitulo": {
-      "familia": "agrave-pro",
+      "familia": "playfair-display",
       "peso": 600,
       "tamanho": "text-2xl"
     },
     "corpo": {
-      "familia": "nunito",
+      "familia": "inter",
       "peso": 400,
       "tamanho": "text-base"
     },
     "legenda": {
-      "familia": "nunito",
+      "familia": "inter",
       "peso": 400,
       "tamanho": "text-sm"
     }

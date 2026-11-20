@@ -190,7 +190,7 @@ Se desejar usar uma paleta diferente da padrão do modelo, basta adicionar `"pal
 - [ ] **2. Preencher os dados cadastrais:** Nome, CRP, Cidade, WhatsApp, Instagram e Bio.
 - [ ] **3. Inserir imagens em `public/images/`:**
   - Foto de retrato (`/images/sobre.webp` ou `/images/hero.webp`);
-  - Imagem de compartilhamento WhatsApp/Google: `public/og.jpg` (1200x630 px);
+  - Imagem de compartilhamento WhatsApp/Instagram/Google: `public/og.jpg` (**1200×630 px**, peso ideal entre **80 KB e 150 KB** / **`80.000` a `150.000 bytes`**, e **obrigatoriamente abaixo de 300 KB / `300.000 bytes`** para evitar recompressão borrada no WhatsApp; manter o rosto centralizado no quadrado central `630×630 px`);
   - Ícone da aba do navegador: `public/favicon.svg`.
 - [ ] **4. Configurações de Deploy e Domínio:**
   - `astro.config.mjs`: altere o campo `site` com o domínio ou Worker do cliente;

@@ -1,10 +1,23 @@
 {
-  "modelo": "silvia-leticia",
-  "paleta": "ceu-e-sol",
-  "nome": "Joice Feitosa",
+  "modelo": "silvia-volpatto",
+  "hero": {
+    "mobile": {
+      "variante": "overlay",
+      "fundo": "dark",
+      "gradiente": "dark",
+      "tema_texto": "light"
+    },
+    "desktop":{
+      "variante": "editorial",
+      "fundo": "dark",
+      "tema_texto": "light"
+    }
+  },
+  "paleta": "purpura",
+  "nome": "Thamires Morceli",
   "profissao": "Psicóloga",
-  "crp": "06/196398",
-  "cidade": "São Paulo",
+  "crp": "06/208981",
+  "cidade": "Presidente Prudente",
   "uf": "SP",
   "bairro": "",
   "endereco": "",
@@ -12,13 +25,14 @@
   "abordagem": "Terapia Cognitivo-Comportamental",
   "modalidade": [
     "presencial",
-    "online"
+    "online",
+    "grupo"
   ],
-  "titulo_hero": "Psicóloga TCC em São Paulo",
+  "titulo_hero": "Psicóloga Thamires Morceli",
   "subtitulo_hero": "A vida não é o que nos acontece. É o que a gente faz do que nos acontece.",
   "bio": "A criança carrega uma das formas mais genuínas e singelas da natureza humana. Quando necessário, nós, adultos, podemos oferecer apoio, acolhimento e suporte para que ela atravesse suas dificuldades com mais segurança.",
   "bio_complementar": "Estar presente na infância é também uma forma de cuidar do adulto que essa criança irá se tornar. ",
-  "descricao_seo": "Joice Feitosa - Psicóloga Clínica (CRP 06/197171). Terapia Online em São Paulo. Agende um atendimento.",
+  "descricao_seo": "Thamires Morceli - Psicóloga Clínica (CRP 06/208981). Terapia Online em Presidente Prudente. Agende um atendimento.",
   "demandas_titulo": "Por que psicanálise?",
   "demandas_subtitulo": "É necessário recordar, repetir e elaborar",
   "demandas": [
@@ -29,7 +43,7 @@
   "servicos": [
     {
       "titulo": "Terapia Presencial",
-      "descricao": "Meu consultório está localizado na Zona Leste de São Paulo, em um ambiente preparado para oferecer acolhimento, privacidade e tranquilidade durante os atendimentos. As sessões presenciais são realizadas às terças, quintas e sextas-feiras, das 13h às 17h. Para saber mais sobre o atendimento, esclarecer dúvidas ou consultar a disponibilidade de horários, entre em contato."
+      "descricao": "Meu consultório está localizado na Zona Leste de Presidente Prudente, em um ambiente preparado para oferecer acolhimento, privacidade e tranquilidade durante os atendimentos. As sessões presenciais são realizadas às terças, quintas e sextas-feiras, das 13h às 17h. Para saber mais sobre o atendimento, esclarecer dúvidas ou consultar a disponibilidade de horários, entre em contato."
     },
     {
       "titulo": "Terapia Online",
@@ -79,36 +93,69 @@
   ],
   "contato_texto": "Agende uma consulta e se permita dar o primeiro passo para uma vida mais leve.",
   "tipo_agendamento": "link",
-  "link_agendamento": "https://www.instagram.com/psi.eduardoafonso/",
+  "link_agendamento": "https://www.instagram.com/psithamiresmorceli/",
   "whatsapp": "551199999999",
-  "whatsapp_mensagem": "Olá, Eduardo! Vim pelo site e gostaria de agendar um atendimento.",
-  "instagram": "psi.eduardoafonso",
+  "whatsapp_mensagem": "Olá, Thamires! Vim pelo site e gostaria de agendar um atendimento.",
+  "instagram": "psithamiresmorceli",
   "og_image": "/og.jpg",
   "imagens": {
     "hero": {
-      "desktop": "/images/hero-joice-mobile.webp",
-      "mobile": "/images/hero-joice-mobile.webp",
-      "arquivo": "/images/hero-joice-mobile.webp",
-      "alt": "Retrato de Joice Feitosa, Psicóloga Clínica",
+      "desktop": "/images/hero-elaine-desktop.webp",
+      "mobile": "/images/hero-elaine-mobile.webp",
+      "arquivo": "/images/hero-elaine-mobile.webp",
+      "alt": "Retrato de Thamires Morceli, Psicóloga Clínica",
       "obrigatoria": false
     },
     "sobre": {
       "arquivo": "/images/sobre.webp",
-      "alt": "Joice Feitosa em foto profissional",
+      "alt": "Thamires Morceli em foto profissional",
       "obrigatoria": false
     }
   },
   "blocos_texto": {
-    "hero_identificacao": { "arredondado": false, "tracejado": true },
-    "hero_bio_1": { "arredondado": true, "tracejado": false },
-    "hero_bio_2": { "arredondado": true, "tracejado": false },
-    "por_que_checklist": { "arredondado": true, "tracejado": false },
-    "por_que_reflexao": { "arredondado": false, "tracejado": true },
-    "abordagem_citacao": { "arredondado": false, "tracejado": true },
-    "abordagem_nota": { "arredondado": true, "tracejado": false },
-    "como_funciona_passos": { "arredondado": false, "tracejado": true },
-    "mini_cta_balao": { "arredondado": false, "tracejado": true },
-    "faq_itens": { "arredondado": true, "tracejado": false },
-    "contato_card": { "arredondado": true, "tracejado": false }
+    "hero_identificacao": {
+      "arredondado": false,
+      "tracejado": true
+    },
+    "hero_bio_1": {
+      "arredondado": true,
+      "tracejado": false
+    },
+    "hero_bio_2": {
+      "arredondado": true,
+      "tracejado": false
+    },
+    "por_que_checklist": {
+      "arredondado": true,
+      "tracejado": false
+    },
+    "por_que_reflexao": {
+      "arredondado": false,
+      "tracejado": true
+    },
+    "abordagem_citacao": {
+      "arredondado": false,
+      "tracejado": true
+    },
+    "abordagem_nota": {
+      "arredondado": true,
+      "tracejado": false
+    },
+    "como_funciona_passos": {
+      "arredondado": false,
+      "tracejado": true
+    },
+    "mini_cta_balao": {
+      "arredondado": false,
+      "tracejado": true
+    },
+    "faq_itens": {
+      "arredondado": true,
+      "tracejado": false
+    },
+    "contato_card": {
+      "arredondado": true,
+      "tracejado": false
+    }
   }
 }

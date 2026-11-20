@@ -158,7 +158,7 @@ O sistema gera automaticamente os `@font-face` e injeta as variáveis `--font-ti
 | Imagem | Localização | Proporção / Tamanho Ideal | Função |
 | :--- | :--- | :--- | :--- |
 | **`sobre.webp`** ou **`hero.webp`** | `public/images/` | 3:4 (ex.: 900x1200 px) | Retrato vertical do psicólogo |
-| **`hero-desktop.webp`** | `public/images/` | 1920x630 px | Foto panorâmica para Hero Overlay (Modelo 1) |
+| **`hero-desktop.webp`** | `public/images/` | 1920x600 px | Foto panorâmica para Hero Overlay (Modelos 1 e 7) |
 | **`hero-mobile.webp`** | `public/images/` | 767x838 px | Foto vertical para Hero Overlay (Modelo 1) |
 | **`og.jpg`** | `public/og.jpg` | 1200x630 px (exato) | Miniatura que aparece no link do WhatsApp e Google |
 | **`favicon.svg`** | `public/favicon.svg` | Vetorial / Quadrado | Ícone da aba do navegador |
@@ -194,22 +194,65 @@ Essa configuração pode ser feita diretamente no `cliente.json` através do blo
 
 ### O que você pode controlar:
 
-1. **Ativar o Layout de Imagem de Fundo (Hero Overlay) em qualquer modelo:**
-   - Adicione `"variante": "overlay"` dentro do bloco `"hero"` (ou no item da seção em `secoes`).
-   - O site automaticamente usará a foto panorâmica com a paleta do modelo ativo (`classico-pb`, `azul-confiante`, `salvia`, `ludico-lilas`, etc.).
+1. **Escolher a Variante da Hero Separadamente para Celular (`mobile.variante`) e Computador (`desktop.variante`):**
+   Nos modelos **`"silvia-volpatto"`** e **`"silvia-leticia"`**, você pode definir uma `"variante"` diferente dentro de `"mobile"` e dentro de `"desktop"`:
+   - **`"overlay"`** *(padrão)*: A foto preenche todo o fundo da seção com os textos e botão sobrepostos.
+   - **`"nenhum"`** (ou `"sem-foto"`): Desativa a foto da Hero naquele dispositivo, exibindo apenas o fundo da paleta (sólido `"light"`, `"dark"` ou `"gradiente"`) com o cabeçalho Nome/CRP, título, subtítulo e botão.
+   - **`"editorial"`** (ou `"card"`): Exibe a foto em um card separado (acima do texto no celular ou ao lado direito do texto em 2 colunas no computador), sem sobrepor texto em cima da imagem.
+
+   **Exemplo prático (`"overlay"` no celular e `"nenhum"` no computador):**
+   ```json
+   {
+     "modelo": "silvia-leticia",
+     "hero": {
+       "mobile": {
+         "variante": "overlay",
+         "gradiente": "nenhum",
+         "tema_texto": "light",
+         "tema_texto_topo": "dark"
+       },
+       "desktop": {
+         "variante": "nenhum",
+         "fundo": "light",
+         "tema_texto": "dark"
+       }
+     }
+   }
+   ```
+
+   **Outro exemplo (`"overlay"` no celular e `"editorial"` com foto em card ao lado no computador):**
+   ```json
+   {
+     "modelo": "silvia-volpatto",
+     "hero": {
+       "mobile": {
+         "variante": "overlay"
+       },
+       "desktop": {
+         "variante": "editorial",
+         "fundo": "dark",
+         "tema_texto": "light"
+       }
+     }
+   }
+   ```
 
 2. **Opções para Celulares (`mobile`):**
+   - `"variante"`: `"overlay"`, `"editorial"` ou `"nenhum"`.
    - `"fundo"`: `"dark"` (fundo escuro da paleta) ou `"light"` (fundo claro da paleta).
    - `"gradiente"`: `"dark"` (máscara suave na base para leitura), `"light"` ou `"nenhum"`.
    - `"tema_texto"`: `"light"` (textos claros) ou `"dark"` (textos escuros).
+   - `"tema_texto_topo"`: `"light"` ou `"dark"` (controla especificamente a cor do Nome e CRP no topo).
    - `"variante_botao"`: `"normal"`, `"light"` ou `"dark"`.
 
 3. **Opções para Computadores (`desktop`):**
-   - `"fundo"`: `"gradiente"` (gradiente contínuo estendendo as cores da paleta pelas laterais da tela) ou `"solido"`.
+   - `"variante"`: `"overlay"`, `"editorial"` ou `"nenhum"`.
+   - `"fundo"`: `"light"`, `"dark"`, `"solido"` ou `"gradiente"` (gradiente contínuo estendendo as cores da paleta pelas laterais da tela).
    - `"direcao_gradiente"`: `"light-para-dark"` ou `"dark-para-light"`.
    - `"extensao_gradiente"`: Percentual onde ocorre a transição (ex.: `45`, `50`, `60`).
    - `"gradiente"`: `"nenhum"` (ideal se a foto já possui degradê), `"dark"` ou `"light"`.
    - `"tema_texto"`: `"dark"` ou `"light"`.
+   - `"tema_texto_topo"`: `"dark"` ou `"light"`.
    - `"variante_botao"`: `"normal"`, `"light"` ou `"dark"`.
 
 4. **Responsividade Desktop nos Layouts Nativos:**
@@ -347,16 +390,17 @@ Se dentro de uma lista você quiser que **um passo específico** (em `passos_tim
 
 ### 6.3. Estrutura e Especificidades do Modelo Híbrido `silvia-leticia`
 
-O modelo **`"silvia-leticia"`** (ou alias `"modelo-7"`) mescla as seções dos modelos **`"silvia-volpatto"`** e **`"leticia-malta"`** na seguinte ordem exata:
+O modelo **`"silvia-leticia"`** (ou alias `"modelo-7"`) possui todos os seus componentes isolados na pasta própria 📁 **`src/components/modelos/silvia-leticia/`**, permitindo que você edite qualquer seção dele sem impactar os modelos `"silvia-volpatto"` ou `"leticia-malta"`:
 
-| Ordem | Seção | Origem do Componente | Campos Consumidos do `cliente.json` |
+| Ordem | Seção | Arquivo em `src/components/modelos/silvia-leticia/` | Campos Consumidos do `cliente.json` |
 | :--- | :--- | :--- | :--- |
-| **1. Hero** (`id="inicio"`) | [`HeroOverlay.astro`](../src/components/modelos/silvia-volpatto/HeroOverlay.astro) | Modelo `silvia-volpatto` | `nome`, `crp`, `profissao`, `cidade`, `titulo_hero`, `subtitulo_hero`, `imagens.hero` (`desktop`, `mobile`, `arquivo`, `alt`) e objeto `hero` (`mobile` / `desktop`). |
-| **2. Serviços** (`id="servicos"`) | [`ServicosOrganicos.astro`](../src/components/modelos/leticia-malta/ServicosOrganicos.astro) | Modelo `leticia-malta` | `servicos`: lista de `{ titulo, descricao, icone? }` (se `icone` não for informado no item, alterna automaticamente entre `"planta"`, `"coracao"`, `"ansiedade"` e `"estrela"`). |
-| **3. Sobre mim** (`id="sobre"`) | [`ApresentacaoOrganica.astro`](../src/components/modelos/leticia-malta/ApresentacaoOrganica.astro) | Modelo `leticia-malta` | `frase_acolhimento` (citação em destaque no topo), `nome`, `bio`, `bio_complementar` e `imagens.sobre.arquivo`. |
-| **4. Formas de atendimento** (`id="modalidades"`) | [`ModalidadesEditorial.astro`](../src/components/modelos/silvia-volpatto/ModalidadesEditorial.astro) | Modelo `silvia-volpatto` | `modalidades_info`: lista de `{ titulo, descricao }` + botão de agendamento. |
-| **5. Perguntas Frequentes** (`id="faq"`) | [`FaqEditorial.astro`](../src/components/modelos/silvia-volpatto/FaqEditorial.astro) | Modelo `silvia-volpatto` | `faq`: lista de `{ pergunta, resposta }`. |
-| **6. Rodapé / Contato** (`id="contato"`) | [`ContatoEditorial.astro`](../src/components/modelos/silvia-volpatto/ContatoEditorial.astro) | Modelo `silvia-volpatto` | `nome`, `crp`, `email`, `endereco` (opcional) e `instagram`. |
+| **1. Hero** (`id="inicio"`) | `hero-silvia-leticia` | [`HeroSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/HeroSilviaLeticia.astro) | `nome`, `crp`, `profissao`, `cidade`, `titulo_hero`, `subtitulo_hero`, `imagens.hero` (`desktop`, `mobile`, `arquivo`, `alt`) e objeto `hero` (`mobile` / `desktop`). |
+| **1b. Frase de Acolhimento** (`id="acolhimento"`) | `frase-silvia-leticia` | [`FraseSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/FraseSilviaLeticia.astro) | `frase_acolhimento`: exibida em destaque com respiro vertical logo abaixo da Hero e antes da seção de Serviços. |
+| **2. Serviços** (`id="servicos"`) | `servicos-silvia-leticia` | [`ServicosSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/ServicosSilviaLeticia.astro) | `servicos`: lista de `{ titulo, descricao, icone? }` (se `icone` não for informado no item, alterna automaticamente entre `"planta"`, `"coracao"`, `"ansiedade"` e `"estrela"`). |
+| **3. Sobre mim** (`id="sobre"`) | `sobre-silvia-leticia` | [`SobreSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/SobreSilviaLeticia.astro) | `nome`, `bio`, `bio_complementar` e `imagens.sobre.arquivo`. |
+| **4. Formas de atendimento** (`id="modalidades"`) | `modalidades-silvia-leticia` | [`ModalidadesSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/ModalidadesSilviaLeticia.astro) | `modalidades_info`: lista de `{ titulo, descricao }` + botão de agendamento. |
+| **5. Perguntas Frequentes** (`id="faq"`) | `faq-silvia-leticia` | [`FaqSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/FaqSilviaLeticia.astro) | `faq`: lista de `{ pergunta, resposta }`. |
+| **6. Rodapé / Contato** (`id="contato"`) | `contato-silvia-leticia` | [`ContatoSilviaLeticia.astro`](../src/components/modelos/silvia-leticia/ContatoSilviaLeticia.astro) | `nome`, `crp`, `email`, `endereco` (opcional) e `instagram`. |
 
 #### Como ativar e personalizar no `src/content/cliente.json`:
 

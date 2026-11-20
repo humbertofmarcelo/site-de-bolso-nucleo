@@ -158,8 +158,7 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     secoes: [
       {
         id: "inicio",
-        tipo: "hero",
-        variante: "overlay",
+        tipo: "hero-silvia-leticia",
         mobile: {
           gradiente: "nenhum",
           tema_texto: "light",
@@ -173,11 +172,12 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
           tema_texto: "dark",
         },
       },
-      { id: "servicos", tipo: "servicos-organicos" },
-      { id: "sobre", tipo: "apresentacao-organica" },
-      { id: "modalidades", tipo: "modalidades" },
-      { id: "faq", tipo: "faq" },
-      { id: "contato", tipo: "contato" },
+      { id: "acolhimento", tipo: "frase-silvia-leticia" },
+      { id: "servicos", tipo: "servicos-silvia-leticia" },
+      { id: "sobre", tipo: "sobre-silvia-leticia" },
+      { id: "modalidades", tipo: "modalidades-silvia-leticia" },
+      { id: "faq", tipo: "faq-silvia-leticia" },
+      { id: "contato", tipo: "contato-silvia-leticia" },
     ],
   },
 };

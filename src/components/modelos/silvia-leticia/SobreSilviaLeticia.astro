@@ -1,0 +1,35 @@
+---
+// Tokens: -mx-6, -mt-16, mb-8, md:mx-0, md:mt-0, md:mb-0, flex, justify-center, overflow-hidden, md:rounded-card, md:border, md:border-line, md:shadow-sm, w-full, md:max-w-sm, h-96, object-cover, block, text-center, md:text-left, text-2xl, text-base, text-ink, text-ink-soft, font-serif, font-medium, leading-relaxed, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, bio, bio_complementar, imagens.sobre
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const foto = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
+---
+
+<Section id="sobre" tom="alt" largura="ampla">
+  <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+    <!-- Coluna Retrato Vertical (Tela cheia sem bordas no mobile / Card arredondado no desktop) -->
+    <div class="-mx-6 -mt-16 mb-8 md:mx-0 md:mt-0 md:mb-0 flex justify-center">
+      <div class="overflow-hidden md:rounded-card md:border md:border-line md:shadow-sm w-full md:max-w-sm">
+        <img
+          src={foto}
+          alt={`Retrato de ${cliente.nome}`}
+          class="w-full h-96 object-cover block"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Coluna Apresentação Pessoal -->
+    <div class="text-center md:text-left">
+      <div class="text-base text-ink-soft leading-relaxed space-y-4">
+        <h2 class="text-2xl text-ink font-serif font-medium">
+          Olá, sou {cliente.nome}
+        </h2>
+        <p>{cliente.bio}</p>
+        {cliente.bio_complementar && <p>{cliente.bio_complementar}</p>}
+      </div>
+    </div>
+  </div>
+</Section>

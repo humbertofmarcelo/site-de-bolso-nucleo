@@ -1,6 +1,6 @@
 ---
-// Tokens: text-xl, text-2xl, text-base, text-ink, text-ink-soft, rounded-card, border, border-line, mt-6, mt-8, text-center, md:text-left, max-w-md, md:max-w-none, mx-auto, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
-// cliente.json: bio, bio_complementar, frase_acolhimento, imagens.sobre
+// Tokens: -mx-6, -mt-16, mb-8, md:mx-0, md:mt-0, md:mb-0, flex, justify-center, overflow-hidden, md:rounded-card, md:border, md:border-line, md:shadow-sm, w-full, md:max-w-sm, h-96, object-cover, block, text-center, md:text-left, text-xl, md:text-2xl, text-2xl, text-base, text-ink, text-ink-soft, font-serif, italic, font-medium, text-balance, leading-relaxed, mt-6, border-t, border-line, pt-6, space-y-4, md:grid, md:grid-cols-2, md:gap-12, md:items-center
+// cliente.json: nome, bio, bio_complementar, frase_acolhimento, imagens.sobre
 import Section from "../../ui/Section.astro";
 import cliente from "../../../content/cliente.json";
 
@@ -10,13 +10,13 @@ const foto = cliente.imagens?.sobre?.arquivo || "/images/sobre.webp";
 
 <Section id="sobre" tom="alt" largura="ampla">
   <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-    <!-- Coluna Retrato Vertical -->
-    <div class="flex justify-center mb-8 md:mb-0">
-      <div class="overflow-hidden rounded-card border border-line shadow-sm w-full max-w-xs md:max-w-sm">
+    <!-- Coluna Retrato Vertical (Tela cheia sem bordas no mobile / Card arredondado no desktop) -->
+    <div class="-mx-6 -mt-16 mb-8 md:mx-0 md:mt-0 md:mb-0 flex justify-center">
+      <div class="overflow-hidden md:rounded-card md:border md:border-line md:shadow-sm w-full md:max-w-sm">
         <img
           src={foto}
           alt={`Retrato de ${cliente.nome}`}
-          class="w-full h-80 md:h-96 object-cover"
+          class="w-full h-96 object-cover block"
           loading="lazy"
         />
       </div>

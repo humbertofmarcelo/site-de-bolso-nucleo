@@ -1,0 +1,18 @@
+---
+// Tokens: px-6, pt-16, md:pt-24, text-center, max-w-2xl, mx-auto, text-xl, md:text-2xl, text-ink, font-serif, italic, text-balance, leading-relaxed
+// cliente.json: frase_acolhimento
+import Section from "../../ui/Section.astro";
+import cliente from "../../../content/cliente.json";
+
+const frase =
+  (cliente as any).frase_acolhimento ||
+  "Se você sente que precisa de um espaço seguro para cuidar de si, desacelerar e acolher sua história com mais gentileza...";
+---
+
+<Section id="acolhimento" tom="alt" largura="ampla" semPadding={true}>
+  <div class="px-6 pt-16 md:pt-24 text-center max-w-2xl mx-auto">
+    <p class="text-xl md:text-2xl text-ink font-serif italic text-balance leading-relaxed">
+      "{frase}"
+    </p>
+  </div>
+</Section>
