@@ -11,10 +11,11 @@ Este guia ensina como você pode alterar **modelos de layout**, **textos**, **co
    - [Configurar Botão de Agendamento: WhatsApp ou Link/Formulário](#31-configurar-botão-de-agendamento-whatsapp-ou-linkformulário)
    - [Campos Específicos por Modelo](#32-campos-específicos-por-modelo)
 4. [Tipografia e Fontes Locais](#4-tipografia-e-fontes-locais)
-5. [Imagens e Dimensões Recomendadas](#5-imagens-e-dimensões-recomendadas)
-6. [Personalização da Seção Hero (Gradiente, Textos Light/Dark)](#6-personalização-da-seção-hero-modelo-1)
-7. [Cuidados Críticos: SEO e CFP](#7-cuidados-críticos-seo-e-cfp)
-8. [Comandos de Validação e Teste](#8-comandos-de-validação-e-teste)
+15. [Imagens e Dimensões Recomendadas](#5-imagens-e-dimensões-recomendadas)
+16. [Personalização da Seção Hero (Gradiente, Textos Light/Dark)](#6-personalização-da-seção-hero-modelo-1)
+17. [Reordenar Seções, Trocar Tema Light/Dark e Criar Seções Novas pelo JSON](#7-reordenar-seções-trocar-tema-lightdark-e-criar-seções-novas-pelo-json)
+18. [Cuidados Críticos: SEO e CFP](#8-cuidados-críticos-seo-e-cfp)
+19. [Comandos de Validação e Teste](#9-comandos-de-validação-e-teste)
 
 ---
 
@@ -435,7 +436,173 @@ O modelo **`"silvia-leticia"`** (ou alias `"modelo-7"`) possui todos os seus com
 
 ---
 
-## 7. Cuidados Críticos: SEO e CFP
+## 7. Reordenar Seções, Trocar Tema Light/Dark e Criar Seções Novas pelo JSON
+
+Você pode **mudar a ordem das seções**, **inverter o tema `light`/`dark`** de qualquer seção e **criar seções novas** em qualquer um dos 7 modelos diretamente no arquivo 📁 **`src/content/cliente.json`**, sem editar nenhum arquivo `.astro`.
+
+---
+
+### 7.1. Como Trocar a Ordem das Seções (Preservando as Cores da Posição)
+
+Para reordenar as seções do site, adicione a lista **`"ordem_secoes"`** no `src/content/cliente.json` com os nomes (`id` ou `tipo`) na ordem desejada:
+
+```json
+{
+  "modelo": "silvia-volpatto",
+  "ordem_secoes": [
+    "inicio",
+    "sobre",
+    "faq",
+    "servicos",
+    "modalidades",
+    "demandas",
+    "contato"
+  ]
+}
+```
+
+#### O que acontece com as cores quando você muda a ordem?
+- **Preservação automática por posição:** O sistema guarda o gabarito de cores de cada posição da página do modelo escolhido (ex.: se a 1ª seção abaixo da Hero no modelo é `light` com texto `dark` e a 2ª é `dark` com texto `light`).
+- Independentemente de qual seção você colocar na 1ª posição (`"sobre"`, `"faq"`, `"modalidades"` ou `"servicos"`), ela assumirá automaticamente o fundo `light` com texto `dark` daquela posição, mantendo o ritmo visual da paleta intacto!
+- **Dica:** Você também pode incluir na lista `"ordem_secoes"` o nome de qualquer seção extra disponível no catálogo [src/components/registry.ts](../src/components/registry.ts) (como `"formacao"`), e o site a incluirá automaticamente naquela posição.
+
+---
+
+### 7.2. Como Trocar Facilmente o Tema `"light"` e `"dark"` de Qualquer Seção
+
+Se você quiser escolher manualmente se uma seção terá fundo claro (`"light"`) ou fundo escuro (`"dark"`), basta usar o bloco **`"temas_secoes"`** no `src/content/cliente.json`:
+
+#### Opção A: Troca rápida (`"light"` ou `"dark"`)
+Ao definir `"light"`, a seção fica com fundo claro (`bg-surface-alt`) e letras escuras (`text-ink`). Ao definir `"dark"`, a seção fica com fundo escuro (`bg-surface`) e letras claras (`text-ink-light`), preservando automaticamente a leitura dentro dos cartões:
+
+```json
+{
+  "modelo": "silvia-leticia",
+  "temas_secoes": {
+    "sobre": "dark",
+    "modalidades": "light",
+    "faq": "dark"
+  }
+}
+```
+
+#### Opção B: Controle separado de `"fundo"` e `"tema_texto"`
+Se quiser separar explicitamente o fundo (`"light"`, `"dark"`, `"soft"` ou `"primary"`) e a cor do texto (`"light"` ou `"dark"`):
+
+```json
+{
+  "temas_secoes": {
+    "sobre": {
+      "fundo": "dark",
+      "tema_texto": "light"
+    },
+    "faq": {
+      "fundo": "light",
+      "tema_texto": "dark"
+    }
+  }
+}
+```
+
+*(Você também pode passar `"tema": "dark"` diretamente dentro de um item da lista `"ordem_secoes"`, ex.: `{ "id": "faq", "tema": "dark" }`).*
+
+---
+
+### 7.3. Como Criar uma Seção 100% Nova Direto pelo `cliente.json` (`secao-livre`)
+
+Você pode criar quantas seções novas quiser **sem criar arquivos `.astro`**, usando o componente curinga **`"secao-livre"`** ([`SecaoLivre.astro`](../src/components/common/SecaoLivre.astro)).
+
+Existem **duas formas** de declarar uma seção nova no `src/content/cliente.json`:
+
+#### Forma 1: Declarar em `"secoes_livres"` e posicionar pelo nome em `"ordem_secoes"` *(Mais organizada)*
+
+```json
+{
+  "modelo": "silvia-leticia",
+  "ordem_secoes": [
+    "inicio",
+    "acolhimento",
+    "servicos",
+    "supervisao",
+    "sobre",
+    "modalidades",
+    "faq",
+    "contato"
+  ],
+  "secoes_livres": {
+    "supervisao": {
+      "tema": "dark",
+      "chapeu": "Para Profissionais",
+      "titulo": "Supervisão Clínica e Grupos de Estudo",
+      "subtitulo": "Acompanhamento técnico e teórico para psicólogos recém-formados",
+      "paragrafos": [
+        "Ofereço supervisão clínica individual e em pequenos grupos para psicólogos que desejam aprofundar a escuta e o manejo clínico.",
+        "Os encontros acontecem quinzenalmente de forma online."
+      ],
+      "itens": [
+        "Discussão aprofundada de casos clínicos",
+        "Orientação sobre manejo e direção do tratamento",
+        "Material de leitura selecionado por encontro"
+      ],
+      "cards": [
+        {
+          "titulo": "Supervisão Individual",
+          "descricao": "Encontro dedicado exclusivamente aos seus casos clínicos.",
+          "icone": "estrela"
+        },
+        {
+          "titulo": "Grupo de Estudos",
+          "descricao": "Turmas reduzidas com encontros quinzenais ao vivo.",
+          "icone": "coracao"
+        }
+      ],
+      "mostrar_botao": true,
+      "rotulo_botao": "SABER MAIS SOBRE SUPERVISÃO"
+    }
+  }
+}
+```
+
+#### Forma 2: Colocar o objeto da seção nova diretamente dentro de `"ordem_secoes"`
+
+```json
+{
+  "ordem_secoes": [
+    "inicio",
+    "sobre",
+    {
+      "id": "aviso-atendimento",
+      "tipo": "secao-livre",
+      "titulo": "Atendimento a Brasileiros no Exterior",
+      "texto": "Realizo psicoterapia online com horários adaptados a diferentes fusos horários para brasileiros que vivem fora do país.",
+      "mostrar_botao": true
+    },
+    "faq",
+    "contato"
+  ]
+}
+```
+
+#### Todos os campos disponíveis em uma `"secao-livre"`:
+
+| Campo no JSON | Tipo | Função |
+| :--- | :--- | :--- |
+| **`id`** | Texto | Identificador da seção na página (ex.: `"supervisao"`). |
+| **`tema`** | `"light"` ou `"dark"` | Define fundo e cor de texto da seção *(se omitido, usa automaticamente o tema da posição em que ela estiver!)*. |
+| **`chapeu`** | Texto *(opcional)* | Pequeno rótulo em letras maiúsculas acima do título. |
+| **`titulo`** | Texto *(opcional)* | Título principal (`<h2>`) da seção. |
+| **`subtitulo`** | Texto *(opcional)* | Frase de apoio abaixo do título. |
+| **`texto`** ou **`paragrafos`** | Texto ou Lista de textos *(opcional)* | Um parágrafo único (`"texto"`) ou vários parágrafos (`"paragrafos": ["...", "..."]`). |
+| **`itens`** (ou **`lista`**) | Lista de textos *(opcional)* | Lista de tópicos com ícone de check (`[✓]`). |
+| **`cards`** | Lista de objetos *(opcional)* | Grade de cartões `{ "titulo": "...", "descricao": "...", "icone": "planta", "arredondado": true, "tracejado": false }`. |
+| **`imagem`** | Caminho *(opcional)* | Exibe uma foto (ex.: `"/images/sobre.webp"`) ao lado do texto em 2 colunas no desktop. |
+| **`mostrar_botao`** | `true` ou `false` | Se `true`, exibe o botão de agendamento no final da seção. |
+| **`rotulo_botao`** | Texto *(opcional)* | Texto do botão (padrão: `"AGENDE UM ATENDIMENTO"`). |
+| **`alinhamento`** | `"centro"` ou `"esquerda"` | Alinhamento do cabeçalho e textos (padrão: `"centro"`). |
+
+---
+
+## 8. Cuidados Críticos: SEO e CFP
 
 ### Regras do CFP (Conselho Federal de Psicologia):
 * Proibido prometer cura ou resultados garantidos.
@@ -447,7 +614,7 @@ O modelo **`"silvia-leticia"`** (ou alias `"modelo-7"`) possui todos os seus com
 
 ---
 
-## 8. Comandos de Validação e Teste
+## 9. Comandos de Validação e Teste
 
 Abra o terminal na pasta do projeto e execute:
 

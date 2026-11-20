@@ -31,6 +31,97 @@
   line-height: var(--text-sm--line-height);
 }
 
+/* ==========================================================================
+   Controle Dinâmico de Tema (Fundo e Texto) por Seção / Posição
+   Permite reordenar seções ou inverter light/dark sem quebrar contrastes.
+   ========================================================================== */
+.secao-fundo-light > section,
+section.secao-fundo-light {
+  background-color: var(--color-surface-alt);
+}
+
+.secao-fundo-dark > section,
+section.secao-fundo-dark {
+  background-color: var(--color-surface);
+}
+
+.secao-fundo-soft > section,
+section.secao-fundo-soft {
+  background-color: var(--color-surface-soft, var(--color-surface-alt));
+}
+
+.secao-fundo-primary > section,
+section.secao-fundo-primary {
+  background-color: var(--color-primary);
+}
+
+/* Quando o tema de texto da seção é ESCURO (sobre fundo light) */
+.secao-texto-dark > section {
+  color: var(--color-ink);
+}
+
+.secao-texto-dark > section .text-ink-light,
+.secao-texto-dark > section .text-ink {
+  color: var(--color-ink);
+}
+
+.secao-texto-dark > section .text-ink-light-soft,
+.secao-texto-dark > section .text-ink-soft {
+  color: var(--color-ink-soft);
+}
+
+.secao-texto-dark > section .border-line-dark {
+  border-color: var(--color-line);
+}
+
+/* Preserva texto claro apenas em sub-blocos ou botões internos explicitamente escuros (dentro da section) */
+.secao-texto-dark > section .bg-surface .text-ink-light,
+.secao-texto-dark > section a.bg-surface {
+  color: var(--color-ink-light);
+}
+
+.secao-texto-dark > section .bg-surface .text-ink-light-soft {
+  color: var(--color-ink-light-soft);
+}
+
+/* Quando o tema de texto da seção é CLARO (sobre fundo dark) */
+.secao-texto-light > section {
+  color: var(--color-ink-light);
+}
+
+.secao-texto-light > section .text-ink,
+.secao-texto-light > section .text-ink-light {
+  color: var(--color-ink-light);
+}
+
+.secao-texto-light > section .text-ink-soft,
+.secao-texto-light > section .text-ink-light-soft {
+  color: var(--color-ink-light-soft);
+}
+
+.secao-texto-light > section .border-line {
+  border-color: var(--color-line-dark);
+}
+
+/* Preserva texto escuro apenas em cartões internos claros (dentro da section, sem afetar a própria tag section) */
+.secao-texto-light > section .bg-surface-card,
+.secao-texto-light > section .bg-surface-alt,
+.secao-texto-light > section .bg-surface-card .text-ink,
+.secao-texto-light > section .bg-surface-alt .text-ink,
+.secao-texto-light > section a.bg-surface-alt {
+  color: var(--color-ink);
+}
+
+.secao-texto-light > section .bg-surface-card .text-ink-soft,
+.secao-texto-light > section .bg-surface-alt .text-ink-soft {
+  color: var(--color-ink-soft);
+}
+
+.secao-texto-light > section .bg-surface-card .border-line,
+.secao-texto-light > section .bg-surface-alt .border-line {
+  border-color: var(--color-line);
+}
+
 /* Máscaras de legibilidade para Hero com imagem (baseadas nas superfícies da paleta) */
 .hero-overlay-mask,
 .hero-overlay-mask-light {

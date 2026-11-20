@@ -3,55 +3,194 @@ import Base from "../layouts/Base.astro";
 import site from "../config/site.json";
 import cliente from "../content/cliente.json";
 import { obterComponenteSecao } from "../components/registry";
-import { resolverModelo } from "../config/modelos";
+import { resolverModelo, type SecaoDef, type TemaSecao } from "../config/modelos";
 
 interface SecaoConfig {
   id: string;
   tipo: string;
   variante?: string;
+  tema?: TemaSecao;
+  fundo?: TemaSecao;
+  tema_texto?: "light" | "dark";
   [key: string]: any;
 }
 
+const clienteAny = cliente as any;
+
 // 1. Resolve o modelo ativo (definido no cliente.json, ou fallback em site.json)
-const modeloId = (cliente as any).modelo || (site as any).modelo || "silvia-volpatto";
+const modeloId = clienteAny.modelo || (site as any).modelo || "silvia-volpatto";
 const modelo = resolverModelo(modeloId);
-
-// 2. Configurações globais de Hero fornecidas diretamente no cliente.json
-const clienteHero = (cliente as any).hero || (cliente as any).hero_config || {};
-
-// 3. Determina a lista de seções a renderizar (permite sobrescrita no cliente.json ou usa o padrão do modelo)
-const secoesOriginais: SecaoConfig[] = (cliente as any).secoes ?? modelo.secoes;
-
 const colecaoAtiva = modelo.colecaoPadrao || "editorial";
 
-// 4. Mapeia e injeta configurações de liberdade (como Hero mobile/desktop do item 6)
-const secoes = secoesOriginais
-  .map((item) => {
-    let itemConfig = { ...item };
+// 2. Configurações globais de Hero e temas de seções fornecidas no cliente.json
+const clienteHero = clienteAny.hero || clienteAny.hero_config || {};
+const temasSecoes: Record<string, any> =
+  clienteAny.temas_secoes || clienteAny.secoes_tema || {};
+const secoesLivres: Record<string, any> = clienteAny.secoes_livres || {};
 
-    // Se for a seção Hero (tipo "hero", "hero-*" ou id "inicio"), injeta opções de liberdade
-    const ehHero = item.tipo.startsWith("hero") || item.id === "inicio";
+// 3. Gabarito posicional de temas do modelo original (garante que trocar a ordem não quebre a paleta da posição)
+const gabaritoTemasPorPosicao: (TemaSecao | undefined)[] = modelo.secoes.map(
+  (sec) => sec.temaPadrao
+);
+
+// Função auxiliar para localizar ou construir uma seção a partir de um nome (string) ou objeto
+function resolverItemSecao(entrada: string | SecaoConfig, index: number): SecaoConfig {
+  if (typeof entrada === "string") {
+    const chave = entrada.trim();
+
+    // a) Procura na lista padrão do modelo ativo (por id ou por tipo)
+    const existenteNoModelo = modelo.secoes.find(
+      (s) => s.id === chave || s.tipo === chave
+    );
+    if (existenteNoModelo) {
+      return { ...existenteNoModelo, ...(secoesLivres[chave] || {}) };
+    }
+
+    // b) Procura no dicionário "secoes_livres" do cliente.json
+    if (secoesLivres[chave]) {
+      const livre = secoesLivres[chave];
+      return {
+        id: livre.id || chave,
+        tipo: livre.tipo || "secao-livre",
+        ...livre,
+      };
+    }
+
+    // c) Verifica se existe componente direto no registry (ex.: "formacao", "demandas", etc.)
+    const compCatalogo = obterComponenteSecao(colecaoAtiva, chave);
+    if (compCatalogo) {
+      return { id: chave, tipo: chave };
+    }
+
+    // d) Fallback: trata como uma seção livre
+    return { id: chave, tipo: "secao-livre" };
+  }
+
+  // Quando a entrada já é um objeto (em "ordem_secoes" ou em "secoes")
+  const idEntrada = entrada.id || entrada.tipo || `secao-${index + 1}`;
+  const existenteNoModelo = modelo.secoes.find(
+    (s) => s.id === idEntrada || (entrada.tipo && s.tipo === entrada.tipo)
+  );
+  const dadosLivre = secoesLivres[idEntrada] || {};
+
+  // Se o objeto tem campos de seção livre (titulo, texto, paragrafos, cards, itens) e não especificou um tipo existente
+  const pareceSecaoLivre =
+    !entrada.tipo &&
+    !existenteNoModelo &&
+    Boolean(
+      entrada.titulo ||
+        entrada.texto ||
+        entrada.paragrafos ||
+        entrada.cards ||
+        entrada.itens ||
+        entrada.lista ||
+        dadosLivre.titulo
+    );
+
+  const tipoResolvido =
+    entrada.tipo ||
+    existenteNoModelo?.tipo ||
+    dadosLivre.tipo ||
+    (pareceSecaoLivre ? "secao-livre" : idEntrada);
+
+  return {
+    ...(existenteNoModelo || {}),
+    ...dadosLivre,
+    ...entrada,
+    id: idEntrada,
+    tipo: tipoResolvido,
+  };
+}
+
+// 4. Determina a lista de seções a renderizar:
+//    Prioridade: 1) cliente.ordem_secoes -> 2) cliente.secoes -> 3) modelo.secoes
+const listaBruta: (string | SecaoConfig)[] =
+  clienteAny.ordem_secoes ?? clienteAny.secoes ?? modelo.secoes;
+
+const foiReordenado = Boolean(clienteAny.ordem_secoes || clienteAny.secoes);
+
+// 5. Mapeia seções, injeta configurações da Hero e resolve o tema (posicional ou manual)
+const secoes = listaBruta
+  .map((entrada, index) => {
+    const itemConfig = resolverItemSecao(entrada, index);
+
+    const ehHero = itemConfig.tipo.startsWith("hero") || itemConfig.id === "inicio";
     if (ehHero) {
       if (clienteHero.variante) {
         itemConfig.variante = clienteHero.variante;
       }
       itemConfig.mobile = {
-        ...(item.mobile || {}),
+        ...(itemConfig.mobile || {}),
         ...(clienteHero.mobile || {}),
       };
       itemConfig.desktop = {
-        ...(item.desktop || {}),
+        ...(itemConfig.desktop || {}),
         ...(clienteHero.desktop || {}),
       };
     }
 
-    const Componente = obterComponenteSecao(colecaoAtiva, itemConfig.tipo, itemConfig.variante);
+    let Componente = obterComponenteSecao(
+      colecaoAtiva,
+      itemConfig.tipo,
+      itemConfig.variante
+    );
+
+    // Se não encontrou componente mas tem conteúdo de seção livre, usa SecaoLivre
+    if (!Componente) {
+      Componente = obterComponenteSecao(colecaoAtiva, "secao-livre");
+    }
+
+    // Resolução de tema (fundo light/dark e texto light/dark) para seções comuns (não-Hero)
+    let classesTemaWrapper = "";
+    if (!ehHero) {
+      const overrideManual =
+        temasSecoes[itemConfig.id] ??
+        temasSecoes[itemConfig.tipo] ??
+        itemConfig.tema;
+
+      // Tema da posição atual no gabarito do modelo (se passar do tamanho original, alterna light/dark)
+      const temaPosicional: TemaSecao =
+        gabaritoTemasPorPosicao[index] ??
+        (index % 2 === 1 ? "light" : "dark");
+
+      let fundoEscolhido: TemaSecao | undefined = itemConfig.fundo;
+      let textoEscolhido: "light" | "dark" | undefined =
+        itemConfig.tema_texto ?? itemConfig["tema-texto"];
+
+      if (typeof overrideManual === "string") {
+        fundoEscolhido = overrideManual as TemaSecao;
+      } else if (overrideManual && typeof overrideManual === "object") {
+        fundoEscolhido = overrideManual.fundo ?? overrideManual.tema;
+        textoEscolhido =
+          overrideManual.tema_texto ??
+          overrideManual["tema-texto"] ??
+          overrideManual.texto;
+      }
+
+      const temOverrideExplicito = Boolean(
+        fundoEscolhido || textoEscolhido || overrideManual
+      );
+      const ehSecaoLivre = itemConfig.tipo === "secao-livre" || itemConfig.tipo === "personalizada" || itemConfig.tipo === "custom";
+
+      // Aplica o wrapper de tema quando:
+      // 1) O usuário definiu tema/fundo/tema_texto manualmente;
+      // 2) As seções foram reordenadas e a seção caiu numa posição com tema diferente do seu original;
+      // 3) É uma seção livre criada no JSON (para respeitar o ritmo de cores da posição).
+      if (temOverrideExplicito || foiReordenado || ehSecaoLivre) {
+        const fundoFinal: TemaSecao = fundoEscolhido || temaPosicional;
+        const textoFinal: "light" | "dark" =
+          textoEscolhido || (fundoFinal === "dark" ? "light" : "dark");
+
+        classesTemaWrapper = `secao-fundo-${fundoFinal} secao-texto-${textoFinal}`;
+      }
+    }
 
     return {
       id: itemConfig.id,
       tipo: itemConfig.tipo,
       Componente,
       config: itemConfig,
+      classesTemaWrapper,
     };
   })
   .filter((item) => item.Componente !== null);
@@ -59,8 +198,14 @@ const secoes = secoesOriginais
 
 <Base>
   <main>
-    {secoes.map(({ id, Componente, config }) => (
-      <Componente id={id} {...config} />
-    ))}
+    {secoes.map(({ id, Componente, config, classesTemaWrapper }) =>
+      classesTemaWrapper ? (
+        <div class={classesTemaWrapper}>
+          <Componente id={id} {...config} />
+        </div>
+      ) : (
+        <Componente id={id} {...config} />
+      )
+    )}
   </main>
 </Base>

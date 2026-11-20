@@ -2,10 +2,13 @@
  * Catálogo e Definição dos Modelos de Layout do Site de Bolso
  */
 
+export type TemaSecao = "light" | "dark" | "soft" | "primary";
+
 export interface SecaoDef {
   id: string;
   tipo: string;
   variante?: string;
+  temaPadrao?: TemaSecao;
   [key: string]: any;
 }
 
@@ -45,12 +48,12 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
           tema_texto: "dark",
         },
       },
-      { id: "demandas", tipo: "demandas" },
-      { id: "servicos", tipo: "servicos" },
-      { id: "sobre", tipo: "sobre" },
-      { id: "modalidades", tipo: "modalidades" },
-      { id: "faq", tipo: "faq" },
-      { id: "contato", tipo: "contato" },
+      { id: "demandas", tipo: "demandas", temaPadrao: "light" },
+      { id: "servicos", tipo: "servicos", temaPadrao: "dark" },
+      { id: "sobre", tipo: "sobre", temaPadrao: "light" },
+      { id: "modalidades", tipo: "modalidades", temaPadrao: "dark" },
+      { id: "faq", tipo: "faq", temaPadrao: "light" },
+      { id: "contato", tipo: "contato", temaPadrao: "dark" },
     ],
   },
   "gabriela-alcantara": {
@@ -75,11 +78,11 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
           variante_botao: "light",
         },
       },
-      { id: "para-quem", tipo: "para-quem-pb" },
-      { id: "servicos", tipo: "servicos-pb" },
-      { id: "passos", tipo: "passos-pb" },
-      { id: "faq", tipo: "faq-pb" },
-      { id: "contato", tipo: "contato-pb" },
+      { id: "para-quem", tipo: "para-quem-pb", temaPadrao: "light" },
+      { id: "servicos", tipo: "servicos-pb", temaPadrao: "soft" },
+      { id: "passos", tipo: "passos-pb", temaPadrao: "light" },
+      { id: "faq", tipo: "faq-pb", temaPadrao: "soft" },
+      { id: "contato", tipo: "contato-pb", temaPadrao: "dark" },
     ],
   },
   "amanda-botelho": {
@@ -90,13 +93,13 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     paletaPadrao: "ludico-lilas",
     colecaoPadrao: "editorial",
     secoes: [
-      { id: "inicio", tipo: "hero-ludico" },
-      { id: "por-que-terapia", tipo: "por-que-terapia" },
-      { id: "abordagem", tipo: "abordagem-ludica" },
-      { id: "como-funciona", tipo: "stepper-ludico" },
-      { id: "mini-cta", tipo: "mini-cta-ludico" },
-      { id: "faq", tipo: "faq-ludico" },
-      { id: "contato", tipo: "contato-ludico" },
+      { id: "inicio", tipo: "hero-ludico", temaPadrao: "light" },
+      { id: "por-que-terapia", tipo: "por-que-terapia", temaPadrao: "dark" },
+      { id: "abordagem", tipo: "abordagem-ludica", temaPadrao: "light" },
+      { id: "como-funciona", tipo: "stepper-ludico", temaPadrao: "dark" },
+      { id: "mini-cta", tipo: "mini-cta-ludico", temaPadrao: "primary" },
+      { id: "faq", tipo: "faq-ludico", temaPadrao: "dark" },
+      { id: "contato", tipo: "contato-ludico", temaPadrao: "light" },
     ],
   },
   "leticia-malta": {
@@ -107,12 +110,12 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     paletaPadrao: "salvia",
     colecaoPadrao: "editorial",
     secoes: [
-      { id: "inicio", tipo: "hero-organico" },
-      { id: "apresentacao", tipo: "apresentacao-organica" },
-      { id: "servicos", tipo: "servicos-organicos" },
-      { id: "convite", tipo: "convite-organico" },
-      { id: "faq", tipo: "faq-organico" },
-      { id: "contato", tipo: "rodape-organico" },
+      { id: "inicio", tipo: "hero-organico", temaPadrao: "light" },
+      { id: "apresentacao", tipo: "apresentacao-organica", temaPadrao: "light" },
+      { id: "servicos", tipo: "servicos-organicos", temaPadrao: "light" },
+      { id: "convite", tipo: "convite-organico", temaPadrao: "dark" },
+      { id: "faq", tipo: "faq-organico", temaPadrao: "light" },
+      { id: "contato", tipo: "rodape-organico", temaPadrao: "dark" },
     ],
   },
   "ricardo-costa": {
@@ -123,12 +126,12 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     paletaPadrao: "azul-confiante",
     colecaoPadrao: "editorial",
     secoes: [
-      { id: "inicio", tipo: "hero-estruturado" },
-      { id: "motivos", tipo: "motivos-grid" },
-      { id: "sobre", tipo: "sobre-estruturado" },
-      { id: "agendamento", tipo: "agendamento-info" },
-      { id: "faq", tipo: "faq-estruturado" },
-      { id: "contato", tipo: "contato-estruturado" },
+      { id: "inicio", tipo: "hero-estruturado", temaPadrao: "dark" },
+      { id: "motivos", tipo: "motivos-grid", temaPadrao: "light" },
+      { id: "sobre", tipo: "sobre-estruturado", temaPadrao: "light" },
+      { id: "agendamento", tipo: "agendamento-info", temaPadrao: "dark" },
+      { id: "faq", tipo: "faq-estruturado", temaPadrao: "light" },
+      { id: "contato", tipo: "contato-estruturado", temaPadrao: "dark" },
     ],
   },
   "bruno-freitas": {
@@ -139,13 +142,13 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
     paletaPadrao: "vibrante-roxo",
     colecaoPadrao: "editorial",
     secoes: [
-      { id: "inicio", tipo: "hero-vibrante" },
-      { id: "como-ajudar", tipo: "como-ajudar-vibrante" },
-      { id: "quando-buscar", tipo: "quando-buscar-vibrante" },
-      { id: "sobre", tipo: "sobre-vibrante" },
-      { id: "processo", tipo: "processo-vibrante" },
-      { id: "faq", tipo: "faq-vibrante" },
-      { id: "contato", tipo: "contato-vibrante" },
+      { id: "inicio", tipo: "hero-vibrante", temaPadrao: "dark" },
+      { id: "como-ajudar", tipo: "como-ajudar-vibrante", temaPadrao: "light" },
+      { id: "quando-buscar", tipo: "quando-buscar-vibrante", temaPadrao: "dark" },
+      { id: "sobre", tipo: "sobre-vibrante", temaPadrao: "light" },
+      { id: "processo", tipo: "processo-vibrante", temaPadrao: "light" },
+      { id: "faq", tipo: "faq-vibrante", temaPadrao: "dark" },
+      { id: "contato", tipo: "contato-vibrante", temaPadrao: "dark" },
     ],
   },
   "silvia-leticia": {
@@ -172,12 +175,12 @@ export const CATALOGO_MODELOS: Record<string, ModeloDef> = {
           tema_texto: "dark",
         },
       },
-      { id: "acolhimento", tipo: "frase-silvia-leticia" },
-      { id: "servicos", tipo: "servicos-silvia-leticia" },
-      { id: "sobre", tipo: "sobre-silvia-leticia" },
-      { id: "modalidades", tipo: "modalidades-silvia-leticia" },
-      { id: "faq", tipo: "faq-silvia-leticia" },
-      { id: "contato", tipo: "contato-silvia-leticia" },
+      { id: "acolhimento", tipo: "frase-silvia-leticia", temaPadrao: "light" },
+      { id: "servicos", tipo: "servicos-silvia-leticia", temaPadrao: "light" },
+      { id: "sobre", tipo: "sobre-silvia-leticia", temaPadrao: "light" },
+      { id: "modalidades", tipo: "modalidades-silvia-leticia", temaPadrao: "dark" },
+      { id: "faq", tipo: "faq-silvia-leticia", temaPadrao: "light" },
+      { id: "contato", tipo: "contato-silvia-leticia", temaPadrao: "dark" },
     ],
   },
 };
@@ -200,4 +203,3 @@ export function resolverModelo(idOuAlias?: string): ModeloDef {
 
   return CATALOGO_MODELOS["silvia-volpatto"];
 }
-

@@ -1,0 +1,179 @@
+---
+// Tokens: text-center, text-left, md:text-left, text-sm, text-base, text-lg, text-xl, texto-subtitulo, text-ink, text-ink-soft, text-primary, uppercase, tracking-wider, text-balance, font-medium, leading-relaxed, mt-2, mt-3, mt-4, mt-6, mt-8, mb-8, md:mb-0, p-6, md:p-8, space-y-3, space-y-4, md:space-y-0, flex, flex-col, justify-between, justify-center, items-start, items-center, gap-3, gap-4, md:grid, md:grid-cols-2, md:gap-6, md:gap-12, md:items-center, md:items-stretch, bg-surface-card, border, border-2, border-dashed, border-line, rounded-card, shadow-sm, w-full, max-w-sm, max-w-2xl, mx-auto, h-80, md:h-96, object-cover, block, shrink-0
+// cliente.json: secoes, secoes_livres
+// Props: id, titulo, subtitulo, chapeu, texto, paragrafos, itens, lista, cards, imagem, alt_imagem, mostrar_botao, rotulo_botao, variante_botao, largura, alinhamento, arredondado, tracejado
+import Section from "../ui/Section.astro";
+import BotaoAgendamento from "./BotaoAgendamento.astro";
+import Icone from "./Icone.astro";
+
+interface CardLivre {
+  titulo?: string;
+  descricao?: string;
+  icone?: string;
+  arredondado?: boolean;
+  tracejado?: boolean;
+}
+
+interface Props {
+  id?: string;
+  chapeu?: string;
+  titulo?: string;
+  subtitulo?: string;
+  texto?: string;
+  paragrafos?: string[];
+  itens?: string[];
+  lista?: string[];
+  cards?: CardLivre[];
+  imagem?: string;
+  alt_imagem?: string;
+  mostrar_botao?: boolean;
+  rotulo_botao?: string;
+  variante_botao?: "normal" | "light" | "dark";
+  largura?: "padrao" | "ampla";
+  alinhamento?: "centro" | "esquerda";
+  arredondado?: boolean;
+  tracejado?: boolean;
+  [key: string]: any;
+}
+
+const {
+  id = "secao-extra",
+  chapeu,
+  titulo,
+  subtitulo,
+  texto,
+  paragrafos = [],
+  itens = [],
+  lista = [],
+  cards = [],
+  imagem,
+  alt_imagem = titulo || "Imagem da seção",
+  mostrar_botao = false,
+  rotulo_botao = "AGENDE UM ATENDIMENTO",
+  variante_botao = "normal",
+  largura,
+  alinhamento = "centro",
+  arredondado = true,
+  tracejado = false,
+} = Astro.props as Props;
+
+const listaParagrafos: string[] = [
+  ...(texto ? [texto] : []),
+  ...(Array.isArray(paragrafos) ? paragrafos : []),
+];
+
+const listaTopicos: string[] =
+  Array.isArray(itens) && itens.length > 0
+    ? itens
+    : Array.isArray(lista)
+      ? lista
+      : [];
+
+const temCards = Array.isArray(cards) && cards.length > 0;
+const temImagem = Boolean(imagem);
+const larguraFinal = largura || (temCards || temImagem ? "ampla" : "padrao");
+const classeAlinhamentoCabecalho =
+  alinhamento === "esquerda" || temImagem ? "text-center md:text-left" : "text-center";
+
+function resolverBordaCard(card?: CardLivre): string {
+  const usaArredondado = card?.arredondado ?? arredondado;
+  const usaTracejado = card?.tracejado ?? tracejado;
+  const classeRaio = usaArredondado ? "rounded-card" : "";
+  const classeBorda = usaTracejado
+    ? "border-2 border-dashed border-line"
+    : "border border-line";
+  return `${classeRaio} ${classeBorda}`.trim();
+}
+---
+
+<Section id={id} tom="alt" largura={larguraFinal}>
+  <div class={temImagem ? "md:grid md:grid-cols-2 md:gap-12 md:items-center" : ""}>
+    {temImagem && (
+      <div class="mb-8 md:mb-0 flex justify-center">
+        <img
+          src={imagem}
+          alt={alt_imagem}
+          class="rounded-card border border-line object-cover w-full max-w-sm h-80 md:h-96 shadow-sm block"
+          loading="lazy"
+        />
+      </div>
+    )}
+
+    <div>
+      {(chapeu || titulo || subtitulo) && (
+        <div class={classeAlinhamentoCabecalho}>
+          {chapeu && (
+            <p class="text-sm text-ink-soft uppercase tracking-wider">
+              {chapeu}
+            </p>
+          )}
+          {titulo && (
+            <h2 class={`texto-subtitulo text-ink text-balance ${chapeu ? "mt-2" : ""}`.trim()}>
+              {titulo}
+            </h2>
+          )}
+          {subtitulo && (
+            <p class="text-base text-ink-soft mt-3 text-balance">
+              {subtitulo}
+            </p>
+          )}
+        </div>
+      )}
+
+      {listaParagrafos.length > 0 && (
+        <div class={`mt-6 space-y-4 text-base text-ink-soft leading-relaxed ${!temImagem && alinhamento === "centro" ? "max-w-2xl mx-auto text-center" : ""}`.trim()}>
+          {listaParagrafos.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+      )}
+
+      {listaTopicos.length > 0 && (
+        <ul class="mt-6 space-y-3 text-base text-ink max-w-2xl mx-auto">
+          {listaTopicos.map((topico) => (
+            <li class="flex items-start gap-3">
+              <span class="text-primary shrink-0 mt-1" aria-hidden="true">
+                <Icone nome="check" tamanho="sm" />
+              </span>
+              <span>{topico}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+
+  {temCards && (
+    <div class="mt-8 md:grid md:grid-cols-2 md:gap-6 md:items-stretch space-y-4 md:space-y-0">
+      {cards.map((card) => (
+        <div class={`bg-surface-card ${resolverBordaCard(card)} p-6 md:p-8 shadow-sm flex flex-col justify-between`}>
+          <div>
+            <div class="flex justify-between items-start gap-4">
+              {card.titulo && (
+                <h3 class="text-xl text-ink font-medium text-balance">
+                  {card.titulo}
+                </h3>
+              )}
+              {card.icone && (
+                <span class="text-ink-soft shrink-0" aria-hidden="true">
+                  <Icone nome={card.icone} tamanho="lg" />
+                </span>
+              )}
+            </div>
+            {card.descricao && (
+              <p class="text-base text-ink-soft mt-3 leading-relaxed">
+                {card.descricao}
+              </p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {mostrar_botao && (
+    <div class={`mt-8 flex ${alinhamento === "esquerda" || temImagem ? "justify-center md:justify-start" : "justify-center"}`}>
+      <BotaoAgendamento rotulo={rotulo_botao} variante={variante_botao} />
+    </div>
+  )}
+</Section>

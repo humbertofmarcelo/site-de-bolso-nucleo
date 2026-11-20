@@ -60,6 +60,9 @@ import ModalidadesSilviaLeticia from "./modelos/silvia-leticia/ModalidadesSilvia
 import FaqSilviaLeticia from "./modelos/silvia-leticia/FaqSilviaLeticia.astro";
 import ContatoSilviaLeticia from "./modelos/silvia-leticia/ContatoSilviaLeticia.astro";
 
+// Seção Livre / Personalizada via JSON (Caminho A)
+import SecaoLivre from "./common/SecaoLivre.astro";
+
 // Catálogo de seções diretas por identificador de tipo
 export const secoesCompartilhadas: Record<string, any> = {
   // Modelo 1 (Silvia Volpatto)
@@ -124,6 +127,11 @@ export const secoesCompartilhadas: Record<string, any> = {
   "modalidades-silvia-leticia": ModalidadesSilviaLeticia,
   "faq-silvia-leticia": FaqSilviaLeticia,
   "contato-silvia-leticia": ContatoSilviaLeticia,
+
+  // Seção Livre / Personalizada (100% via cliente.json)
+  "secao-livre": SecaoLivre,
+  personalizada: SecaoLivre,
+  custom: SecaoLivre,
 };
 
 // Catálogo de variantes por seção base

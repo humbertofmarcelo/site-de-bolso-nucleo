@@ -1,5 +1,24 @@
 {
   "modelo": "silvia-volpatto",
+  "ordem_secoes": [
+    "inicio",
+    "servicos",
+    "demandas",
+    "sobre",
+    "modalidades",
+    "faq",
+    "contato"
+  ],
+  "temas_secoes": {
+    "servicos": {
+      "fundo": "light",
+      "tema_texto": "dark"
+    },
+    "demandas": {
+      "fundo": "dark",
+      "tema_texto": "light"
+    }
+  },
   "hero": {
     "mobile": {
       "variante": "overlay",
@@ -7,7 +26,7 @@
       "gradiente": "dark",
       "tema_texto": "light"
     },
-    "desktop":{
+    "desktop": {
       "variante": "editorial",
       "fundo": "dark",
       "tema_texto": "light"
